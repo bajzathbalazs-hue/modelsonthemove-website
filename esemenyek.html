@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Korábbi esték — Models on the Move</title>
+<meta name="description" content="Models on the Move — korábbi esték galériája. Fotók és aftermovie-k a Models on the Move eseményeiről, Budapest.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..800;1,6..96,400..800&family=Yellowtail&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sans:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+  --serif:'Bodoni Moda',Georgia,serif;
+  --script:'Yellowtail',cursive;
+  --mono: ui-monospace,"SF Mono","Cascadia Code","Roboto Mono",monospace;
+
+  --black:#1c0508;
+  --panel:#2c0810;
+  --ivory:#f3efe6;
+  --ivory-dim:rgba(243,239,230,0.62);
+  --ivory-dimmer:rgba(243,239,230,0.38);
+  --bronze:#c9a054;
+  --bronze-bright:#e9cf9c;
+  --bronze-dim:#8a6a41;
+  --peach:#ef9d7c;
+  --peach-bright:#f6bfa4;
+  --glow:rgba(224,90,50,.55);
+  --forest:#16241b;
+  --forest-bright:#2c4a35;
+  --cyan:#4fd8e6;
+  --cyan-dim:rgba(79,216,230,0.35);
+  --magenta:#e0517a;
+  --jewel:#3a0f18;
+  --line:rgba(243,239,230,0.14);
+  --line-strong:rgba(243,239,230,0.22);
+  --r-xl:36px;
+  --r-lg:26px;
+  --r-md:18px;
+  --r-sm:12px;
+  --shadow-float:0 24px 60px -24px rgba(0,0,0,.65), 0 2px 0 rgba(255,255,255,.04) inset;
+  --shadow-soft:0 14px 36px -18px rgba(0,0,0,.55);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:
+    radial-gradient(120% 50% at 50% 0%, rgba(224,90,50,.08), transparent 60%),
+    linear-gradient(180deg, #060101 0%, #1c0608 10%, #330b0e 32%, #2c090c 50%, #170507 70%, #0a0202 88%, #050101 100%);
+  color:var(--ivory);font-family:var(--sans);overflow-x:hidden;-webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none;}
+img,svg{display:block;max-width:100%;}
+button{font-family:inherit;background:none;border:none;color:inherit;cursor:pointer;}
+::selection{background:var(--bronze-dim);color:var(--black);}
+.wrap{max-width:1320px;margin:0 auto;padding:0 48px;}
+@media(max-width:860px){.wrap{padding:0 22px;}}
+
+/* ---------- reveal ---------- */
+.rv{opacity:0;transform:translateY(32px) scale(.98);transition:opacity 1.1s cubic-bezier(.16,1,.3,1),transform 1.1s cubic-bezier(.16,1,.3,1);}
+.rv.in{opacity:1;transform:translateY(0) scale(1);}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none;}}
+
+/* ---------- grain ---------- */
+.grain{position:relative;}
+.grain::after{
+  content:'';position:absolute;inset:0;pointer-events:none;opacity:.05;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------- placeholder media plates (evoking VIBE's real interior: gold chandelier bokeh, neon-lit trees, mirrored brass, jewel velvet) ---------- */
+.plate{position:relative;overflow:hidden;background:#0c0c0b;border-radius:var(--r-lg);transition:transform .5s cubic-bezier(.16,1,.3,1),box-shadow .5s cubic-bezier(.16,1,.3,1);}
+.hero .plate,.exp-plate.plate,.statement .plate,.vip-bg{border-radius:0;}
+
+/* ---------- living ambient orbs: dirty gold → red → orange, glossy 3D spheres ---------- */
+.blob{position:absolute;border-radius:50%;pointer-events:none;z-index:1;}
+.blob::after{
+  content:'';position:absolute;inset:0;border-radius:50%;mix-blend-mode:overlay;opacity:.5;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.blob.gold{
+  background:radial-gradient(circle at 34% 30%, rgba(255,206,140,.95) 0%, rgba(224,124,46,.75) 28%, rgba(154,46,30,.55) 52%, rgba(90,20,16,.25) 72%, transparent 82%);
+  filter:blur(46px);opacity:.75;animation:driftA 17s ease-in-out infinite, pulse 7s ease-in-out infinite;
+}
+.blob.ember{
+  background:radial-gradient(circle at 62% 68%, rgba(255,180,110,.8) 0%, rgba(201,84,38,.6) 30%, rgba(122,31,31,.4) 58%, transparent 78%);
+  filter:blur(56px);opacity:.55;animation:driftB 21s ease-in-out infinite, pulse 9s ease-in-out infinite reverse;
+}
+.blob.ice{background:radial-gradient(circle,rgba(79,216,230,.35) 0%,transparent 70%);filter:blur(80px);opacity:.16;animation:driftB 23s ease-in-out infinite;}
+@keyframes driftA{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(60px,44px) scale(1.14);}}
+@keyframes driftB{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(-50px,-54px) scale(1.16);}}
+@keyframes pulse{0%,100%{opacity:.55;}50%{opacity:.85;}}
+@media(prefers-reduced-motion:reduce){.blob{animation:none;}}
+.plate .cap{
+  position:absolute;left:18px;bottom:16px;z-index:2;font-family:var(--mono);font-size:9.5px;
+  letter-spacing:.1em;color:rgba(243,239,230,.55);text-transform:uppercase;
+}
+.plate--bronze{
+  background:
+    radial-gradient(3% 4% at 30% 24%, rgba(255,224,170,.9), transparent 70%),
+    radial-gradient(2.5% 3% at 46% 18%, rgba(255,224,170,.75), transparent 70%),
+    radial-gradient(3% 4% at 62% 27%, rgba(255,224,170,.8), transparent 70%),
+    radial-gradient(2% 3% at 38% 34%, rgba(255,224,170,.6), transparent 70%),
+    radial-gradient(120% 90% at 20% 100%, rgba(201,160,84,.32), transparent 60%),
+    radial-gradient(90% 70% at 90% 0%, rgba(60,40,20,.5), transparent 65%),
+    linear-gradient(160deg,#1c1712,#0a0a09 70%);
+}
+.plate--forest{
+  background:
+    linear-gradient(100deg, transparent 46%, var(--cyan-dim) 47%, transparent 48%),
+    linear-gradient(96deg, transparent 61%, rgba(224,81,122,.28) 62%, transparent 63%),
+    radial-gradient(110% 90% at 80% 100%, rgba(44,74,53,.6), transparent 60%),
+    radial-gradient(90% 70% at 10% 0%, rgba(20,20,18,.6), transparent 65%),
+    linear-gradient(160deg,#111512,#0a0a09 70%);
+}
+.plate--night{
+  background:
+    linear-gradient(115deg, transparent 30%, var(--cyan-dim) 31%, transparent 32%),
+    radial-gradient(90% 70% at 50% 10%, rgba(79,216,230,.16), transparent 60%),
+    radial-gradient(60% 50% at 85% 80%, rgba(201,160,84,.18), transparent 65%),
+    linear-gradient(180deg,#0c0e0f,#0a0a09 70%);
+}
+.plate--champagne{background:radial-gradient(100% 80% at 30% 20%, rgba(233,207,156,.3), transparent 60%), linear-gradient(200deg,#171310,#0a0a09 75%);}
+.plate--jewel{background:radial-gradient(100% 80% at 70% 100%, rgba(58,15,24,.85), transparent 65%), radial-gradient(70% 60% at 20% 10%, rgba(201,160,84,.14), transparent 65%), linear-gradient(160deg,#150a0d,#0a0a09 75%);}
+.plate.photo{background-size:cover;background-position:center;}
+.glow-card{position:relative;}
+.glow-card::before{
+  content:'';position:absolute;inset:-16px;z-index:-1;border-radius:inherit;
+  background:radial-gradient(120% 120% at 50% 35%, var(--glow), transparent 72%);
+  filter:blur(30px);opacity:.75;transition:opacity .5s ease,filter .5s ease;
+}
+.glow-card:hover::before{opacity:1;filter:blur(36px);}
+.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;}
+.plate.photo::before{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(0deg,rgba(10,10,9,.85) 0%,rgba(10,10,9,.15) 45%,rgba(10,10,9,.35) 100%);}
+.plate.photo.dim-top::before{background:linear-gradient(180deg,rgba(6,1,1,.88) 0%,rgba(6,1,1,.62) 30%,rgba(6,1,1,.78) 100%);}
+.wordmark-img{height:44px;display:block;width:auto;}
+.wordmark-img.lg{height:56px;}
+
+/* ---------- section scaffold ---------- */
+section{position:relative;}
+.snum{
+  font-family:var(--serif);font-style:italic;font-size:15px;color:var(--ivory-dimmer);
+}
+.eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--bronze-bright);font-weight:600;}
+.rule{border-top:1px solid var(--line);}
+.pad{padding:150px 0;}
+@media(max-width:860px){.pad{padding:96px 0;}}
+
+/* ================= NAV ================= */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;
+  padding:22px 48px;transition:top .6s cubic-bezier(.16,1,.3,1),left .6s cubic-bezier(.16,1,.3,1),right .6s cubic-bezier(.16,1,.3,1),padding .5s ease,background .5s ease,border-radius .5s ease,box-shadow .5s ease;
+  border-bottom:1px solid transparent;border-radius:0;
+}
+nav.scrolled{
+  top:14px;left:22px;right:22px;background:rgba(16,14,12,.72);backdrop-filter:blur(22px) saturate(140%);
+  border:1px solid var(--line-strong);border-radius:100px;padding:13px 26px;box-shadow:var(--shadow-float);
+}
+.wordmark{display:flex;flex-direction:column;line-height:.78;}
+.wordmark .a{font-family:var(--serif);font-weight:700;font-size:16px;letter-spacing:.03em;color:var(--bronze-bright);text-transform:uppercase;}
+.wordmark .b{font-family:var(--script);font-size:22px;color:var(--ivory);margin-top:-2px;}
+.wordmark.on-light .b{color:var(--black);}
+.nav-links{display:flex;gap:40px;font-size:11px;letter-spacing:.14em;color:var(--ivory-dim);}
+.nav-links a{position:relative;transition:color .3s;}
+.nav-links a:hover{color:var(--bronze-bright);}
+.nav-right{display:flex;align-items:center;gap:22px;}
+.langsw{display:flex;gap:2px;font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;background:rgba(255,255,255,.04);border-radius:100px;padding:3px;}
+.langsw button{padding:6px 10px;color:var(--ivory-dimmer);border-radius:100px;transition:background .3s,color .3s;}
+.langsw button.on{color:var(--black);background:var(--bronze-bright);}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  padding:14px 26px;border:1px solid var(--bronze-dim);color:var(--ivory);border-radius:100px;
+  transition:border-color .35s ease,background .35s ease,transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s ease;
+}
+.btn:hover{border-color:var(--bronze-bright);background:rgba(185,138,82,.08);transform:translateY(-3px);box-shadow:var(--shadow-soft);}
+.btn.filled{background:var(--bronze);color:#0a0a09;border-color:var(--bronze);box-shadow:0 10px 30px -12px rgba(201,160,84,.55);}
+.btn.filled:hover{background:var(--bronze-bright);border-color:var(--bronze-bright);box-shadow:0 16px 40px -14px rgba(217,171,111,.7);}
+.btn.small{padding:11px 18px;font-size:10.5px;}
+.burger{
+  display:none;position:relative;flex-direction:column;align-items:center;justify-content:center;gap:5px;
+  width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.05);border:1px solid var(--line-strong);
+  box-shadow:var(--shadow-soft);transition:transform .35s cubic-bezier(.16,1,.3,1),background .35s ease;
+}
+.burger:hover{transform:translateY(-2px) scale(1.04);background:rgba(255,255,255,.09);}
+.burger span{height:2px;width:18px;border-radius:100px;background:var(--ivory);transition:transform .4s cubic-bezier(.16,1,.3,1),opacity .3s ease;}
+.burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.burger.open span:nth-child(2){opacity:0;}
+.burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+@media(max-width:900px){.nav-links,.langsw,.nav-right .btn{display:none;}.burger{display:flex;}}
+
+/* mobile full-screen menu */
+.mobile-menu{
+  position:fixed;inset:0;z-index:300;background:rgba(10,10,9,.98);backdrop-filter:blur(10px);
+  display:none;flex-direction:column;align-items:center;justify-content:center;gap:30px;
+}
+.mobile-menu a{font-family:var(--serif);font-style:italic;font-size:28px;}
+.mobile-menu .mlangs{display:flex;gap:18px;font-family:var(--mono);font-size:12px;letter-spacing:.1em;margin-top:10px;color:var(--ivory-dimmer);}
+.mobile-menu .mlangs .on{color:var(--bronze-bright);}
+.mobile-close{position:absolute;top:26px;right:28px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;}
+
+/* ================= HERO ================= */
+.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;}
+.hero .plate{position:absolute;inset:0;z-index:0;}
+.hero::after{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(0deg,rgba(10,10,9,1) 0%,rgba(10,10,9,.55) 42%,rgba(10,10,9,.15) 70%,rgba(10,10,9,.55) 100%);}
+.hero-inner{position:relative;z-index:2;padding:160px 48px 70px;}
+@media(max-width:860px){.hero-inner{padding:140px 22px 50px;}}
+.hero-kicker{display:flex;align-items:center;gap:10px;margin-bottom:26px;}
+.hero-kicker .dot{width:6px;height:6px;border-radius:50%;background:var(--cyan);box-shadow:0 0 10px var(--cyan);}
+.collab{display:flex;align-items:baseline;gap:18px;flex-wrap:wrap;}
+.collab .m1{font-family:var(--sans);font-weight:800;text-transform:uppercase;font-size:clamp(30px,5.4vw,64px);letter-spacing:-.01em;line-height:.98;}
+.collab .x{font-family:var(--serif);font-style:italic;font-size:clamp(22px,3vw,36px);color:var(--bronze-bright);}
+.collab .m2{font-family:var(--serif);font-style:italic;font-size:clamp(30px,5.4vw,64px);color:var(--bronze-bright);line-height:.98;}
+.collab .vibe-logo{height:clamp(30px,5.5vw,58px);width:auto;align-self:center;}
+.hero-tags{display:flex;gap:14px;margin-top:22px;flex-wrap:wrap;}
+.tag{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;color:var(--ivory-dim);
+  padding:9px 18px;border:1px solid var(--line-strong);border-radius:100px;background:rgba(255,255,255,.04);
+  transition:transform .35s cubic-bezier(.16,1,.3,1),border-color .35s ease;
+}
+.tag:hover{transform:translateY(-2px);border-color:var(--bronze-bright);}
+.hero-meta{display:flex;gap:0;margin-top:42px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:22px;}
+.hero-meta div{padding-right:34px;margin-right:34px;border-right:1px solid var(--line);}
+.hero-meta div:last-child{border-right:none;}
+.hero-meta b{display:block;font-family:var(--sans);font-weight:700;font-size:16px;font-variant-numeric:tabular-nums;}
+.hero-meta span{font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--ivory-dimmer);}
+.hero-tag{margin-top:26px;font-size:15px;color:var(--ivory-dim);max-width:460px;line-height:1.7;}
+.hero-ctas{display:flex;align-items:center;gap:16px;margin-top:38px;flex-wrap:wrap;}
+.hero-ctas .sub{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--ivory-dim);border-bottom:1px solid var(--line-strong);padding-bottom:3px;transition:color .3s,border-color .3s;}
+.hero-ctas .sub:hover{color:var(--bronze-bright);border-color:var(--bronze-bright);}
+.hero-current{
+  display:inline-flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:34px;padding:12px 20px;
+  border:1px solid var(--line-strong);border-radius:100px;background:rgba(255,255,255,.04);
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:var(--ivory-dim);text-transform:uppercase;
+  transition:border-color .35s ease,background .35s ease,transform .35s cubic-bezier(.16,1,.3,1);
+  max-width:100%;
+}
+@media(max-width:520px){.hero-current{border-radius:var(--r-lg);gap:6px 10px;}}
+.hero-current:hover{border-color:var(--bronze-bright);background:rgba(255,255,255,.07);transform:translateY(-2px);}
+.hero-current .dot{width:6px;height:6px;border-radius:50%;background:var(--cyan);box-shadow:0 0 10px var(--cyan);flex:none;}
+.hero-current b{color:var(--bronze-bright);font-weight:700;letter-spacing:.02em;}
+.hero-current .arrow{color:var(--bronze-bright);}
+.hero-trio{display:flex;gap:0;margin-top:44px;padding-top:22px;border-top:1px solid var(--bronze-dim);max-width:620px;}
+.hero-trio div{flex:1;text-align:center;padding:0 14px;border-left:1px solid var(--line);}
+.hero-trio div:first-child{border-left:none;}
+.hero-trio svg{width:18px;height:18px;stroke:var(--bronze-bright);fill:none;stroke-width:1.3;margin:0 auto 10px;display:block;}
+.hero-trio span{font-family:var(--mono);font-size:8.5px;letter-spacing:.09em;color:var(--ivory-dim);text-transform:uppercase;line-height:1.5;display:block;}
+@media(max-width:600px){.hero-trio{max-width:100%;}.hero-trio span{font-size:7.5px;}}
+.scroll-hint{position:absolute;bottom:26px;right:48px;z-index:2;font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;color:var(--ivory-dimmer);writing-mode:vertical-rl;display:flex;align-items:center;gap:10px;}
+.scroll-hint .ln{width:1px;height:40px;background:var(--line-strong);}
+@media(max-width:860px){.scroll-hint{display:none;}}
+
+/* ================= CURRENT EVENT (02) ================= */
+.event{padding:150px 0;position:relative;overflow:hidden;}
+.event .wrap{position:relative;z-index:1;}
+.event-head{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end;margin-bottom:70px;}
+.event-head h2{font-family:var(--sans);font-weight:800;text-transform:uppercase;font-size:clamp(34px,5.5vw,72px);line-height:.98;letter-spacing:-.01em;}
+.event-head h2 em{font-family:var(--serif);font-style:italic;color:var(--bronze-bright);font-weight:400;}
+.event-side p{font-size:14px;line-height:1.85;color:var(--ivory-dim);max-width:420px;}
+.event-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;}
+.event-plate{aspect-ratio:4/5;border-radius:var(--r-xl);box-shadow:var(--shadow-float);}
+.event-plate:hover{transform:translateY(-8px);}
+.event-info{display:flex;flex-direction:column;justify-content:space-between;padding:6px 0;}
+.event-facts{
+  display:flex;flex-direction:column;gap:0;background:rgba(255,255,255,.03);backdrop-filter:blur(16px);
+  border:1px solid var(--line);border-radius:var(--r-lg);padding:8px 22px;box-shadow:var(--shadow-soft);
+}
+.event-facts div{display:flex;justify-content:space-between;padding:16px 0;border-bottom:1px solid var(--line);font-size:13px;}
+.event-facts div span:first-child{color:var(--ivory-dimmer);font-family:var(--mono);font-size:10px;letter-spacing:.08em;}
+.event-facts div span:last-child{font-weight:600;}
+.lineup{margin-top:30px;}
+.lineup h4{font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--bronze-bright);margin-bottom:16px;}
+.dj{display:flex;justify-content:space-between;align-items:baseline;padding:14px 0;border-top:1px solid var(--line);}
+.dj:last-child{border-bottom:1px solid var(--line);}
+.dj .name{font-family:var(--serif);font-style:italic;font-size:20px;}
+.dj .meta{text-align:right;}
+.dj .genre{display:block;font-size:11px;color:var(--ivory-dim);}
+.dj .ig{display:block;font-family:var(--mono);font-size:10px;color:var(--bronze-bright);margin-top:3px;}
+.event-cta{display:flex;gap:16px;margin-top:34px;flex-wrap:wrap;}
+.campaign-strip{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:28px;}
+.campaign-strip .plate{aspect-ratio:3/4;border-radius:var(--r-md);}
+.campaign-strip .plate:hover{transform:translateY(-6px) scale(1.02);box-shadow:var(--shadow-soft);}
+@media(max-width:900px){.event-head,.event-grid{grid-template-columns:1fr;}}
+
+/* ================= EXPERIENCE (03) ================= */
+.experience{position:relative;padding:0;}
+.exp-plate{min-height:100vh;position:relative;display:flex;align-items:center;}
+.exp-word-wall{position:relative;z-index:2;padding:0 48px;display:flex;flex-wrap:wrap;gap:.35em .9em;max-width:1100px;}
+@media(max-width:860px){.exp-word-wall{padding:0 22px;}}
+.exp-word{font-family:var(--serif);font-style:italic;letter-spacing:-.01em;color:rgba(243,239,230,.62);line-height:1.15;text-shadow:0 6px 28px rgba(0,0,0,.85),0 2px 10px rgba(0,0,0,.9);}
+.exp-word.hi{color:var(--ivory);}
+.exp-word.accent{color:var(--bronze-bright);}
+.exp-word.sm{font-size:clamp(18px,2.6vw,30px);}
+.exp-word.md{font-size:clamp(26px,4vw,52px);}
+.exp-word.lg{font-size:clamp(38px,6.4vw,88px);}
+.exp-foot{position:relative;z-index:2;padding:60px 48px 0;}
+@media(max-width:860px){.exp-foot{padding:60px 22px 0;}}
+
+/* ================= VIP CLUB (04) ================= */
+.vip{padding:150px 0;position:relative;overflow:hidden;}
+.vip-bg{position:absolute;inset:0;z-index:0;opacity:.22;background-size:cover;background-position:center 30%;}
+.vip-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,var(--black) 15%,transparent 60%),linear-gradient(0deg,var(--black),transparent 30%,transparent 70%,var(--black));}
+.vip .wrap{position:relative;z-index:1;}
+.vip-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:70px;align-items:start;}
+.vip-copy h2{font-family:var(--serif);font-style:italic;font-size:clamp(34px,5vw,58px);line-height:1.05;margin-bottom:24px;}
+.vip-copy .sub-h{font-family:var(--sans);font-weight:800;text-transform:uppercase;letter-spacing:.02em;font-size:13px;color:var(--bronze-bright);margin-bottom:16px;}
+.vip-copy p{font-size:14.5px;line-height:1.9;color:var(--ivory-dim);max-width:440px;margin-bottom:32px;}
+.perks{display:flex;flex-wrap:wrap;gap:10px 12px;margin-bottom:40px;}
+.perks span{font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--ivory-dim);padding-bottom:8px;border-bottom:1px solid var(--line-strong);}
+.vip-form{
+  background:rgba(255,255,255,.03);backdrop-filter:blur(16px);border:1px solid var(--line);
+  border-radius:var(--r-xl);padding:34px;box-shadow:var(--shadow-float);
+}
+.vip-form .row{display:grid;grid-template-columns:1fr 1fr;gap:0 24px;}
+.field{display:flex;flex-direction:column;margin-bottom:22px;}
+.field label{font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--ivory-dimmer);margin-bottom:8px;text-transform:uppercase;}
+.field input,.field textarea,.field select{
+  background:rgba(255,255,255,.04);border:1px solid var(--line-strong);border-radius:var(--r-md);padding:13px 16px;color:var(--ivory);
+  font-family:var(--sans);font-size:14.5px;outline:none;transition:border-color .3s,background .3s,box-shadow .3s;
+}
+.field textarea{resize:vertical;min-height:80px;}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--bronze);background:rgba(255,255,255,.06);box-shadow:0 0 0 4px rgba(201,160,84,.12);}
+.check{display:flex;align-items:flex-start;gap:10px;margin:6px 0 26px;font-size:12px;color:var(--ivory-dimmer);line-height:1.6;}
+.check input{margin-top:3px;}
+.form-msg{display:none;padding:22px 0;border-top:1px solid var(--line-strong);}
+.form-msg.show{display:block;}
+.form-msg h4{font-family:var(--serif);font-style:italic;font-size:22px;margin-bottom:10px;}
+.form-msg p{font-size:13px;color:var(--ivory-dim);line-height:1.7;}
+@media(max-width:900px){.vip-grid{grid-template-columns:1fr;gap:50px;}.vip-form .row{grid-template-columns:1fr;}}
+
+/* ================= SERVICES (05) ================= */
+.services-head{padding-bottom:80px;}
+.services-head h2{font-family:var(--sans);font-weight:800;text-transform:uppercase;font-size:clamp(34px,6vw,80px);line-height:.96;letter-spacing:-.01em;}
+.services-head h2 .light{color:var(--ivory-dimmer);}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+.svc-card{
+  position:relative;overflow:hidden;border-radius:var(--r-xl);border:1px solid var(--line);
+  min-height:300px;display:flex;flex-direction:column;justify-content:flex-end;padding:32px 28px;
+  transition:transform .5s cubic-bezier(.16,1,.3,1),box-shadow .5s ease,border-color .5s ease;
+}
+.svc-card:hover{transform:translateY(-10px);box-shadow:var(--shadow-float);border-color:var(--line-strong);}
+.svc-card .bg{position:absolute;inset:0;z-index:0;opacity:.6;transition:opacity .6s ease,transform .7s cubic-bezier(.16,1,.3,1);}
+.svc-card:hover .bg{opacity:.85;transform:scale(1.07);}
+.svc-card .veil{position:absolute;inset:0;z-index:0;background:linear-gradient(180deg,transparent 25%,rgba(6,1,1,.82) 100%);}
+.svc-card .n{position:relative;z-index:1;font-family:var(--serif);font-style:italic;font-size:15px;color:var(--peach-bright);margin-bottom:12px;}
+.svc-card h3{position:relative;z-index:1;font-family:var(--sans);font-weight:800;font-size:22px;letter-spacing:-.01em;text-transform:uppercase;margin-bottom:10px;}
+.svc-card p{position:relative;z-index:1;font-size:13px;line-height:1.7;color:var(--ivory-dim);}
+@media(max-width:1080px){.svc-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:640px){.svc-grid{grid-template-columns:1fr;}}
+
+/* ================= GALLERY (06) ================= */
+.gallery-head{margin-bottom:50px;}
+.hscroll{display:flex;gap:18px;overflow-x:auto;padding:0 48px 20px;scroll-snap-type:x proximity;}
+@media(max-width:860px){.hscroll{padding:0 22px 20px;}}
+.hscroll::-webkit-scrollbar{height:4px;}
+.hscroll::-webkit-scrollbar-thumb{background:var(--line-strong);}
+.gcard{flex:0 0 auto;width:min(70vw,420px);scroll-snap-align:start;}
+.gcard.wide{width:min(84vw,620px);}
+.gcard .plate{aspect-ratio:4/5;}
+.gcard.wide .plate{aspect-ratio:16/9;}
+.gcard:hover .plate{transform:translateY(-10px) scale(1.02);box-shadow:var(--shadow-float);}
+.gcard .meta{padding-top:14px;display:flex;justify-content:space-between;align-items:baseline;gap:10px;}
+.gcard h4{font-family:var(--serif);font-style:italic;font-size:19px;color:var(--peach-bright);}
+.gcard .loc{font-family:var(--mono);font-size:10px;color:var(--ivory-dimmer);letter-spacing:.06em;text-align:right;}
+.gcard.soon .plate{display:flex;align-items:center;justify-content:center;}
+.gcard.soon .plate span{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--ivory-dimmer);}
+
+/* ================= TALENT (07) ================= */
+.talent-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+.tcard{background:var(--black);aspect-ratio:3/4;position:relative;overflow:hidden;border-radius:var(--r-lg);}
+.tcard .plate{position:absolute;inset:0;border-radius:0;}
+.tcard:hover .plate{transform:scale(1.06);}
+.tcard .lbl{position:absolute;left:16px;bottom:14px;z-index:2;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;color:var(--ivory-dimmer);text-transform:uppercase;}
+@media(max-width:900px){.talent-grid{grid-template-columns:repeat(2,1fr);}}
+.talent-foot{display:flex;justify-content:space-between;align-items:center;padding-top:44px;flex-wrap:wrap;gap:20px;}
+
+/* ================= FOUNDERS (08) ================= */
+.founders{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.founder{position:relative;min-height:620px;display:flex;align-items:flex-end;overflow:hidden;border-radius:var(--r-xl);}
+.founder .plate{position:absolute;inset:0;border-radius:0;}
+.founder:hover .plate{transform:scale(1.05);}
+.founder-info{position:relative;z-index:2;padding:34px;}
+.founder-info .role{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;color:var(--bronze-bright);margin-bottom:8px;text-transform:uppercase;}
+.founder-info .nm{font-family:var(--serif);font-style:italic;font-size:26px;margin-bottom:6px;}
+.founder-info .ig{font-family:var(--mono);font-size:11px;color:var(--ivory-dim);}
+.founders-intro{max-width:640px;margin-bottom:70px;}
+.founders-intro h2{font-family:var(--serif);font-style:italic;font-size:clamp(30px,4.4vw,50px);line-height:1.1;margin-bottom:24px;}
+.founders-intro p{font-size:14.5px;line-height:1.9;color:var(--ivory-dim);}
+@media(max-width:860px){.founders{grid-template-columns:1fr;}.founder{min-height:440px;}}
+
+/* ================= BUSINESS (09) ================= */
+.biz{padding:150px 0;}
+.biz-head{max-width:760px;margin-bottom:70px;}
+.biz-head h2{font-family:var(--sans);font-weight:800;text-transform:uppercase;font-size:clamp(32px,5vw,64px);line-height:1.02;}
+.biz-head p{font-size:14.5px;color:var(--ivory-dim);margin-top:22px;max-width:460px;line-height:1.85;}
+.biz-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin:8px 0 24px;}
+.chip-opt{font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;padding:10px 18px;border:1px solid var(--line-strong);border-radius:100px;color:var(--ivory-dim);cursor:pointer;transition:all .3s cubic-bezier(.16,1,.3,1);}
+.chip-opt:hover{transform:translateY(-2px);border-color:var(--bronze-bright);}
+.chip-opt.on{background:var(--bronze);color:#0a0a09;border-color:var(--bronze);}
+#bizForm{
+  background:rgba(255,255,255,.03);backdrop-filter:blur(16px);border:1px solid var(--line);
+  border-radius:var(--r-xl);padding:34px;box-shadow:var(--shadow-float);
+}
+.biz-facts{display:flex;flex-direction:column;gap:22px;}
+.biz-fact{background:rgba(255,255,255,.03);border-radius:var(--r-md);padding:20px 22px;transition:transform .4s cubic-bezier(.16,1,.3,1),background .4s ease;}
+.biz-fact:hover{transform:translateX(6px);background:rgba(255,255,255,.05);}
+.biz-fact .k{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--bronze-bright);margin-bottom:8px;}
+.biz-fact .v{font-size:13.5px;color:var(--ivory-dim);line-height:1.7;}
+@media(max-width:900px){.biz-grid{grid-template-columns:1fr;gap:50px;}}
+
+/* ================= STATEMENT (10) ================= */
+.statement{min-height:100vh;position:relative;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;}
+.statement .plate{position:absolute;inset:0;}
+.statement::after{content:'';position:absolute;inset:0;background:rgba(10,10,9,.5);}
+.statement-inner{position:relative;z-index:2;padding:0 24px;}
+.statement h2{font-family:var(--sans);font-weight:800;text-transform:uppercase;font-size:clamp(34px,7vw,110px);line-height:1.02;letter-spacing:-.01em;}
+.statement h2 .thin{font-family:var(--serif);font-style:italic;font-weight:400;text-transform:none;color:var(--bronze-bright);}
+.statement .brandline{margin-top:50px;font-family:var(--mono);font-size:12px;letter-spacing:.2em;color:var(--ivory-dim);}
+
+/* ================= FOOTER ================= */
+footer{padding:90px 0 40px;border-top:1px solid var(--line);background:linear-gradient(180deg,transparent 0%,#050101 25%,#020000 100%);}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;padding-bottom:70px;}
+.foot-grid h5{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--ivory-dimmer);margin-bottom:18px;text-transform:uppercase;}
+.foot-grid a{display:block;font-size:13.5px;color:var(--ivory-dim);padding:6px 0;transition:color .3s;}
+.foot-grid a:hover{color:var(--bronze-bright);}
+.foot-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:30px;border-top:1px solid var(--line);font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--ivory-dimmer);flex-wrap:wrap;gap:14px;}
+.foot-legal{display:flex;gap:22px;}
+.legal-link{
+  font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--ivory-dimmer);
+  text-transform:uppercase;cursor:pointer;transition:color .3s;padding:0;
+}
+.legal-link:hover{color:var(--bronze-bright);}
+
+/* ---------- legal modals ---------- */
+.legal-overlay{
+  position:fixed;inset:0;z-index:400;background:rgba(5,1,1,.82);backdrop-filter:blur(10px);
+  display:none;align-items:flex-start;justify-content:center;padding:90px 24px 40px;overflow-y:auto;
+}
+.legal-overlay.open{display:flex;}
+.legal-box{
+  position:relative;width:100%;max-width:760px;background:var(--panel);border:1px solid var(--line-strong);
+  border-radius:var(--r-xl);padding:50px 54px 60px;box-shadow:var(--shadow-float);
+}
+.legal-box .close{
+  position:absolute;top:22px;right:22px;width:40px;height:40px;border-radius:50%;
+  background:rgba(255,255,255,.05);border:1px solid var(--line-strong);color:var(--ivory);
+  font-family:var(--mono);font-size:14px;cursor:pointer;transition:background .3s,transform .3s;
+}
+.legal-box .close:hover{background:rgba(255,255,255,.1);transform:rotate(90deg);}
+.legal-box h2{font-family:var(--serif);font-style:italic;font-size:clamp(26px,3.4vw,38px);margin-bottom:8px;color:var(--bronze-bright);}
+.legal-box .updated{font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--ivory-dimmer);margin-bottom:34px;text-transform:uppercase;}
+.legal-box h3{font-family:var(--sans);font-weight:800;font-size:15px;letter-spacing:.01em;margin:30px 0 12px;color:var(--ivory);}
+.legal-box h3:first-of-type{margin-top:0;}
+.legal-box p{font-size:13.5px;line-height:1.85;color:var(--ivory-dim);margin-bottom:12px;}
+.legal-box ul{margin:0 0 12px 18px;}
+.legal-box li{font-size:13.5px;line-height:1.85;color:var(--ivory-dim);margin-bottom:6px;}
+.legal-box b{color:var(--ivory);font-weight:700;}
+.legal-box a.inline{color:var(--bronze-bright);text-decoration:underline;text-underline-offset:2px;}
+@media(max-width:640px){.legal-box{padding:40px 24px 44px;}}
+@media(max-width:860px){.foot-grid{grid-template-columns:1fr 1fr;}}
+
+.magnetic{display:inline-block;transition:transform .25s cubic-bezier(.16,1,.3,1);}
+
+/* ---- Events / Gallery page ---- */
+.gal-hero{padding:170px 0 60px;}
+.gal-hero .eyebrow{margin-bottom:20px;display:block;}
+.gal-hero h1{font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(38px,6vw,74px);line-height:1.05;margin-bottom:26px;text-wrap:balance;}
+.gal-hero p{font-size:15px;color:var(--ivory-dim);max-width:580px;line-height:1.85;margin-bottom:36px;}
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.gtile{
+  position:relative;border-radius:var(--r-xl);overflow:hidden;border:1px solid var(--line);
+  min-height:360px;display:flex;flex-direction:column;justify-content:flex-end;
+  transition:transform .5s cubic-bezier(.16,1,.3,1),box-shadow .5s ease,border-color .5s ease;
+}
+.gtile:hover{transform:translateY(-8px);box-shadow:var(--shadow-float);border-color:var(--line-strong);}
+.gtile.wide{grid-column:span 2;}
+.gtile .plate{position:absolute;inset:0;border-radius:0;}
+.gtile-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;}
+.gtile-meta{position:relative;z-index:2;padding:26px;background:linear-gradient(0deg,rgba(6,1,1,.88) 0%,transparent 75%);}
+.gtile-meta h3{font-family:var(--serif);font-style:italic;font-weight:400;font-size:20px;color:var(--peach-bright);margin-bottom:6px;}
+.gtile-meta span{font-family:var(--mono);font-size:10.5px;color:var(--ivory-dimmer);letter-spacing:.06em;}
+.gtile-badge{
+  position:absolute;top:18px;right:18px;z-index:3;font-family:var(--mono);font-size:10px;letter-spacing:.08em;
+  color:var(--ivory);background:rgba(6,1,1,.6);border:1px solid var(--line-strong);border-radius:100px;
+  padding:7px 14px;backdrop-filter:blur(8px);pointer-events:none;
+}
+.gtile.soon{align-items:center;justify-content:center;background:var(--panel);}
+.gtile.soon .plate{opacity:.55;}
+.soon-label{position:relative;z-index:2;font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--ivory-dimmer);text-transform:uppercase;text-align:center;padding:0 20px;}
+@media(max-width:900px){.gallery-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:600px){.gallery-grid{grid-template-columns:1fr;}.gtile.wide{grid-column:span 1;}}
+
+
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="index.html#top" aria-label="Models on the Move — home"><img class="wordmark-img" src="assets/motm_logo_dark.png" alt="Models on the Move"></a>
+  <div class="nav-links">
+    <a href="index.html#events" data-i18n="nav.events">ESEMÉNYEK</a>
+    <a href="index.html#vip" data-i18n="nav.vip">VIP CLUB</a>
+    <a href="index.html#services" data-i18n="nav.services">SZOLGÁLTATÁSOK</a>
+    <a href="index.html#talent" data-i18n="nav.talent">TALENT</a>
+    <a href="index.html#founders" data-i18n="nav.about">RÓLUNK</a>
+  </div>
+  <div class="nav-right">
+    <div class="langsw" id="langsw-d">
+      <button data-lang="hu">HU</button><button data-lang="en">EN</button>
+    </div>
+    <a href="index.html#vip" class="btn filled" data-i18n="nav.cta">CSATLAKOZZ</a>
+  </div>
+  <button class="burger" id="burgerBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="mobileClose" data-i18n="mobile.close">BEZÁR ✕</button>
+  <a href="index.html#events" class="mlink" data-i18n="nav.events">ESEMÉNYEK</a>
+  <a href="index.html#vip" class="mlink" data-i18n="nav.vip">VIP CLUB</a>
+  <a href="index.html#services" class="mlink" data-i18n="nav.services">SZOLGÁLTATÁSOK</a>
+  <a href="index.html#talent" class="mlink" data-i18n="nav.talent">TALENT</a>
+  <a href="index.html#founders" class="mlink" data-i18n="nav.about">RÓLUNK</a>
+  <a href="index.html#vip" class="btn filled mlink" data-i18n="nav.cta" style="margin-top:8px;">CSATLAKOZZ</a>
+  <div class="mlangs" id="langsw-m"><button data-lang="hu">HU</button><button data-lang="en">EN</button></div>
+</div>
+
+
+<!-- EVENTS / GALLERY -->
+<section class="gal-hero">
+  <div class="wrap">
+    <div class="rv">
+      <span class="eyebrow" data-i18n="galpage.eyebrow">ESEMÉNYEK</span>
+      <h1 data-i18n="galpage.h1">Korábbi esték.<br>Maradandó pillanatok.</h1>
+      <p data-i18n="galpage.p">Minden Models on the Move est egy saját világ — fotók és aftermovie-k, ahogy egyre több esemény kerül fel ide. Ha lemaradtál egy estéről, itt éled újra.</p>
+      <a href="index.html#events" class="btn filled magnetic" data-i18n="galpage.cta">AKTUÁLIS ESEMÉNY</a>
+    </div>
+  </div>
+</section>
+
+<section class="pad" style="padding-top:60px;">
+  <div class="wrap">
+    <div class="gallery-grid rv">
+
+      <div class="gtile wide glow-card">
+        <div class="plate photo grain" style="background-image:url('assets/leroy-szezonnyito.jpg')"></div>
+        <div class="gtile-meta">
+          <h3 data-i18n="gal.g1t">Szezonnyitó — Day Time Party &amp; Fashion Show</h3>
+          <span>MOM Leroy Bistro · 2026.05.29.</span>
+        </div>
+      </div>
+
+      <div class="gtile glow-card">
+        <video class="gtile-video" autoplay muted loop playsinline controls poster="assets/hero-myrazs-poster.jpg">
+          <source src="assets/hero-myrazs.mp4" type="video/mp4">
+        </video>
+        <span class="gtile-badge" data-i18n="galpage.videobadge">▶ VIDEO</span>
+        <div class="gtile-meta">
+          <h3 data-i18n="galpage.aftermovie">Szezonnyitó — Aftermovie</h3>
+          <span>MOM Leroy Bistro</span>
+        </div>
+      </div>
+
+      <div class="gtile glow-card">
+        <div class="plate photo grain" style="background-image:url('assets/leroy-fashionshow.jpg')"></div>
+        <div class="gtile-meta">
+          <h3 data-i18n="gal.g2t">Models on the Move × The Pop Out</h3>
+          <span>MOM Leroy Bistro</span>
+        </div>
+      </div>
+
+      <div class="gtile soon">
+        <div class="plate plate--bronze"></div>
+        <span class="soon-label" data-i18n="galpage.photosoon">FOTÓ HAMAROSAN</span>
+      </div>
+
+      <div class="gtile soon">
+        <div class="plate plate--night"></div>
+        <span class="soon-label" data-i18n="galpage.videosoon">▶ VIDEO HAMAROSAN</span>
+      </div>
+
+      <div class="gtile soon">
+        <div class="plate plate--forest"></div>
+        <span class="soon-label" data-i18n="galpage.photosoon">FOTÓ HAMAROSAN</span>
+      </div>
+
+      <div class="gtile soon">
+        <div class="plate plate--jewel"></div>
+        <span class="soon-label" data-i18n="galpage.photosoon">FOTÓ HAMAROSAN</span>
+      </div>
+
+      <div class="gtile soon">
+        <div class="plate plate--champagne"></div>
+        <span class="soon-label" data-i18n="galpage.videosoon">▶ VIDEO HAMAROSAN</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <img class="wordmark-img lg" src="assets/motm_logo_dark.png" alt="Models on the Move">
+        <p style="margin-top:18px;font-size:12.5px;color:var(--ivory-dimmer);max-width:260px;line-height:1.7;" data-i18n="foot.tag">Premium creative, marketing, talent &amp; experience brand. Budapest.</p>
+      </div>
+      <div>
+        <h5 data-i18n="foot.sitemap">OLDALTÉRKÉP</h5>
+        <a href="index.html#events" data-i18n="nav.events">ESEMÉNYEK</a>
+        <a href="index.html#vip" data-i18n="nav.vip">VIP CLUB</a>
+        <a href="index.html#services" data-i18n="nav.services">SZOLGÁLTATÁSOK</a>
+        <a href="index.html#talent" data-i18n="nav.talent">TALENT</a>
+      </div>
+      <div>
+        <h5 data-i18n="foot.company">CÉG</h5>
+        <a href="index.html#founders" data-i18n="nav.about">RÓLUNK</a>
+        <a href="index.html#business" data-i18n="foot.contact">KAPCSOLAT</a>
+      </div>
+      <div>
+        <h5 data-i18n="foot.social">KÖVESS</h5>
+        <a href="index.html#">Instagram</a>
+        <a href="index.html#">TikTok</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <div>© 2026 MODELS ON THE MOVE</div>
+      <div class="foot-legal">
+        <button type="button" class="legal-link" data-open="modal-impressum" data-i18n="foot.impressum">IMPRESSZUM</button>
+        <button type="button" class="legal-link" data-open="modal-privacy" data-i18n="foot.privacy">ADATKEZELÉS</button>
+        <button type="button" class="legal-link" data-open="modal-terms" data-i18n="foot.terms">ÁSZF</button>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div class="legal-overlay" id="modal-impressum">
+  <div class="legal-box">
+    <button type="button" class="close" data-close>✕</button>
+    <h2>Impresszum</h2>
+    <div class="updated">Utolsó frissítés: 2026. szeptember</div>
+
+    <h3>Szolgáltató adatai</h3>
+    <p><b>Név:</b> Bajzáth Balázs Gábor egyéni vállalkozó</p>
+    <p><b>Márkanév:</b> Models on the Move</p>
+    <p><b>Székhely:</b> 1126 Budapest, Kléh István utca 3.</p>
+    <p><b>Adószám:</b> 91280297-1-43</p>
+    <p><b>Nyilvántartási szám:</b> 60773441</p>
+    <p><b>Nyilvántartó hatóság:</b> az egyéni vállalkozók nyilvántartását a Belügyminisztérium Webes Ügysegéd rendszere vezeti (ugyfelkapu.gov.hu / vallalkozokapu.gov.hu)</p>
+    <p><b>E-mail:</b> <a class="inline" href="mailto:hello@modelsonthemove.hu">hello@modelsonthemove.hu</a></p>
+    <p><b>Telefon:</b> <a class="inline" href="tel:+36309404148">+36 30 940 4148</a></p>
+
+    <h3>Tárhelyszolgáltató</h3>
+    <p>[Tárhelyszolgáltató neve, székhelye és elérhetősége — a végleges hosting kiválasztása után kiegészítendő.]</p>
+
+    <h3>A weboldal célja</h3>
+    <p>A modelsonthemove.hu weboldal a Models on the Move márka rendezvényeinek, szolgáltatásainak és VIP közösségének bemutatására, valamint üzleti és tagsági megkeresések fogadására szolgál. A weboldalon keresztül közvetlen jegyértékesítés vagy fizetés jelenleg nem történik — a jegyvásárlás külső, harmadik fél által üzemeltetett rendszeren keresztül valósul meg.</p>
+  </div>
+</div>
+
+<div class="legal-overlay" id="modal-privacy">
+  <div class="legal-box">
+    <button type="button" class="close" data-close>✕</button>
+    <h2>Adatkezelési tájékoztató</h2>
+    <div class="updated">Utolsó frissítés: 2026. szeptember</div>
+
+    <h3>1. Az adatkezelő</h3>
+    <p>Bajzáth Balázs Gábor egyéni vállalkozó (Models on the Move), székhely: 1126 Budapest, Kléh István utca 3., adószám: 91280297-1-43, nyilvántartási szám: 60773441, e-mail: <a class="inline" href="mailto:hello@modelsonthemove.hu">hello@modelsonthemove.hu</a>, telefon: <a class="inline" href="tel:+36309404148">+36 30 940 4148</a> (a továbbiakban: <b>Adatkezelő</b>).</p>
+    <p>Az adatkezelés a mindenkor hatályos jogszabályok — így különösen az Európai Parlament és a Tanács (EU) 2016/679 rendelete (GDPR) és az információs önrendelkezési jogról és az információszabadságról szóló 2011. évi CXII. törvény (Infotv.) — rendelkezéseinek megfelelően történik.</p>
+
+    <h3>2. Milyen adatokat kezelünk, és miért</h3>
+    <p><b>a) VIP Club jelentkezés</b> — a weboldal VIP Club űrlapján megadott: teljes név, e-mail cím, telefonszám, Instagram felhasználónév.<br>Cél: a jelentkezés elbírálása, a tagsággal kapcsolatos kapcsolattartás. A jelentkezés kitöltése és elküldése nem jelent automatikus tagságot.</p>
+    <p><b>b) Üzleti megkeresés</b> — az űrlapon megadott: név, cégnév, e-mail cím, telefonszám, az érdeklődés tárgya, a projekt leírása, valamint opcionálisan Instagram/weboldal cím.<br>Cél: az ajánlatkérés megválaszolása, kapcsolatfelvétel, üzleti egyeztetés.</p>
+    <p><b>c) Kapcsolatfelvétel e-mailben vagy telefonon</b> — az ennek során megadott elérhetőségi és a megkereséshez szükséges adatok.<br>Cél: a megkeresés megválaszolása.</p>
+    <p><b>d) Sütik (cookie-k)</b> — a weboldal jelenleg kizárólag a működéshez szükséges, alapvető sütiket használja (pl. nyelvi beállítás megjegyzése). Marketing- vagy statisztikai célú sütik bevezetése esetén ez a tájékoztató frissítésre kerül, és — ahol jogszabály kötelezővé teszi — külön hozzájárulást kérünk.</p>
+
+    <h3>3. Az adatkezelés jogalapja</h3>
+    <p>Az adatkezelés jogalapja minden esetben az érintett önkéntes hozzájárulása (GDPR 6. cikk (1) bekezdés a) pont), amelyet az adott űrlap elküldésével, a hozzájárulási jelölőnégyzet bejelölésével ad meg. A hozzájárulás bármikor, indoklás nélkül visszavonható, ez azonban nem érinti a visszavonás előtti adatkezelés jogszerűségét.</p>
+
+    <h3>4. Az adatkezelés időtartama</h3>
+    <p>A VIP Club jelentkezések és üzleti megkeresések során megadott adatokat az Adatkezelő a megkeresés elbírálásához, illetve az abból eredő kapcsolat fennállásáig, de legfeljebb a hozzájárulás visszavonásáig, illetve — ha ez korábbi — a megkereséstől számított 2 évig kezeli, kivéve, ha jogszabály (pl. számviteli, adózási kötelezettség) ettől eltérő megőrzési időt ír elő.</p>
+
+    <h3>5. Adattovábbítás, adatfeldolgozók</h3>
+    <p>Az Adatkezelő az adatokat harmadik félnek kereskedelmi célból nem adja át. Az adatok kezelésében közreműködhetnek: a weboldal tárhelyszolgáltatója, valamint — a VIP tagság és üzleti megkeresések adminisztrációjához — az Adatkezelő által igénybe vett levelezőrendszer üzemeltetője. Ezen közreműködők kizárólag technikai adatfeldolgozóként, az Adatkezelő utasításai alapján járnak el.</p>
+
+    <h3>6. Adatbiztonság</h3>
+    <p>Az Adatkezelő megfelelő technikai és szervezési intézkedésekkel gondoskodik a kezelt adatok biztonságáról, védi azokat a jogosulatlan hozzáférés, megváltoztatás, továbbítás, nyilvánosságra hozatal, törlés vagy megsemmisítés, valamint a véletlen megsemmisülés és sérülés ellen.</p>
+
+    <h3>7. Az érintettek jogai</h3>
+    <ul>
+      <li><b>Hozzáférés:</b> tájékoztatást kérhetsz arról, milyen adataidat kezeljük.</li>
+      <li><b>Helyesbítés:</b> kérheted a pontatlan adatok javítását.</li>
+      <li><b>Törlés:</b> kérheted adataid törlését, ha a kezelésükhöz nincs már jogalap.</li>
+      <li><b>Korlátozás:</b> bizonyos esetekben kérheted az adatkezelés korlátozását.</li>
+      <li><b>Tiltakozás:</b> tiltakozhatsz az adatkezelés ellen.</li>
+      <li><b>Adathordozhatóság:</b> kérheted, hogy adataidat tagolt, géppel olvasható formátumban megkapd.</li>
+      <li><b>Hozzájárulás visszavonása:</b> bármikor, indoklás nélkül.</li>
+    </ul>
+    <p>Ezen jogaidat a <a class="inline" href="mailto:hello@modelsonthemove.hu">hello@modelsonthemove.hu</a> e-mail címen gyakorolhatod.</p>
+
+    <h3>8. Jogorvoslat</h3>
+    <p>Panaszoddal fordulhatsz közvetlenül az Adatkezelőhöz, illetve a Nemzeti Adatvédelmi és Információszabadság Hatósághoz (NAIH):<br>
+    Cím: 1055 Budapest, Falk Miksa utca 9–11.<br>
+    Postacím: 1363 Budapest, Pf. 9.<br>
+    E-mail: ugyfelszolgalat@naih.hu<br>
+    Weboldal: <a class="inline" href="https://www.naih.hu" target="_blank" rel="noopener">www.naih.hu</a></p>
+    <p>Jogaid megsértése esetén bírósághoz is fordulhatsz — a per elbírálása a törvényszék hatáskörébe tartozik, a per — választásod szerint — a lakóhelyed szerinti törvényszék előtt is megindítható.</p>
+
+    <h3>9. A tájékoztató módosítása</h3>
+    <p>Az Adatkezelő fenntartja a jogot jelen tájékoztató egyoldalú módosítására. A módosításokról a weboldalon keresztül tájékoztatjuk az érintetteket.</p>
+  </div>
+</div>
+
+<div class="legal-overlay" id="modal-terms">
+  <div class="legal-box">
+    <button type="button" class="close" data-close>✕</button>
+    <h2>Általános Szerződési Feltételek</h2>
+    <div class="updated">Utolsó frissítés: 2026. szeptember</div>
+
+    <h3>1. Általános rendelkezések</h3>
+    <p>Jelen Általános Szerződési Feltételek (a továbbiakban: <b>ÁSZF</b>) a modelsonthemove.hu weboldal (a továbbiakban: <b>Weboldal</b>) használatára, valamint az azon keresztül elérhető szolgáltatásokra vonatkoznak. A Weboldal üzemeltetője Bajzáth Balázs Gábor egyéni vállalkozó, márkanevén Models on the Move (a továbbiakban: <b>Szolgáltató</b>).</p>
+    <p><b>Székhely:</b> 1126 Budapest, Kléh István utca 3. · <b>Adószám:</b> 91280297-1-43 · <b>Nyilvántartási szám:</b> 60773441 · <b>E-mail:</b> <a class="inline" href="mailto:hello@modelsonthemove.hu">hello@modelsonthemove.hu</a> · <b>Telefon:</b> <a class="inline" href="tel:+36309404148">+36 30 940 4148</a></p>
+    <p>A Weboldal használatával a látogató elfogadja a jelen ÁSZF rendelkezéseit.</p>
+
+    <h3>2. A Weboldalon elérhető szolgáltatások köre</h3>
+    <p>A Szolgáltató a Weboldalon keresztül az alábbi tevékenységeket mutatja be és teszi elérhetővé:</p>
+    <ul>
+      <li>rendezvény- és nightlife-koncepciók szervezése és kommunikációja (Models on the Move eseménysorozat);</li>
+      <li>a Models on the Move VIP Club közösségbe történő jelentkezés lehetősége;</li>
+      <li>kreatív, marketing, video-produkciós, influencer marketing, social media és webfejlesztési szolgáltatások bemutatása és az ezekre vonatkozó üzleti megkeresések fogadása;</li>
+      <li>talent (modell / influencer / content creator) közvetítéssel kapcsolatos megkeresések fogadása.</li>
+    </ul>
+    <p>A Weboldal <b>nem</b> ad helyet közvetlen online jegyértékesítésnek vagy fizetésnek — a jegyvásárlás és az asztalfoglalás mindenkor a Szolgáltató által megjelölt külső (harmadik fél által üzemeltetett) felületen történik, amelyre az adott felület saját feltételei irányadók.</p>
+
+    <h3>3. VIP Club tagság</h3>
+    <p>A VIP Club egy zárt, meghívásos jellegű közösség. A Weboldalon keresztül beküldött jelentkezés kizárólag <b>jelentkezésnek</b> minősül, és <b>nem jelent automatikus tagságot</b>. A Szolgáltató a beérkezett jelentkezéseket elbírálja, és a jelentkezőt e-mailben vagy telefonon értesíti a jelentkezés eredményéről. A Szolgáltató fenntartja a jogot, hogy a jelentkezést indoklás nélkül elutasítsa.</p>
+
+    <h3>4. Üzleti megkeresések és ajánlatkérés</h3>
+    <p>Az „Üzleti megkeresés” űrlapon keresztül beküldött adatok kizárólag ajánlatkérésnek, illetve kapcsolatfelvételi szándéknak minősülnek. Az űrlap kitöltése és beküldése önmagában nem hoz létre szerződéses jogviszonyt a Szolgáltató és a megkereső között — a konkrét együttműködés feltételeit a felek külön, egyedi megállapodásban rögzítik.</p>
+
+    <h3>5. Szellemi tulajdon</h3>
+    <p>A Weboldalon megjelenő valamennyi tartalom — így különösen a szövegek, grafikák, fotók, videók, a Models on the Move márkanév, logó és egyéb megjelölések — a Szolgáltató, illetve az általa jogszerűen felhasznált harmadik felek szellemi tulajdonát képezik. Ezek a Szolgáltató előzetes írásbeli engedélye nélkül nem másolhatók, nem terjeszthetők és kereskedelmi célra nem használhatók fel.</p>
+
+    <h3>6. Felelősség korlátozása</h3>
+    <p>A Szolgáltató mindent megtesz a Weboldalon közzétett információk pontossága érdekében, azonban nem vállal felelősséget a Weboldal esetleges technikai hibáiért, elérhetetlenségéért, illetve a rajta közölt adatok esetleges pontatlanságából eredő károkért. A Weboldalon feltüntetett eseményadatok (időpont, helyszín, fellépők) a szervezés előrehaladtával változhatnak — a végleges, aktuális információk a Szolgáltató hivatalos felületein (weboldal, közösségi média) érhetők el.</p>
+
+    <h3>7. Panaszkezelés</h3>
+    <p>A Szolgáltatóval kapcsolatos panaszokat a <a class="inline" href="mailto:hello@modelsonthemove.hu">hello@modelsonthemove.hu</a> e-mail címen lehet jelezni. A Szolgáltató a panaszokat a lehető legrövidebb időn, de legkésőbb 30 napon belül kivizsgálja és megválaszolja.</p>
+
+    <h3>8. Záró rendelkezések</h3>
+    <p>A jelen ÁSZF-ben nem szabályozott kérdésekben a magyar jog, így különösen a Polgári Törvénykönyvről szóló 2013. évi V. törvény rendelkezései az irányadók. A Szolgáltató fenntartja a jogot a jelen ÁSZF egyoldalú módosítására, a módosított rendelkezések a Weboldalon történő közzététellel lépnek hatályba.</p>
+  </div>
+</div>
+
+<script>
+/* ============ i18n ============ */
+const T = {
+  hu:{
+    "nav.events":"ESEMÉNYEK","nav.vip":"VIP CLUB","nav.services":"SZOLGÁLTATÁSOK","nav.talent":"TALENT","nav.about":"RÓLUNK","nav.cta":"CSATLAKOZZ",
+    "mobile.close":"BEZÁR ✕",
+    "hero.kicker":"PRÉMIUM CREATIVE &amp; EXPERIENCE BRAND","hero.tag1":"DUBAI STYLE","hero.tag2":"HOUSE &amp; AFRO HOUSE","hero.scroll":"GÖRGESS",
+    "hero.about":"Rendezvények. Tartalomgyártás. Marketing. Tehetségek. Budapest éjszakai és nappali életének új generációja — egy márka alatt.",
+    "hero.currentlabel":"JELENLEGI ESEMÉNY","cta.discoverbrand":"FEDEZD FEL A MÁRKÁT","cta.joinvip2":"CSATLAKOZZ A VIP CLUBHOZ",
+    "hero.trio1":"RENDEZVÉNYEK","hero.trio2":"TARTALOM &amp; MARKETING","hero.trio3":"TALENT &amp; TEHETSÉGGONDOZÁS",
+    "meta.date":"DÁTUM","meta.start":"KEZDÉS","meta.venue":"HELYSZÍN",
+    "cta.tickets":"JEGYVÁSÁRLÁS","cta.discover":"FEDEZD FEL AZ ESEMÉNYT","cta.joinvip":"CSATLAKOZZ A VIP CLUBHOZ","cta.table":"ASZTALFOGLALÁS",
+    "cta.project":"INDÍTSUNK EGY PROJEKTET","cta.allevents":"ÖSSZES ESEMÉNY","cta.booktalent":"TALENT FOGLALÁS","cta.jointalent":"CSATLAKOZZ HOZZÁNK",
+    "cta.apply":"JELENTKEZEM","cta.sendinquiry":"ÜZLETI MEGKERESÉS KÜLDÉSE",
+    "event.h1":"BUDAPEST<br><em>TALÁLKOZIK</em><br>DUBAIJAL.","event.eyebrow":"02 — AZ ESEMÉNY",
+    "event.p":"Nem egy általános Dubai-hangulatú kép — a valódi este a VIBE Budapestben történik: modellek, szelektált közönség és luxus atmoszféra egy éjszakán.",
+    "event.music":"ZENE","event.lineup":"LINE-UP",
+    "exp.eyebrow":"03 — AZ ÉLMÉNY",
+    "vip.eyebrow":"04 — THE INNER CIRCLE","vip.subh":"MODELS ON THE MOVE VIP CLUB","vip.h1":"Nem egyszerű<br>vendéglista.",
+    "vip.p":"A Models on the Move privát közössége azoknak, akik közelebb szeretnének kerülni az eseményeinkhez, exkluzív élményeinkhez és a MOTM világához.",
+    "vip.perk1":"PRIORITY ACCESS","vip.perk2":"PRIVATE INVITATIONS","vip.perk3":"SELECTED EVENTS","vip.perk4":"SPECIAL EXPERIENCES","vip.perk5":"MOTM COMMUNITY",
+    "vip.msgH":"JELENTKEZÉSED MEGÉRKEZETT.","vip.msgP":"Köszönjük. Amennyiben jelentkezésed elfogadásra kerül, felvesszük veled a kapcsolatot.",
+    "form.name":"TELJES NÉV","form.email":"E-MAIL","form.phone":"TELEFONSZÁM","form.ig":"INSTAGRAM",
+    "form.privacy":"Elfogadom az Adatvédelmi tájékoztatót. A jelentkezés nem jelent automatikus tagságot.","form.privacy2":"Elfogadom az Adatvédelmi tájékoztatót.",
+    "form.company":"CÉG",
+    "svc.eyebrow":"05 — SZOLGÁLTATÁSOK","svc.h1":"NEM CSAK ESEMÉNYEKET","svc.h2":"ALKOTUNK. FIGYELMET TEREMTÜNK.",
+    "svc.s1t":"VIDEO PRODUCTION","svc.s1p":"Prémium reklámfilmek, social tartalmak, eseményvideók, Reels és TikTok produkciók.",
+    "svc.s2t":"INFLUENCER MARKETING","svc.s2p":"Influencerek és tartalomgyártók kiválasztása, közvetítése és teljes körű kampány-lebonyolítás.",
+    "svc.s3t":"MODELS &amp; TALENT","svc.s3p":"Modellek, influencerek és content creatorek közvetítése kampányokhoz, forgatásokhoz, eseményekhez.",
+    "svc.s4t":"SOCIAL MEDIA MANAGEMENT","svc.s4p":"Stratégia, tartalomgyártás és teljes körű social media management.",
+    "svc.s5t":"WEB DESIGN &amp; DEVELOPMENT","svc.s5p":"Modern, prémium weboldalak és digitális élmények tervezése és fejlesztése.",
+    "svc.s6t":"EVENTS &amp; EXPERIENCES","svc.s6p":"Eseménykoncepció, kreatív irány, marketing és prémium eseményprodukció.",
+    "gal.eyebrow":"06 — KORÁBBI ESTÉK","gal.h1":"Korábbi esték.<br>Maradandó pillanatok.","gal.g1t":"Szezonnyitó — Day Time Party &amp; Fashion Show","gal.g2t":"Models on the Move × The Pop Out","gal.soon":"TÖBB ESEMÉNY HAMAROSAN",
+    "tal.eyebrow":"07 — TALENT","tal.h1":"FACES THAT<br>MOVE CULTURE.","tal.model":"MODELL","tal.influencer":"INFLUENCER","tal.creator":"CREATOR",
+    "tal.p":"Modellek, influencerek, tartalomgyártók — kampányokhoz, forgatásokhoz, márkákhoz, eseményekhez.",
+    "fnd.eyebrow":"08 — RÓLUNK","fnd.h1":"Két világ.<br>Egy közös vízió.",
+    "fnd.p":"A Models on the Move egy új generációs vállalkozó és egy Miss Universe Hungary királynő közös projektje. Két különböző világ találkozása: üzlet, divat, marketing és influence — egy közös vízió, amely új módon kapcsolja össze a márkákat, a tehetségeket, az embereket és az élményeket.",
+    "fnd.f1role":"[POZÍCIÓ]","fnd.f1name":"Founder 01 — [NÉV]","fnd.f2role":"[POZÍCIÓ]","fnd.f2name":"Founder 02 — [NÉV]",
+    "biz.eyebrow":"09 — ÜZLETI MEGKERESÉS","biz.h1":"ALKOSSUNK VALAMIT,<br>AMIRE FELFIGYELNEK.","biz.p":"Kampány, talent, produkció, social, web vagy esemény — mondd el, min dolgozol.",
+    "biz.interest":"MIBEN SEGÍTHETÜNK?","biz.desc":"MESÉLJ A PROJEKTRŐL","biz.igw":"INSTAGRAM / WEBSITE (OPCIONÁLIS)",
+    "biz.msgH":"KÖSZÖNJÜK.","biz.msgP":"Hamarosan jelentkezünk.",
+    "biz.fact1k":"MIT KAPSZ","biz.fact1v":"Kreatív koncepció, produkció és végrehajtás egy kézből — a videótól az élő eseményig.",
+    "biz.fact2k":"KIKNEK","biz.fact2v":"Márkáknak, ügynökségeknek és rendezvényszervezőknek, akik figyelmet szeretnének kelteni.",
+    "biz.fact3k":"HOGYAN","biz.fact3v":"Megkeresés → rövid egyeztetés → skálázott ajánlat. Nincs sablon csomag.",
+    "chip.video":"Video Production","chip.influencer":"Influencer Marketing","chip.talent":"Models / Talent","chip.social":"Social Media","chip.web":"Web Design","chip.events":"Events","chip.partnership":"Partnership","chip.other":"Other",
+    "stmt.l1":"FIGYELMET","stmt.l1b":"TEREMTÜNK.","stmt.l2":"EMBEREKET","stmt.l2b":"KAPCSOLUNK ÖSSZE.","stmt.l3":"ÉLMÉNYEKET","stmt.l3b":"ÉPÍTÜNK.",
+    "foot.tag":"Prémium creative, marketing, talent és experience brand. Budapest.","foot.sitemap":"OLDALTÉRKÉP","foot.company":"CÉG","foot.contact":"KAPCSOLAT","foot.social":"KÖVESS","foot.privacy":"ADATKEZELÉS","foot.terms":"ÁSZF","foot.impressum":"IMPRESSZUM",
+    "galpage.eyebrow":"ESEMÉNYEK","galpage.h1":"Korábbi esték.<br>Maradandó pillanatok.",
+    "galpage.p":"Minden Models on the Move est egy saját világ — fotók és aftermovie-k, ahogy egyre több esemény kerül fel ide. Ha lemaradtál egy estéről, itt éled újra.",
+    "galpage.cta":"AKTUÁLIS ESEMÉNY","galpage.videobadge":"▶ VIDEO","galpage.aftermovie":"Szezonnyitó — Aftermovie",
+    "galpage.photosoon":"FOTÓ HAMAROSAN","galpage.videosoon":"▶ VIDEO HAMAROSAN"
+  },
+  en:{
+    "nav.events":"EVENTS","nav.vip":"VIP CLUB","nav.services":"SERVICES","nav.talent":"TALENT","nav.about":"ABOUT","nav.cta":"JOIN THE CLUB",
+    "mobile.close":"CLOSE ✕",
+    "hero.kicker":"PREMIUM CREATIVE &amp; EXPERIENCE BRAND","hero.tag1":"DUBAI STYLE","hero.tag2":"HOUSE &amp; AFRO HOUSE","hero.scroll":"SCROLL",
+    "hero.about":"Events. Content production. Marketing. Talent. The new generation of Budapest's day and night life — under one brand.",
+    "hero.currentlabel":"CURRENT EVENT","cta.discoverbrand":"DISCOVER THE BRAND","cta.joinvip2":"JOIN THE VIP CLUB",
+    "hero.trio1":"EVENTS","hero.trio2":"CONTENT &amp; MARKETING","hero.trio3":"TALENT &amp; MANAGEMENT",
+    "meta.date":"DATE","meta.start":"START","meta.venue":"VENUE",
+    "cta.tickets":"GET TICKETS","cta.discover":"DISCOVER THE EVENT","cta.joinvip":"JOIN THE VIP CLUB","cta.table":"TABLE RESERVATION",
+    "cta.project":"START A PROJECT","cta.allevents":"VIEW ALL EVENTS","cta.booktalent":"BOOK TALENT","cta.jointalent":"JOIN OUR NETWORK",
+    "cta.apply":"APPLY TO JOIN","cta.sendinquiry":"SEND INQUIRY",
+    "event.h1":"BUDAPEST<br><em>MEETS</em><br>DUBAI.","event.eyebrow":"02 — THE EVENT",
+    "event.p":"This isn't a generic Dubai-style image — the real night happens at VIBE Budapest: models, a selected crowd and luxury atmosphere for one night.",
+    "event.music":"MUSIC","event.lineup":"LINE-UP",
+    "exp.eyebrow":"03 — THE EXPERIENCE",
+    "vip.eyebrow":"04 — THE INNER CIRCLE","vip.subh":"MODELS ON THE MOVE VIP CLUB","vip.h1":"More than<br>a guest list.",
+    "vip.p":"A private community for those who want to get closer to Models on the Move events, exclusive experiences and the world of MOTM.",
+    "vip.perk1":"PRIORITY ACCESS","vip.perk2":"PRIVATE INVITATIONS","vip.perk3":"SELECTED EVENTS","vip.perk4":"SPECIAL EXPERIENCES","vip.perk5":"MOTM COMMUNITY",
+    "vip.msgH":"APPLICATION RECEIVED.","vip.msgP":"Thank you. We'll be in touch if your application is approved.",
+    "form.name":"FULL NAME","form.email":"EMAIL","form.phone":"PHONE","form.ig":"INSTAGRAM",
+    "form.privacy":"I accept the Privacy Policy. Applying does not guarantee membership.","form.privacy2":"I accept the Privacy Policy.",
+    "form.company":"COMPANY",
+    "svc.eyebrow":"05 — SERVICES","svc.h1":"WE DON'T JUST","svc.h2":"CREATE EVENTS. WE CREATE ATTENTION.",
+    "svc.s1t":"VIDEO PRODUCTION","svc.s1p":"Premium brand films, social content, event videos, Reels and TikTok productions.",
+    "svc.s2t":"INFLUENCER MARKETING","svc.s2p":"Talent sourcing, creator collaborations and complete influencer campaign execution.",
+    "svc.s3t":"MODELS &amp; TALENT","svc.s3p":"Models, influencers and creators for brands, campaigns, productions and events.",
+    "svc.s4t":"SOCIAL MEDIA MANAGEMENT","svc.s4p":"Strategy, content production and ongoing social media management.",
+    "svc.s5t":"WEB DESIGN &amp; DEVELOPMENT","svc.s5p":"Premium websites and digital experiences for modern brands.",
+    "svc.s6t":"EVENTS &amp; EXPERIENCES","svc.s6p":"Concept development, creative direction, marketing and premium event production.",
+    "gal.eyebrow":"06 — PAST NIGHTS","gal.h1":"Past nights.<br>Lasting moments.","gal.g1t":"Season Opener — Day Time Party &amp; Fashion Show","gal.g2t":"Models on the Move × The Pop Out","gal.soon":"MORE EVENTS COMING SOON",
+    "tal.eyebrow":"07 — TALENT","tal.h1":"FACES THAT<br>MOVE CULTURE.","tal.model":"MODEL","tal.influencer":"INFLUENCER","tal.creator":"CREATOR",
+    "tal.p":"Models, influencers, creators — for campaigns, productions, brands and events.",
+    "fnd.eyebrow":"08 — ABOUT","fnd.h1":"Two worlds.<br>One vision.",
+    "fnd.p":"Models on the Move is the joint project of a new-generation entrepreneur and a Miss Universe Hungary queen. Two different worlds coming together: business, fashion, marketing and influence — one shared vision designed to connect brands, talent, people and experiences in a new way.",
+    "fnd.f1role":"[ROLE]","fnd.f1name":"Founder 01 — [NAME]","fnd.f2role":"[ROLE]","fnd.f2name":"Founder 02 — [NAME]",
+    "biz.eyebrow":"09 — BUSINESS INQUIRIES","biz.h1":"LET'S CREATE SOMETHING<br>PEOPLE WILL NOTICE.","biz.p":"Campaign, talent, production, social, digital or experience — tell us what you're planning.",
+    "biz.interest":"WHAT ARE YOU INTERESTED IN?","biz.desc":"PROJECT DESCRIPTION","biz.igw":"INSTAGRAM / WEBSITE (OPTIONAL)",
+    "biz.msgH":"THANK YOU.","biz.msgP":"We'll be in touch.",
+    "biz.fact1k":"WHAT YOU GET","biz.fact1v":"Creative concept, production and execution from one team — from video to live events.",
+    "biz.fact2k":"WHO IT'S FOR","biz.fact2v":"Brands, agencies and event organisers who want to create attention.",
+    "biz.fact3k":"HOW IT WORKS","biz.fact3v":"Inquiry → short call → tailored proposal. No off-the-shelf packages.",
+    "chip.video":"Video Production","chip.influencer":"Influencer Marketing","chip.talent":"Models / Talent","chip.social":"Social Media","chip.web":"Web Design","chip.events":"Events","chip.partnership":"Partnership","chip.other":"Other",
+    "stmt.l1":"WE CREATE","stmt.l1b":"ATTENTION.","stmt.l2":"WE CONNECT","stmt.l2b":"PEOPLE.","stmt.l3":"WE BUILD","stmt.l3b":"EXPERIENCES.",
+    "foot.tag":"Premium creative, marketing, talent and experience brand. Budapest.","foot.sitemap":"SITEMAP","foot.company":"COMPANY","foot.contact":"CONTACT","foot.social":"FOLLOW","foot.privacy":"PRIVACY","foot.terms":"TERMS","foot.impressum":"LEGAL INFO",
+    "galpage.eyebrow":"EVENTS","galpage.h1":"Past nights.<br>Lasting moments.",
+    "galpage.p":"Every Models on the Move night is its own world — photos and aftermovies, growing as more events go live. If you missed a night, relive it here.",
+    "galpage.cta":"CURRENT EVENT","galpage.videobadge":"▶ VIDEO","galpage.aftermovie":"Season Opener — Aftermovie",
+    "galpage.photosoon":"PHOTO COMING SOON","galpage.videosoon":"▶ VIDEO COMING SOON"
+  }
+};
+
+function applyLang(lang){
+  document.documentElement.setAttribute('lang', lang);
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const k = el.getAttribute('data-i18n');
+    if(T[lang] && T[lang][k] !== undefined) el.innerHTML = T[lang][k];
+  });
+  document.querySelectorAll('.langsw button, .mlangs button').forEach(b=>{
+    b.classList.toggle('on', b.dataset.lang === lang);
+  });
+  localStorage.setItem('motm_lang', lang);
+}
+function initLang(){
+  let lang = localStorage.getItem('motm_lang');
+  if(!lang) lang = navigator.language && navigator.language.toLowerCase().startsWith('hu') ? 'hu' : 'en';
+  applyLang(lang);
+}
+document.querySelectorAll('.langsw button, .mlangs button').forEach(b=>{
+  b.addEventListener('click', ()=> applyLang(b.dataset.lang));
+});
+initLang();
+
+/* ============ nav scroll state ============ */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', ()=> nav.classList.toggle('scrolled', window.scrollY > 40));
+
+/* ============ mobile menu ============ */
+const burgerBtn = document.getElementById('burgerBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+const mobileClose = document.getElementById('mobileClose');
+function openMenu(){ mobileMenu.style.display='flex'; document.body.style.overflow='hidden'; burgerBtn.classList.add('open'); }
+function closeMenu(){ mobileMenu.style.display='none'; document.body.style.overflow=''; burgerBtn.classList.remove('open'); }
+burgerBtn.addEventListener('click', ()=> burgerBtn.classList.contains('open') ? closeMenu() : openMenu());
+mobileClose.addEventListener('click', closeMenu);
+document.querySelectorAll('.mlink').forEach(a=>a.addEventListener('click', closeMenu));
+
+/* ============ legal modals (Impresszum / Adatkezelés / ÁSZF) ============ */
+function openLegal(id){
+  const el = document.getElementById(id);
+  if(!el) return;
+  el.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLegal(el){
+  el.classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.querySelectorAll('[data-open]').forEach(btn=>{
+  btn.addEventListener('click', ()=> openLegal(btn.dataset.open));
+});
+document.querySelectorAll('.legal-overlay').forEach(overlay=>{
+  overlay.addEventListener('click', (e)=>{ if(e.target === overlay) closeLegal(overlay); });
+  overlay.querySelector('[data-close]').addEventListener('click', ()=> closeLegal(overlay));
+});
+window.addEventListener('keydown', (e)=>{
+  if(e.key === 'Escape'){
+    document.querySelectorAll('.legal-overlay.open').forEach(o=>closeLegal(o));
+  }
+});
+
+/* ============ scroll reveal ============ */
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+},{threshold:.15});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+/* ============ magnetic buttons (desktop only) ============ */
+if(window.matchMedia('(hover:hover) and (pointer:fine)').matches){
+  document.querySelectorAll('.magnetic').forEach(btn=>{
+    btn.addEventListener('mousemove', (e)=>{
+      const r = btn.getBoundingClientRect();
+      const x = (e.clientX - r.left - r.width/2) * .2;
+      const y = (e.clientY - r.top - r.height/2) * .3;
+      btn.style.transform = `translate(${x}px, ${y}px)`;
+    });
+    btn.addEventListener('mouseleave', ()=> btn.style.transform = '');
+  });
+}
+
+/* ============ business chip multi-select ============ */
+document.querySelectorAll('#bizChips .chip-opt').forEach(c=>{
+  c.addEventListener('click', ()=> c.classList.toggle('on'));
+});
+
+/* ============ forms (client-side demo submit) ============ */
+const vipForm = document.getElementById('vipForm');
+if(vipForm) vipForm.addEventListener('submit', (e)=>{
+  e.preventDefault();
+  e.target.querySelectorAll('input,button[type=submit],.check').forEach(el=>el.style.display='none');
+  document.getElementById('vipMsg').classList.add('show');
+});
+const bizForm = document.getElementById('bizForm');
+if(bizForm) bizForm.addEventListener('submit', (e)=>{
+  e.preventDefault();
+  e.target.querySelectorAll('input,textarea,button[type=submit],.check,.chips,.field').forEach(el=>el.style.display='none');
+  document.getElementById('bizMsg').classList.add('show');
+});
+</script>
+</body>
+</html>
