@@ -1,6 +1,52 @@
 # -*- coding: utf-8 -*-
 
-EVENTS_BODY = """
+EVENT_TICKET_URL = "https://www.sevenrooms.com/events/vibebudapest/models-on-the-move-meta-2"
+EVENT_TABLE_URL = "https://www.sevenrooms.com/experiences/vibebudapest/vibe-x-models-on-the-move-5074707521585152?lang=hu"
+EVENT_SLUG = "dubai-style"
+
+# ---- homepage teaser (placed directly under the hero) ----
+EVENT_HOME_TEASER = f"""
+<!-- 02 AKTUÁLIS ESEMÉNY -->
+<section class="pad rule" style="padding-top:100px;">
+  <div class="wrap">
+    <div class="event-head rv">
+      <div>
+        <span class="eyebrow">02 — AKTUÁLIS ESEMÉNYÜNK</span>
+        <h2 style="margin-top:14px;">MODELS ON THE MOVE<br><em>× VIBE</em> — DUBAI STYLE</h2>
+      </div>
+      <div class="event-side">
+        <p>2026. október 16-án a Models on the Move × VIBE Budapest — Dubai Style elhozza a dubai éjszakák stílusát és energiáját. Fabios és Mandmil Afro House szettjei, táncosok és élő előadók emelik új szintre az estét.</p>
+      </div>
+    </div>
+    <div class="event-grid rv">
+      <div class="event-plate plate photo grain">
+        <video class="hero-video" autoplay muted loop playsinline poster="assets/hero-champagne.jpg">
+          <source src="assets/hero-loop.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="event-info">
+        <div class="event-facts">
+          <div><span>DÁTUM</span><span>2026. OKTÓBER 16., PÉNTEK</span></div>
+          <div><span>IDŐPONT</span><span>23:00–03:00</span></div>
+          <div><span>HELYSZÍN</span><span>VIBE Budapest</span></div>
+        </div>
+        <div class="lineup">
+          <h4>DJ LINE-UP</h4>
+          <div class="dj"><span class="name">Fabios</span><span class="meta"><span class="genre">23:00–01:00 · Afro House</span></span></div>
+          <div class="dj"><span class="name">Mandmil</span><span class="meta"><span class="genre">01:00–03:00 · Afro House</span></span></div>
+        </div>
+        <div class="event-cta">
+          <a href="{EVENT_TICKET_URL}" class="btn filled magnetic" target="_blank" rel="noopener">JEGYVÁSÁRLÁS</a>
+          <a href="esemenyek/{EVENT_SLUG}/" class="btn magnetic">RÉSZLETEK →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+"""
+
+# ---- /esemenyek/ index page (overview + gallery) ----
+EVENTS_BODY = f"""
 %%BREADCRUMB%%
 <section class="gal-hero">
   <div class="wrap">
@@ -8,7 +54,7 @@ EVENTS_BODY = """
       <span class="eyebrow">ESEMÉNYEK</span>
       <h1>Korábbi esték.<br>Maradandó pillanatok.</h1>
       <p>Minden Models on the Move est egy saját világ — fotók és összefoglaló videók, ahogy egyre több esemény kerül fel ide. Ha lemaradtál egy estéről, itt éled újra. Alább a legközelebbi eseményünket is megtalálod.</p>
-      <a href="#aktualis" class="btn filled magnetic">AKTUÁLIS ESEMÉNY</a>
+      <a href="{EVENT_SLUG}/" class="btn filled magnetic">AKTUÁLIS ESEMÉNY: DUBAI STYLE →</a>
     </div>
   </div>
 </section>
@@ -18,18 +64,23 @@ EVENTS_BODY = """
     <div class="event-head rv">
       <h2>MODELS ON<br>THE MOVE <em>× VIBE</em></h2>
       <div class="event-side">
-        <p>Egy este, ahol a Models on the Move márka minden eleme találkozik: modellek, VIP közönség és prémium produkció a VIBE Budapestben.</p>
+        <p>2026. október 16. — Dubai Style. Fabios és Mandmil Afro House szettjei, táncosok, élő előadók és bottle service egy estén a VIBE Budapestben.</p>
       </div>
     </div>
     <div class="event-grid rv">
-      <div class="event-plate plate photo grain" style="background-image:url('../assets/hero-champagne.jpg');"></div>
+      <div class="event-plate plate photo grain">
+        <video class="hero-video" autoplay muted loop playsinline poster="../assets/hero-champagne.jpg">
+          <source src="../assets/hero-loop.mp4" type="video/mp4">
+        </video>
+      </div>
       <div class="event-info">
         <div class="event-facts">
           <div><span>DÁTUM</span><span>2026. OKTÓBER 16.</span></div>
+          <div><span>IDŐPONT</span><span>23:00–03:00</span></div>
           <div><span>HELYSZÍN</span><span>VIBE Budapest</span></div>
         </div>
         <div class="event-cta">
-          <a href="../kapcsolat/" class="btn filled magnetic">ASZTALFOGLALÁS</a>
+          <a href="{EVENT_SLUG}/" class="btn filled magnetic">RÉSZLETEK, JEGYEK, ASZTALFOGLALÁS →</a>
         </div>
         <div class="campaign-strip">
           <div class="plate photo grain" style="background-image:url('../assets/vibe-cellar-wide.jpg');"></div>
@@ -86,6 +137,109 @@ EVENTS_BODY = """
   <div class="wrap rv">
     <h2>Szerveznél hasonló estét a márkádnak?</h2>
     <div class="ctas"><a href="../rendezvenyszervezes/" class="btn filled magnetic">TERVEZZÜK MEG EGYÜTT</a></div>
+  </div>
+</section>
+"""
+
+# ---- dedicated event detail page: /esemenyek/dubai-style/ ----
+EVENT_DETAIL_BODY = f"""
+<section class="hero" style="min-height:94vh;">
+  <div class="plate photo grain">
+    <video class="hero-video" autoplay muted loop playsinline poster="../../assets/hero-champagne.jpg">
+      <source src="../../assets/hero-loop.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="blob gold" style="width:520px;height:520px;top:-140px;right:-120px;" aria-hidden="true"></div>
+  <div class="hero-inner">
+    <a href="../" class="event-hero-back rv">← ÖSSZES ESEMÉNY</a>
+    <div class="hero-kicker rv"><span class="dot"></span><span class="eyebrow">MODELS ON THE MOVE × VIBE BUDAPEST</span></div>
+    <div class="collab rv">
+      <span class="m1">DUBAI STYLE.</span>
+    </div>
+    <p class="hero-tag rv">A divat világa találkozik a VIBE karakteres hangulatával — Fabios és Mandmil Afro House szettjei, táncosok és élő előadók emelik új szintre az estét. Exkluzív italok, bottle service és snackek egész este.</p>
+    <div class="hero-ctas rv">
+      <a href="{EVENT_TICKET_URL}" class="btn filled magnetic" target="_blank" rel="noopener">JEGYVÁSÁRLÁS</a>
+      <a href="{EVENT_TABLE_URL}" class="btn magnetic" target="_blank" rel="noopener">ASZTALFOGLALÁS</a>
+    </div>
+    <div class="hero-meta rv">
+      <div><b>2026.10.16.</b><span>DÁTUM · PÉNTEK</span></div>
+      <div><b>23:00–03:00</b><span>IDŐPONT</span></div>
+      <div><b>VIBE Budapest</b><span>HELYSZÍN</span></div>
+      <div><b>18+</b><span>KORHATÁR</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="pad rule">
+  <div class="wrap">
+    <div class="event-two-col rv">
+      <div>
+        <span class="eyebrow">AZ ESTE</span>
+        <h2 style="font-family:var(--serif);font-style:italic;font-size:clamp(26px,3.6vw,40px);font-weight:400;margin-top:14px;line-height:1.2;">Egy este Dubaiból,<br>Budapest szívében.</h2>
+        <p style="font-size:15px;line-height:1.9;color:var(--ivory-dim);margin-top:24px;max-width:520px;">2026. október 16-án a Models on the Move × VIBE Budapest — Dubai Style elhozza a dubai éjszakák stílusát és energiáját Budapestre.</p>
+        <p style="font-size:15px;line-height:1.9;color:var(--ivory-dim);margin-top:18px;max-width:520px;">A divat világa találkozik a VIBE karakteres hangulatával: Fabios és Mandmil Afro House szettjei, táncosok és élő előadók emelik új szintre az éjszakát.</p>
+        <p style="font-size:15px;line-height:1.9;color:var(--ivory-dim);margin-top:18px;max-width:520px;">Exkluzív italok, bottle service és snackek egész este — a választás a tiéd, az élmény az asztalodnál folytatódik.</p>
+
+        <div class="lineup" style="margin-top:40px;">
+          <h4>DJ LINE-UP</h4>
+          <div class="dj"><span class="name">Fabios</span><span class="meta"><span class="genre">Afro House</span><span class="ig">23:00–01:00</span></span></div>
+          <div class="dj"><span class="name">Mandmil</span><span class="meta"><span class="genre">Afro House</span><span class="ig">01:00–03:00</span></span></div>
+        </div>
+
+        <div class="event-facts" style="margin-top:40px;max-width:480px;">
+          <div><span>DÁTUM</span><span>2026. október 16., péntek</span></div>
+          <div><span>IDŐPONT</span><span>23:00–03:00</span></div>
+          <div><span>HELYSZÍN</span><span>VIBE Budapest</span></div>
+          <div><span>DRESS CODE</span><span>Elegáns party stílus</span></div>
+          <div><span>KORHATÁR</span><span>18+</span></div>
+        </div>
+      </div>
+
+      <div>
+        <span class="eyebrow">JEGYEK ÉS ASZTALFOGLALÁS</span>
+        <h3 style="font-family:var(--sans);font-weight:800;text-transform:uppercase;font-size:19px;margin-top:14px;margin-bottom:22px;">Állójegyek</h3>
+        <div class="ticket-tiers">
+          <div class="tier"><span class="k">Early Bird</span><span class="v">4 000 Ft</span></div>
+          <div class="tier"><span class="k">Elővételes jegy</span><span class="v">6 000 Ft</span></div>
+          <div class="tier"><span class="k">Helyszíni jegy</span><span class="v">8 000 Ft</span></div>
+        </div>
+        <div class="event-cta-row">
+          <a href="{EVENT_TICKET_URL}" class="btn filled magnetic" target="_blank" rel="noopener">JEGYVÁSÁRLÁS</a>
+        </div>
+
+        <h3 style="font-family:var(--sans);font-weight:800;text-transform:uppercase;font-size:19px;margin-top:50px;margin-bottom:16px;">Asztaljegyek</h3>
+        <p style="font-size:14px;line-height:1.85;color:var(--ivory-dim);max-width:480px;">Ha az állójegy helyett inkább ülőhelyet szeretnél, foglald le az asztalodat — a részleteket és az elérhető asztalokat a foglalási oldalon találod. Az asztalok limitált számban foglalhatók.</p>
+        <div class="note-box">
+          <b>Fontos:</b> az asztalfoglalás díja nem fogyasztási minimum — a foglalási díj egyben a belépődet is tartalmazza. Ha asztalt foglalsz, külön állójegyet már nem kell vásárolnod.
+        </div>
+        <div class="event-cta-row">
+          <a href="{EVENT_TABLE_URL}" class="btn magnetic" target="_blank" rel="noopener">ASZTALFOGLALÁS</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pad rule">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="eyebrow">GALÉRIA</span><h2>Hamarosan itt a hangulat.</h2>
+      <p>Az esemény napján és utána itt jelennek meg a friss fotók és az összefoglaló videó.</p>
+    </div>
+    <div class="gallery-grid rv">
+      <div class="gtile soon wide"><div class="plate plate--bronze"></div><span class="soon-label">FOTÓ HAMAROSAN</span></div>
+      <div class="gtile soon"><div class="plate plate--night"></div><span class="soon-label">FOTÓ HAMAROSAN</span></div>
+      <div class="gtile soon"><div class="plate plate--forest"></div><span class="soon-label">▶ VIDEÓ HAMAROSAN</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band rule">
+  <div class="wrap rv">
+    <h2>Biztosítsd a helyed, és légy részese a VIBE energiájának.</h2>
+    <div class="ctas">
+      <a href="{EVENT_TICKET_URL}" class="btn filled magnetic" target="_blank" rel="noopener">JEGYVÁSÁRLÁS</a>
+      <a href="{EVENT_TABLE_URL}" class="btn magnetic" target="_blank" rel="noopener">ASZTALFOGLALÁS</a>
+    </div>
   </div>
 </section>
 """

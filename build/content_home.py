@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from content_events import EVENT_HOME_TEASER
 
 HOME_BODY = """
 <!-- 01 HERO -->
@@ -22,10 +23,10 @@ HOME_BODY = """
       <a href="kapcsolat/" class="btn filled magnetic">BESZÉLJÜNK A CÉGEDRŐL</a>
       <a href="#pillars" class="btn magnetic">FEDEZD FEL, MIVEL FOGLALKOZUNK</a>
     </div>
-    <a href="esemenyek/" class="hero-current">
+    <a href="esemenyek/dubai-style/" class="hero-current">
       <span class="dot"></span>
       <span>JELENLEGI ESEMÉNYÜNK</span>
-      <b>MODELS ON THE MOVE × VIBE — 2026.10.16.</b>
+      <b>MODELS ON THE MOVE × VIBE — DUBAI STYLE — 2026.10.16.</b>
       <span class="arrow">→</span>
     </a>
     <div class="hero-trio">
@@ -35,8 +36,8 @@ HOME_BODY = """
     </div>
   </div>
 </section>
-
-<!-- 02 RÖVID POZICIONÁLÁS -->
+""" + EVENT_HOME_TEASER + """
+<!-- 03 RÖVID POZICIONÁLÁS -->
 <section class="pad">
   <div class="wrap">
     <div class="sec-head rv" style="max-width:820px;">
@@ -53,7 +54,7 @@ HOME_BODY = """
 <section class="pad rule" id="pillars" style="padding-top:100px;">
   <div class="wrap">
     <div class="sec-head rv">
-      <span class="eyebrow">03 — MIVEL FOGLALKOZUNK</span>
+      <span class="eyebrow">04 — MIVEL FOGLALKOZUNK</span>
       <h2>Három terület.<br>Egy összehangolt csapat.</h2>
     </div>
     <div class="pillar-grid rv">

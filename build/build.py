@@ -11,7 +11,7 @@ from shell import page, breadcrumb, service_page, BASE_URL
 from content_home import HOME_BODY
 from content_services import SERVICES
 from content_pages import MUNKAINK_BODY, ROLUNK_BODY, KAPCSOLAT_BODY, NOTFOUND_BODY
-from content_events import EVENTS_BODY, REDIRECT_HTML
+from content_events import EVENTS_BODY, REDIRECT_HTML, EVENT_DETAIL_BODY, EVENT_SLUG, EVENT_TICKET_URL, EVENT_TABLE_URL
 
 
 def write(rel_path, content):
@@ -103,6 +103,49 @@ def main():
     )
     write("esemenyek/index.html", html)
     routes.append(("esemenyek/", "0.8", "weekly"))
+
+    # ---- ESEMENY DETAIL: Dubai Style (VIBE x MOTM, 2026.10.16.) ----
+    event_jsonld = f"""
+<script type="application/ld+json">
+{{
+  "@context": "https://schema.org",
+  "@type": "Event",
+  "name": "Models on the Move × VIBE — Dubai Style",
+  "startDate": "2026-10-16T23:00:00+02:00",
+  "endDate": "2026-10-17T03:00:00+02:00",
+  "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+  "eventStatus": "https://schema.org/EventScheduled",
+  "location": {{
+    "@type": "Place",
+    "name": "VIBE Budapest",
+    "address": {{"@type": "PostalAddress", "addressLocality": "Budapest", "addressCountry": "HU"}}
+  }},
+  "image": ["{BASE_URL}/assets/hero-champagne.jpg"],
+  "description": "A Models on the Move x VIBE Budapest Dubai Style estje Fabios és Mandmil Afro House DJ-szettjeivel.",
+  "performer": [
+    {{"@type": "PerformingGroup", "name": "Fabios"}},
+    {{"@type": "PerformingGroup", "name": "Mandmil"}}
+  ],
+  "organizer": {{"@type": "Organization", "name": "Models on the Move", "url": "{BASE_URL}/"}},
+  "offers": [
+    {{"@type": "Offer", "name": "Early Bird", "price": "4000", "priceCurrency": "HUF", "url": "{EVENT_TICKET_URL}", "availability": "https://schema.org/InStock"}},
+    {{"@type": "Offer", "name": "Elővételes jegy", "price": "6000", "priceCurrency": "HUF", "url": "{EVENT_TICKET_URL}", "availability": "https://schema.org/InStock"}},
+    {{"@type": "Offer", "name": "Helyszíni jegy", "price": "8000", "priceCurrency": "HUF", "url": "{EVENT_TICKET_URL}", "availability": "https://schema.org/InStock"}}
+  ]
+}}
+</script>"""
+    html = page(
+        title="Models on the Move × VIBE — Dubai Style | 2026.10.16.",
+        description="2026. október 16. — Models on the Move × VIBE Budapest, Dubai Style. Fabios és Mandmil Afro House szettjei, jegyek és asztalfoglalás.",
+        canonical_path=f"esemenyek/{EVENT_SLUG}/",
+        body=EVENT_DETAIL_BODY,
+        depth=2,
+        active="events",
+        og_image="assets/hero-champagne.jpg",
+        extra_jsonld=event_jsonld,
+    )
+    write(f"esemenyek/{EVENT_SLUG}/index.html", html)
+    routes.append((f"esemenyek/{EVENT_SLUG}/", "0.9", "daily"))
 
     # old flat esemenyek.html -> redirect to esemenyek/
     write("esemenyek.html", REDIRECT_HTML.format(base=BASE_URL))
