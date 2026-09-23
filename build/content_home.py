@@ -58,7 +58,7 @@ HOME_BODY = """
     </div>
     <div class="pillar-grid rv">
       <div class="pillar-card glow-card">
-        <div class="plate photo dim-top" style="position:absolute;inset:0;z-index:-1;opacity:.4;background-image:url('assets/campaign-dubai.jpg');"></div>
+        <div class="plate photo dim-top" style="position:absolute;inset:0;z-index:-1;opacity:.4;background-image:url('assets/vibe-cellar-detail.jpg');"></div>
         <span class="n">01</span>
         <h3>Modellek és influencerek</h3>
         <p>Modelleket, influencereket, tartalomkészítőket és reklámarcokat kapcsolunk össze márkákkal, kampányokkal, fotózásokkal, forgatásokkal és eseményekkel.</p>
@@ -72,7 +72,7 @@ HOME_BODY = """
         <a href="modellugynokseg/" class="go">MODELLEK ÉS INFLUENCEREK →</a>
       </div>
       <div class="pillar-card glow-card">
-        <div class="plate photo dim-top" style="position:absolute;inset:0;z-index:-1;opacity:.4;background-image:url('assets/campaign-tree.jpg');"></div>
+        <div class="plate photo dim-top" style="position:absolute;inset:0;z-index:-1;opacity:.4;background-image:url('assets/vibe-cellar-wide.jpg');"></div>
         <span class="n">02</span>
         <h3>Marketing és márkaépítés</h3>
         <p>A stratégiától a napi megvalósításig összehangoljuk a márkád digitális és kreatív jelenlétét.</p>
