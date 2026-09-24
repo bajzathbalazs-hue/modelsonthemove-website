@@ -679,6 +679,20 @@ nav a:focus-visible,.btn:focus-visible,button:focus-visible,input:focus-visible,
 .event-two-col{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;}
 @media(max-width:900px){.event-two-col{grid-template-columns:1fr;gap:48px;}}
 
+/* ================= EXT: egyszerűbb, gyorsabb animáció mobilon ================= */
+@media(max-width:760px){
+  .rv{transform:translateY(12px);transition:opacity .45s ease-out,transform .45s ease-out;}
+  .magnetic{transition:none !important;}
+}
+
+/* ================= EXT: mobile nav logo fix ================= */
+/* A logófájl korábban rosszul volt méretezve (sok átlátszó szegéllyel),
+   ezért kellett kicsire venni. A kép mostantól szorosan a tartalomra van
+   vágva, így mobilon nagyobbra vehető és jól látszik. */
+@media(max-width:900px){
+  .wordmark-img{height:38px;}
+}
+
 /* ================= EXT: generic helpers ================= */
 .mt-64{margin-top:64px;}
 .skip-link{position:absolute;left:-9999px;top:0;background:var(--bronze-bright);color:#0a0a09;padding:14px 22px;border-radius:0 0 var(--r-md) 0;font-family:var(--mono);font-size:12px;letter-spacing:.05em;z-index:999;}

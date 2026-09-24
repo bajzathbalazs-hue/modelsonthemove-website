@@ -285,6 +285,31 @@ window.addEventListener('keydown', (e)=>{
   }
 });
 
+/* ============ autoplay videók megbízható elindítása (mobilon a natív autoplay
+   attribútum gyakran nem elég, kézzel is el kell indítani, ill. amikor a
+   képernyőn kívüli videó scrollal bekerül a nézetbe) ============ */
+(function(){
+  const vids = Array.from(document.querySelectorAll('video[autoplay]'));
+  if(!vids.length) return;
+  function tryPlay(v){
+    v.muted = true;
+    v.setAttribute('muted','');
+    v.playsInline = true;
+    const p = v.play();
+    if(p && p.catch) p.catch(()=>{});
+  }
+  vids.forEach(tryPlay);
+  document.addEventListener('DOMContentLoaded', ()=> vids.forEach(tryPlay));
+  window.addEventListener('load', ()=> vids.forEach(tryPlay));
+  const vio = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting) tryPlay(e.target); });
+  },{threshold:.1});
+  vids.forEach(v=>vio.observe(v));
+  document.addEventListener('visibilitychange', ()=>{
+    if(!document.hidden) vids.forEach(tryPlay);
+  });
+})();
+
 /* ============ scroll reveal ============ */
 const io = new IntersectionObserver((entries)=>{
   entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });

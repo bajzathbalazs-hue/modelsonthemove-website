@@ -143,8 +143,12 @@ EVENTS_BODY = f"""
 
 # ---- dedicated event detail page: /esemenyek/dubai-style/ ----
 EVENT_DETAIL_BODY = f"""
+<style>
+.event-hero-bg{{background-image:url('../../assets/dubai-style-flyer.jpg');background-position:center 22%;}}
+@media(max-width:680px){{.event-hero-bg{{background-image:url('../../assets/dubai-style-flyer-portrait.jpg');background-position:center top;}}}}
+</style>
 <section class="hero" style="min-height:82vh;">
-  <div class="plate photo" style="background-image:url('../../assets/dubai-style-flyer.jpg');background-position:center 22%;"></div>
+  <div class="plate photo event-hero-bg"></div>
   <a href="../" class="event-hero-back rv" style="position:absolute;top:110px;left:48px;z-index:3;">← ÖSSZES ESEMÉNY</a>
   <div class="hero-inner" style="padding-bottom:44px;">
     <div class="hero-ctas rv">
