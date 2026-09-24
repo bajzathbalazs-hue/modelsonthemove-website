@@ -20,8 +20,8 @@ EVENT_HOME_TEASER = f"""
     </div>
     <div class="event-grid rv">
       <div class="event-plate plate photo grain">
-        <video class="hero-video" autoplay muted loop playsinline poster="assets/hero-champagne.jpg">
-          <source src="assets/hero-loop.mp4" type="video/mp4">
+        <video class="hero-video" autoplay muted loop playsinline poster="assets/vibe-cocktail-bg-poster.jpg">
+          <source src="assets/vibe-cocktail-bg.mp4" type="video/mp4">
         </video>
       </div>
       <div class="event-info">
@@ -69,8 +69,8 @@ EVENTS_BODY = f"""
     </div>
     <div class="event-grid rv">
       <div class="event-plate plate photo grain">
-        <video class="hero-video" autoplay muted loop playsinline poster="../assets/hero-champagne.jpg">
-          <source src="../assets/hero-loop.mp4" type="video/mp4">
+        <video class="hero-video" autoplay muted loop playsinline poster="../assets/vibe-cocktail-bg-poster.jpg">
+          <source src="../assets/vibe-cocktail-bg.mp4" type="video/mp4">
         </video>
       </div>
       <div class="event-info">
@@ -83,8 +83,8 @@ EVENTS_BODY = f"""
           <a href="{EVENT_SLUG}/" class="btn filled magnetic">RÉSZLETEK, JEGYEK, ASZTALFOGLALÁS →</a>
         </div>
         <div class="campaign-strip">
-          <div class="plate photo grain" style="background-image:url('../assets/vibe-cellar-wide.jpg');"></div>
-          <div class="plate photo grain" style="background-image:url('../assets/vibe-jungle.jpg');"></div>
+          <div class="plate photo grain" style="background-image:url('../assets/vibe-champagne-cellar.jpg');"></div>
+          <div class="plate photo grain" style="background-image:url('../assets/vibe-nightclub-wide.jpg');"></div>
         </div>
       </div>
     </div>
@@ -143,24 +143,22 @@ EVENTS_BODY = f"""
 
 # ---- dedicated event detail page: /esemenyek/dubai-style/ ----
 EVENT_DETAIL_BODY = f"""
-<section class="hero" style="min-height:94vh;">
-  <div class="plate photo grain">
-    <video class="hero-video" autoplay muted loop playsinline poster="../../assets/hero-champagne.jpg">
-      <source src="../../assets/hero-loop.mp4" type="video/mp4">
-    </video>
-  </div>
-  <div class="blob gold" style="width:520px;height:520px;top:-140px;right:-120px;" aria-hidden="true"></div>
-  <div class="hero-inner">
-    <a href="../" class="event-hero-back rv">← ÖSSZES ESEMÉNY</a>
-    <div class="hero-kicker rv"><span class="dot"></span><span class="eyebrow">MODELS ON THE MOVE × VIBE BUDAPEST</span></div>
-    <div class="collab rv">
-      <span class="m1">DUBAI STYLE.</span>
-    </div>
-    <p class="hero-tag rv">A divat világa találkozik a VIBE karakteres hangulatával — Fabios és Mandmil Afro House szettjei, táncosok és élő előadók emelik új szintre az estét. Exkluzív italok, bottle service és snackek egész este.</p>
+<section class="hero" style="min-height:82vh;">
+  <div class="plate photo" style="background-image:url('../../assets/dubai-style-flyer.jpg');background-position:center 22%;"></div>
+  <a href="../" class="event-hero-back rv" style="position:absolute;top:110px;left:48px;z-index:3;">← ÖSSZES ESEMÉNY</a>
+  <div class="hero-inner" style="padding-bottom:44px;">
     <div class="hero-ctas rv">
       <a href="{EVENT_TICKET_URL}" class="btn filled magnetic" target="_blank" rel="noopener">JEGYVÁSÁRLÁS</a>
       <a href="{EVENT_TABLE_URL}" class="btn magnetic" target="_blank" rel="noopener">ASZTALFOGLALÁS</a>
     </div>
+  </div>
+</section>
+
+<section class="pad rule" style="padding-top:70px;padding-bottom:70px;">
+  <div class="wrap">
+    <div class="hero-kicker rv"><span class="dot"></span><span class="eyebrow">MODELS ON THE MOVE × VIBE BUDAPEST</span></div>
+    <h1 class="rv" style="font-family:var(--sans);font-weight:800;text-transform:uppercase;font-size:clamp(38px,7vw,90px);line-height:.98;letter-spacing:-.01em;margin-top:18px;">DUBAI STYLE.</h1>
+    <p class="rv" style="font-size:15.5px;line-height:1.85;color:var(--ivory-dim);max-width:620px;margin-top:26px;">A divat világa találkozik a VIBE karakteres hangulatával — Fabios és Mandmil Afro House szettjei, táncosok és élő előadók emelik új szintre az estét. Exkluzív italok, bottle service és snackek egész este.</p>
     <div class="hero-meta rv">
       <div><b>2026.10.16.</b><span>DÁTUM · PÉNTEK</span></div>
       <div><b>23:00–03:00</b><span>IDŐPONT</span></div>
@@ -222,12 +220,15 @@ EVENT_DETAIL_BODY = f"""
 
 <section class="pad rule">
   <div class="wrap">
-    <div class="sec-head rv"><span class="eyebrow">GALÉRIA</span><h2>Hamarosan itt a hangulat.</h2>
-      <p>Az esemény napján és utána itt jelennek meg a friss fotók és az összefoglaló videó.</p>
+    <div class="sec-head rv"><span class="eyebrow">A HELYSZÍN</span><h2>Ízelítő a VIBE hangulatából.</h2>
+      <p>Az esemény napján és utána itt jelennek meg a friss fotók és az összefoglaló videó is.</p>
     </div>
     <div class="gallery-grid rv">
-      <div class="gtile soon wide"><div class="plate plate--bronze"></div><span class="soon-label">FOTÓ HAMAROSAN</span></div>
-      <div class="gtile soon"><div class="plate plate--night"></div><span class="soon-label">FOTÓ HAMAROSAN</span></div>
+      <div class="gtile wide glow-card"><div class="plate photo grain" style="background-image:url('../../assets/vibe-jungle-lounge.jpg');"></div></div>
+      <div class="gtile glow-card"><div class="plate photo grain" style="background-image:url('../../assets/vibe-bartrio-final.jpg');background-position:center 30%;"></div></div>
+      <div class="gtile glow-card"><div class="plate photo grain" style="background-image:url('../../assets/vibe-redroom-group.jpg');background-position:center 15%;"></div></div>
+      <div class="gtile glow-card"><div class="plate photo grain" style="background-image:url('../../assets/vibe-table-group.jpg');background-position:center 15%;"></div></div>
+      <div class="gtile glow-card"><div class="plate photo grain" style="background-image:url('../../assets/vibe-cellar-table.jpg');"></div></div>
       <div class="gtile soon"><div class="plate plate--forest"></div><span class="soon-label">▶ VIDEÓ HAMAROSAN</span></div>
     </div>
   </div>

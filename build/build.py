@@ -120,7 +120,7 @@ def main():
     "name": "VIBE Budapest",
     "address": {{"@type": "PostalAddress", "addressLocality": "Budapest", "addressCountry": "HU"}}
   }},
-  "image": ["{BASE_URL}/assets/hero-champagne.jpg"],
+  "image": ["{BASE_URL}/assets/dubai-style-flyer.jpg"],
   "description": "A Models on the Move x VIBE Budapest Dubai Style estje Fabios és Mandmil Afro House DJ-szettjeivel.",
   "performer": [
     {{"@type": "PerformingGroup", "name": "Fabios"}},
@@ -141,7 +141,7 @@ def main():
         body=EVENT_DETAIL_BODY,
         depth=2,
         active="events",
-        og_image="assets/hero-champagne.jpg",
+        og_image="assets/dubai-style-flyer.jpg",
         extra_jsonld=event_jsonld,
     )
     write(f"esemenyek/{EVENT_SLUG}/index.html", html)
