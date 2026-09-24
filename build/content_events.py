@@ -197,10 +197,11 @@ EVENT_DETAIL_BODY = f"""
         <span class="eyebrow">JEGYEK ÉS ASZTALFOGLALÁS</span>
         <h3 style="font-family:var(--sans);font-weight:800;text-transform:uppercase;font-size:19px;margin-top:14px;margin-bottom:22px;">Állójegyek</h3>
         <div class="ticket-tiers">
-          <div class="tier"><span class="k">Early Bird</span><span class="v">4 000 Ft</span></div>
+          <div class="tier soldout"><span class="k">Early Bird<span class="tier-badge">ELFOGYOTT</span></span><span class="v">4 000 Ft</span></div>
           <div class="tier"><span class="k">Elővételes jegy</span><span class="v">6 000 Ft</span></div>
           <div class="tier"><span class="k">Helyszíni jegy</span><span class="v">8 000 Ft</span></div>
         </div>
+        <p style="font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;color:var(--peach-bright);margin-top:14px;">Az Early Bird jegyek egy nap alatt elfogytak — elővételes jegyek még elérhetők.</p>
         <div class="event-cta-row">
           <a href="{EVENT_TICKET_URL}" class="btn filled magnetic" target="_blank" rel="noopener">JEGYVÁSÁRLÁS</a>
         </div>

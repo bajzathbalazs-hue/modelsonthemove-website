@@ -128,7 +128,7 @@ def main():
   ],
   "organizer": {{"@type": "Organization", "name": "Models on the Move", "url": "{BASE_URL}/"}},
   "offers": [
-    {{"@type": "Offer", "name": "Early Bird", "price": "4000", "priceCurrency": "HUF", "url": "{EVENT_TICKET_URL}", "availability": "https://schema.org/InStock"}},
+    {{"@type": "Offer", "name": "Early Bird", "price": "4000", "priceCurrency": "HUF", "url": "{EVENT_TICKET_URL}", "availability": "https://schema.org/SoldOut"}},
     {{"@type": "Offer", "name": "Elővételes jegy", "price": "6000", "priceCurrency": "HUF", "url": "{EVENT_TICKET_URL}", "availability": "https://schema.org/InStock"}},
     {{"@type": "Offer", "name": "Helyszíni jegy", "price": "8000", "priceCurrency": "HUF", "url": "{EVENT_TICKET_URL}", "availability": "https://schema.org/InStock"}}
   ]

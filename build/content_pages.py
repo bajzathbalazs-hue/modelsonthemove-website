@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from shell import BASE_URL
 
 MUNKAINK_BODY = """
 %%BREADCRUMB%%
@@ -198,14 +199,14 @@ KAPCSOLAT_BODY = """
 </section>
 """
 
-NOTFOUND_BODY = """
+NOTFOUND_BODY = f"""
 <section class="notfound">
   <div class="code">404</div>
   <h1>Ez az oldal nem található.</h1>
   <p>A keresett oldal elköltözött, átnevezésre került, vagy sosem létezett. Nézz vissza a főoldalra, vagy fedezd fel a szolgáltatásainkat.</p>
   <div class="ctas">
-    <a href="/" class="btn filled magnetic">VISSZA A FŐOLDALRA</a>
-    <a href="/kapcsolat/" class="btn magnetic">KAPCSOLAT</a>
+    <a href="{BASE_URL}/" class="btn filled magnetic">VISSZA A FŐOLDALRA</a>
+    <a href="{BASE_URL}/kapcsolat/" class="btn magnetic">KAPCSOLAT</a>
   </div>
 </section>
 """
