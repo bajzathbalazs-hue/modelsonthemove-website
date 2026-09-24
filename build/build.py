@@ -179,7 +179,11 @@ Sitemap: {BASE_URL}/sitemap.xml
 """
     write("robots.txt", robots)
 
-    print(f"\nKész: {len(routes)} indexelhető route + 404 + sitemap + robots.")
+    # ---- CNAME (GitHub Pages custom domain) ----
+    domain = BASE_URL.replace("https://", "").replace("http://", "").rstrip("/")
+    write("CNAME", domain + "\n")
+
+    print(f"\nKész: {len(routes)} indexelhető route + 404 + sitemap + robots + CNAME ({domain}).")
 
 
 if __name__ == "__main__":

@@ -4,9 +4,10 @@ import os
 HERE = os.path.dirname(os.path.abspath(__file__))
 SITE_ROOT = os.path.dirname(HERE)
 
-BASE_URL = "https://bajzathbalazs-hue.github.io/modelsonthemove-website"
-# TODO domain-csere: ha éles saját domain (pl. https://modelsonthemove.hu) készül,
-# EZT az egy konstanst kell átírni — minden canonical/OG/sitemap URL innen származik.
+BASE_URL = "https://modelsonthemove.hu"
+# Saját domain aktív (GitHub Pages CNAME + DNS A/CNAME rekordok). Ha vissza kellene
+# állni a github.io címre, ezt az egy konstanst kell visszaírni — minden
+# canonical/OG/sitemap URL innen származik.
 
 SITE_NAME = "Models on the Move"
 

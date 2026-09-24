@@ -4,7 +4,7 @@ Statikus, több oldalas weboldal (nincs build-eszköz futásidőben — az oldal
 generátorral készülnek, majd sima HTML/CSS/JS fájlként kerülnek ki, amit bármilyen
 statikus hosting kiszolgálhat, jelenleg GitHub Pages).
 
-Élő oldal: https://bajzathbalazs-hue.github.io/modelsonthemove-website/
+Élő oldal: https://modelsonthemove.hu/ (korábban: https://bajzathbalazs-hue.github.io/modelsonthemove-website/ — ez a cím automatikusan átirányít az új domainre, amint a DNS beállt)
 
 ## Hogyan működik ez a rendszer
 
@@ -59,14 +59,24 @@ Ezek a `build/shell.py`-ban a `SCRIPT` konstansban vannak — módosítás után
 ### Domain-csere
 
 A `build/shell.py` tetején egyetlen konstans (`BASE_URL`) állítja be a canonical
-URL-eket, az Open Graph tageket és a sitemap domainjét. Saját domain (pl.
-`https://modelsonthemove.hu`) beállásakor **ezt az egy sort** kell átírni, majd
-újra buildelni és publikálni — nincs más helyen hardcode-olva.
+URL-eket, az Open Graph tageket és a sitemap domainjét. Domainváltáskor **ezt az
+egy sort** kell átírni, majd újra buildelni és publikálni — nincs más helyen
+hardcode-olva. A build ugyanebből a konstansból generálja a repo gyökerében lévő
+`CNAME` fájlt is (GitHub Pages custom domain).
 
-GitHub Pages nem támogat szerveroldali 301-es átirányítást egy domain-váltásnál;
-DNS-átállás esetén a GitHub Pages saját "custom domain" beállítását és a
-CNAME rekordot kell használni, a régi `github.io` cím pedig automatikusan
-átirányít az új domainre, ha a "Custom domain" mezőben be van állítva.
+**Jelenlegi állapot (2026. szeptember):** a `modelsonthemove.hu` saját domain
+aktív, `BASE_URL = "https://modelsonthemove.hu"`. A domain korábban egy Framer-
+oldalra mutatott — a DNS-t erre a GitHub Pages buildre állítottuk át (lásd a
+tárhelyszolgáltatónál beállított rekordokat). A Google Workspace email
+(MX/SPF/DMARC) és a MailerLite rekordok változatlanok maradtak.
+
+DNS-oldali beállítás GitHub Pages custom domainhez:
+- apex (`modelsonthemove.hu`) A-rekordok: `185.199.108.153`, `185.199.109.153`,
+  `185.199.110.153`, `185.199.111.153`
+- `www` CNAME: `bajzathbalazs-hue.github.io`
+- GitHub oldalon: repo Settings → Pages → Custom domain = `modelsonthemove.hu`,
+  "Enforce HTTPS" bekapcsolva (a tanúsítvány kiadása a DNS-propagáció után
+  automatikusan megtörténik, ez órákat is igénybe vehet).
 
 ## Hiányzó / jóváhagyásra váró tartalmak
 

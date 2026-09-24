@@ -1,5 +1,5 @@
 window.MOTM_CONFIG = {
-  baseUrl: "https://bajzathbalazs-hue.github.io/modelsonthemove-website",
+  baseUrl: "https://modelsonthemove.hu",
   /* TODO: állítsd be az éles form-beküldési endpointot (pl. egy saját szerverless függvény
      vagy egy form-kezelő szolgáltatás URL-je). Amíg üres marad, az űrlapok NEM állítják,
      hogy sikeresen elküldték az adatot — helyette egy tájékoztató üzenetet mutatnak. */

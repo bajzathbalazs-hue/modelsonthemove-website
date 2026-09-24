@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /404.html
 
-Sitemap: https://bajzathbalazs-hue.github.io/modelsonthemove-website/sitemap.xml
+Sitemap: https://modelsonthemove.hu/sitemap.xml
