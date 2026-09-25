@@ -15,6 +15,178 @@ IG_AFTERPARTY_TICKETS = "https://www.instagram.com/p/DU8rIVhgjz3/"
 IG_MYRAZS_TICKET_PROMO = "https://www.instagram.com/p/DXuTi24DD-C/"
 IG_MYRAZS_FEATHER_MIRAGE = "https://www.instagram.com/p/DaNzhxwCTw9/"
 
+# ---- korábbi események: egy kártya = egy esemény, kattintásra saját aloldal ----
+PAST_EVENTS = [
+    {
+        "slug": "szezonnyito",
+        "title": "Szezonnyitó — Day Time Party & Fashion Show",
+        "venue": "MOM Leroy Bistro",
+        "date_label": "2026.05.29.",
+        "date_full": "2026. május 29., péntek",
+        "time_label": "16:00–24:00",
+        "cover": "ig-featured-momleroy.jpg",
+        "teaser": "Két fashion show, DJ-k és napközbeni luxury hangulat a MOM Leroy teraszán.",
+        "intro": [
+            "A szezonnyitó estén a divat, a zene és a közösség találkozott a MOM Leroy Bistróban — napközbeni luxury experience-ként indult, és éjszakába nyúló partyvá alakult.",
+            "Két fashion show, élő DJ-szettek, pop-up store és tombola tette emlékezetessé az estét.",
+        ],
+        "facts": [
+            ("DÁTUM", "2026. május 29., péntek"),
+            ("IDŐPONT", "16:00–24:00"),
+            ("HELYSZÍN", "MOM Leroy Bistro"),
+            ("LÉTSZÁM", "kb. 300–350 fő"),
+        ],
+        "lineup": [
+            ("In My Style", "Fashion show"),
+            ("Myrázs", "Fashion show"),
+            ("Szőke Rebi", "DJ"),
+            ("Molnár Fábi", "DJ"),
+        ],
+        "extras": ["Pop-up store", "Tombola és meglepetések", "Külön modellmenü"],
+        "gallery": ["ig-featured-momleroy.jpg", "leroy-szezonnyito.jpg", "leroy-fashionshow.jpg"],
+        "video": {"src": "hero-myrazs.mp4", "poster": "hero-myrazs-poster.jpg"},
+    },
+    {
+        "slug": "myrazs-fashion-show",
+        "title": "Myrázs Fashion Show & After Party",
+        "venue": "MOM Leroy Bistro",
+        "date_label": "2026.01.09.",
+        "date_full": "2026. január 9., péntek",
+        "time_label": None,
+        "cover": "ig-myrazs-recap.jpg",
+        "teaser": "Fashion show és after party a Myrázs csapatával, telt házzal.",
+        "intro": [
+            "A Myrázs Fashion Show & After Party volt az első nagy MODELS ON THE MOVE party — a hatalmas érdeklődésre való tekintettel ez indította el a rendszeres estéink sorát.",
+        ],
+        "facts": [
+            ("DÁTUM", "2026. január 9., péntek"),
+            ("HELYSZÍN", "MOM Leroy Bistro"),
+            ("LÉTSZÁM", "kb. 400–450 fő, forgóban akár 500 fő"),
+        ],
+        "lineup": [],
+        "extras": [],
+        "gallery": ["ig-myrazs-recap.jpg", "ig-fashionshow-videoreport.jpg", "ig-afterparty-tickets.jpg", "ig-myrazs-ticket-promo.jpg"],
+        "video": None,
+    },
+    {
+        "slug": "afro-house-night",
+        "title": "Afro House Night",
+        "venue": "MOM Leroy Bistro",
+        "date_label": "2026.02.27.",
+        "date_full": "2026. február 27., péntek",
+        "time_label": None,
+        "cover": "ig-afrohouse-announce.jpg",
+        "teaser": "Vacsora, fashion show, majd Afro House party a MOM Leroy Bistróban.",
+        "intro": [
+            "Vacsora közben fashion show, majd ahogy leszállt az este, a hangulat egy igazi Afro House partyvá alakult a MOM Leroy Bistróban.",
+        ],
+        "facts": [
+            ("DÁTUM", "2026. február 27., péntek"),
+            ("HELYSZÍN", "MOM Leroy Bistro"),
+        ],
+        "lineup": [],
+        "extras": [],
+        "gallery": ["ig-afrohouse-announce.jpg", "ig-momleroy-teaser.jpg"],
+        "video": None,
+    },
+]
+
+
+def _event_card(ev, depth_prefix="../assets/"):
+    return f"""      <a class="event-card glow-card" href="{ev['slug']}/">
+        <div class="plate photo grain" style="background-image:url('{depth_prefix}{ev['cover']}')"></div>
+        <div class="event-card-body">
+          <h3>{ev['title']}</h3>
+          <div class="meta-line">{ev['venue']} · {ev['date_label']}</div>
+          <p>{ev['teaser']}</p>
+        </div>
+      </a>"""
+
+
+def _fact_rows(facts):
+    return "\n".join(f'          <div><span>{k}</span><span>{v}</span></div>' for k, v in facts)
+
+
+def _lineup_rows(lineup):
+    if not lineup:
+        return ""
+    rows = "\n".join(
+        f'          <div class="dj"><span class="name">{name}</span><span class="meta"><span class="genre">{role}</span></span></div>'
+        for name, role in lineup
+    )
+    return f"""
+        <div class="lineup" style="margin-top:40px;">
+          <h4>KÖZREMŰKÖDŐK</h4>
+{rows}
+        </div>"""
+
+
+def _extras_html(extras):
+    if not extras:
+        return ""
+    tags = "".join(f'<span class="tag">{e}</span>' for e in extras)
+    return f'\n        <div class="audience-row" style="margin-top:28px;">{tags}</div>'
+
+
+def _gallery_html(ev):
+    tiles = []
+    if ev.get("video"):
+        tiles.append(f"""      <div class="gtile wide glow-card">
+        <video class="gtile-video" autoplay muted loop playsinline controls poster="../../assets/{ev['video']['poster']}">
+          <source src="../../assets/{ev['video']['src']}" type="video/mp4">
+        </video>
+        <span class="gtile-badge">▶ VIDEÓ</span>
+      </div>""")
+    for i, img in enumerate(ev["gallery"]):
+        wide = " wide" if i == 0 and not ev.get("video") else ""
+        tiles.append(f"""      <div class="gtile{wide} glow-card"><div class="plate photo grain" style="background-image:url('../../assets/{img}')"></div></div>""")
+    return "\n\n".join(tiles)
+
+
+def past_event_detail_body(ev):
+    intro_html = "\n        ".join(f"<p>{p}</p>" for p in ev["intro"])
+    time_row = f'\n          <div><span>IDŐPONT</span><span>{ev["time_label"]}</span></div>' if ev.get("time_label") else ""
+    return f"""
+<section class="hero" style="min-height:56vh;">
+  <div class="plate photo grain" style="background-image:url('../../assets/{ev['cover']}');background-position:center 28%;"></div>
+  <a href="../" class="event-hero-back rv" style="position:absolute;top:110px;left:48px;z-index:3;">← ÖSSZES ESEMÉNY</a>
+</section>
+
+<section class="pad rule" style="padding-top:60px;padding-bottom:60px;">
+  <div class="wrap">
+    <div class="hero-kicker rv"><span class="dot"></span><span class="eyebrow">KORÁBBI ESTÉNK</span></div>
+    <h1 class="rv" style="font-family:var(--sans);font-weight:800;text-transform:uppercase;font-size:clamp(30px,5.6vw,64px);line-height:1.02;letter-spacing:-.01em;margin-top:18px;max-width:900px;">{ev['title']}</h1>
+    <div class="event-two-col rv" style="margin-top:44px;">
+      <div>
+        {intro_html}{_lineup_rows(ev['lineup'])}{_extras_html(ev['extras'])}
+      </div>
+      <div>
+        <div class="event-facts">
+{_fact_rows(ev['facts'])}{time_row}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pad rule">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="eyebrow">GALÉRIA</span><h2>Ízelítő az estéből.</h2></div>
+    <div class="gallery-grid rv-stagger">
+{_gallery_html(ev)}
+    </div>
+  </div>
+</section>
+
+<section class="cta-band rule">
+  <div class="wrap rv">
+    <h2>Szerveznél hasonló estét a márkádnak?</h2>
+    <div class="ctas"><a href="../../rendezvenyszervezes/" class="btn filled magnetic">TERVEZZÜK MEG EGYÜTT</a></div>
+  </div>
+</section>
+"""
+
+
 # ---- homepage teaser (placed directly under the hero) ----
 EVENT_HOME_TEASER = f"""
 <!-- 02 AKTUÁLIS ESEMÉNY -->
@@ -26,31 +198,23 @@ EVENT_HOME_TEASER = f"""
         <h2 style="margin-top:14px;">MODELS ON THE MOVE<br><em>× VIBE</em> — DUBAI STYLE</h2>
       </div>
       <div class="event-side">
-        <p>2026. október 16-án a Models on the Move × VIBE Budapest — Dubai Style elhozza a dubai éjszakák stílusát és energiáját. Fabios és Mandmil Afro House szettjei, táncosok és élő előadók emelik új szintre az estét.</p>
+        <p>2026. október 16. · VIBE Budapest — Afro House szettek, exkluzív italok, bottle service.</p>
       </div>
     </div>
-    <div class="event-grid rv">
-      <div class="event-plate plate photo grain">
-        <video class="hero-video" autoplay muted loop playsinline poster="assets/vibe-cocktail-bg-poster.jpg">
-          <source src="assets/vibe-cocktail-bg.mp4" type="video/mp4">
-        </video>
-      </div>
-      <div class="event-info">
-        <div class="event-facts">
-          <div><span>DÁTUM</span><span>2026. OKTÓBER 16., PÉNTEK</span></div>
-          <div><span>IDŐPONT</span><span>23:00–03:00</span></div>
-          <div><span>HELYSZÍN</span><span>VIBE Budapest</span></div>
+    <div class="event-cards-row rv-stagger">
+      <a class="event-card glow-card" href="esemenyek/{EVENT_SLUG}/">
+        <div class="plate photo grain" style="background-image:url('assets/dubai-style-flyer.jpg');background-position:center 22%;"></div>
+        <div class="event-card-body">
+          <span class="event-card-badge">AKTUÁLIS ESEMÉNY</span>
+          <h3>Dubai Style</h3>
+          <div class="meta-line">VIBE Budapest · 2026.10.16.</div>
+          <p>Fabios és Mandmil Afro House szettjei egy estén.</p>
         </div>
-        <div class="lineup">
-          <h4>DJ LINE-UP</h4>
-          <div class="dj"><span class="name">Fabios</span><span class="meta"><span class="genre">23:00–01:00 · Afro House</span></span></div>
-          <div class="dj"><span class="name">Mandmil</span><span class="meta"><span class="genre">01:00–03:00 · Afro House</span></span></div>
-        </div>
-        <div class="event-cta">
-          <a href="{EVENT_TICKET_URL}" class="btn filled magnetic" target="_blank" rel="noopener">JEGYVÁSÁRLÁS</a>
-          <a href="esemenyek/{EVENT_SLUG}/" class="btn magnetic">RÉSZLETEK →</a>
-        </div>
-      </div>
+      </a>
+    </div>
+    <div class="event-cta" style="margin-top:24px;">
+      <a href="{EVENT_TICKET_URL}" class="btn filled magnetic" target="_blank" rel="noopener">JEGYVÁSÁRLÁS</a>
+      <a href="esemenyek/{EVENT_SLUG}/" class="btn magnetic">RÉSZLETEK →</a>
     </div>
   </div>
 </section>
@@ -72,140 +236,26 @@ EVENTS_BODY = f"""
 
 <section class="pad rule" id="aktualis" style="padding-top:60px;">
   <div class="wrap">
-    <div class="event-head rv">
-      <h2>MODELS ON<br>THE MOVE <em>× VIBE</em></h2>
-      <div class="event-side">
-        <p>2026. október 16. — Dubai Style. Fabios és Mandmil Afro House szettjei, táncosok, élő előadók és bottle service egy estén a VIBE Budapestben.</p>
-      </div>
-    </div>
-    <div class="event-grid rv">
-      <div class="event-plate plate photo grain">
-        <video class="hero-video" autoplay muted loop playsinline poster="../assets/vibe-cocktail-bg-poster.jpg">
-          <source src="../assets/vibe-cocktail-bg.mp4" type="video/mp4">
-        </video>
-      </div>
-      <div class="event-info">
-        <div class="event-facts">
-          <div><span>DÁTUM</span><span>2026. OKTÓBER 16.</span></div>
-          <div><span>IDŐPONT</span><span>23:00–03:00</span></div>
-          <div><span>HELYSZÍN</span><span>VIBE Budapest</span></div>
+    <div class="sec-head rv"><span class="eyebrow">AKTUÁLIS ESEMÉNY</span><h2>Ami most jön.</h2></div>
+    <div class="event-cards-row rv-stagger">
+      <a class="event-card glow-card" href="{EVENT_SLUG}/">
+        <div class="plate photo grain" style="background-image:url('../assets/dubai-style-flyer.jpg');background-position:center 22%;"></div>
+        <div class="event-card-body">
+          <span class="event-card-badge">AKTUÁLIS ESEMÉNY</span>
+          <h3>Dubai Style</h3>
+          <div class="meta-line">VIBE Budapest · 2026.10.16.</div>
+          <p>Fabios és Mandmil Afro House szettjei egy estén.</p>
         </div>
-        <div class="event-cta">
-          <a href="{EVENT_SLUG}/" class="btn filled magnetic">RÉSZLETEK, JEGYEK, ASZTALFOGLALÁS →</a>
-        </div>
-        <div class="campaign-strip">
-          <div class="plate photo grain" style="background-image:url('../assets/vibe-champagne-cellar.jpg');"></div>
-          <div class="plate photo grain" style="background-image:url('../assets/vibe-nightclub-wide.jpg');"></div>
-        </div>
-      </div>
+      </a>
     </div>
   </div>
 </section>
 
 <section class="pad rule">
   <div class="wrap">
-    <div class="sec-head rv"><span class="eyebrow">ELŐZŐ ESTÉINK</span><h2>A galéria.</h2></div>
-    <div class="gallery-grid rv-stagger">
-
-      <button type="button" class="gtile wide glow-card" data-ig-permalink="{IG_FEATURED}">
-        <div class="plate photo grain" style="background-image:url('../assets/ig-featured-momleroy.jpg')"></div>
-        <span class="gtile-badge">▶ INSTAGRAM</span>
-        <div class="gtile-meta">
-          <h3>MOM Leroy — Fashion Show &amp; Afro House Night</h3>
-          <span>@models_on_the_move · Instagram</span>
-        </div>
-      </button>
-
-      <div class="gtile wide glow-card">
-        <div class="plate photo grain" style="background-image:url('../assets/leroy-szezonnyito.jpg')"></div>
-        <div class="gtile-meta">
-          <h3>Szezonnyitó — Day Time Party &amp; Fashion Show</h3>
-          <span>MOM Leroy Bistro · 2026.05.29.</span>
-        </div>
-      </div>
-
-      <div class="gtile glow-card">
-        <video class="gtile-video" autoplay muted loop playsinline controls poster="../assets/hero-myrazs-poster.jpg">
-          <source src="../assets/hero-myrazs.mp4" type="video/mp4">
-        </video>
-        <span class="gtile-badge">▶ VIDEÓ</span>
-        <div class="gtile-meta">
-          <h3>Szezonnyitó — Összefoglaló videó</h3>
-          <span>MOM Leroy Bistro</span>
-        </div>
-      </div>
-
-      <div class="gtile glow-card">
-        <div class="plate photo grain" style="background-image:url('../assets/leroy-fashionshow.jpg')"></div>
-        <div class="gtile-meta">
-          <h3>Models on the Move × The Pop Out</h3>
-          <span>MOM Leroy Bistro</span>
-        </div>
-      </div>
-
-      <button type="button" class="gtile glow-card" data-ig-permalink="{IG_MYRAZS_RECAP}">
-        <div class="plate photo grain" style="background-image:url('../assets/ig-myrazs-recap.jpg')"></div>
-        <span class="gtile-badge">INSTAGRAM</span>
-        <div class="gtile-meta">
-          <h3>Myrázs — Fashion Show &amp; After Party</h3>
-          <span>MOM Leroy · Január 9.</span>
-        </div>
-      </button>
-
-      <button type="button" class="gtile glow-card" data-ig-permalink="{IG_FASHIONSHOW_REPORT}">
-        <div class="plate photo grain" style="background-image:url('../assets/ig-fashionshow-videoreport.jpg')"></div>
-        <span class="gtile-badge">▶ INSTAGRAM</span>
-        <div class="gtile-meta">
-          <h3>Fashion Show — Video Report</h3>
-          <span>@mavreels</span>
-        </div>
-      </button>
-
-      <button type="button" class="gtile glow-card" data-ig-permalink="{IG_AFROHOUSE_ANNOUNCE}">
-        <div class="plate photo grain" style="background-image:url('../assets/ig-afrohouse-announce.jpg')"></div>
-        <span class="gtile-badge">▶ INSTAGRAM</span>
-        <div class="gtile-meta">
-          <h3>Afro House Night</h3>
-          <span>@models_on_the_move</span>
-        </div>
-      </button>
-
-      <button type="button" class="gtile glow-card" data-ig-permalink="{IG_MOMLEROY_TEASER}">
-        <div class="plate photo grain" style="background-image:url('../assets/ig-momleroy-teaser.jpg')"></div>
-        <span class="gtile-badge">▶ INSTAGRAM</span>
-        <div class="gtile-meta">
-          <h3>MOM Leroy Bistro</h3>
-          <span>@momleroy</span>
-        </div>
-      </button>
-
-      <button type="button" class="gtile glow-card" data-ig-permalink="{IG_AFTERPARTY_TICKETS}">
-        <div class="plate photo grain" style="background-image:url('../assets/ig-afterparty-tickets.jpg')"></div>
-        <span class="gtile-badge">▶ INSTAGRAM</span>
-        <div class="gtile-meta">
-          <h3>Models on the Move After Party</h3>
-          <span>@models_on_the_move</span>
-        </div>
-      </button>
-
-      <button type="button" class="gtile glow-card" data-ig-permalink="{IG_MYRAZS_TICKET_PROMO}">
-        <div class="plate photo grain" style="background-image:url('../assets/ig-myrazs-ticket-promo.jpg')"></div>
-        <span class="gtile-badge">▶ INSTAGRAM</span>
-        <div class="gtile-meta">
-          <h3>Myrázs</h3>
-          <span>@myrazs.by.mira</span>
-        </div>
-      </button>
-
-      <button type="button" class="gtile glow-card" data-ig-permalink="{IG_MYRAZS_FEATHER_MIRAGE}">
-        <div class="plate photo grain" style="background-image:url('../assets/ig-myrazs-feather-mirage.jpg')"></div>
-        <span class="gtile-badge">▶ INSTAGRAM</span>
-        <div class="gtile-meta">
-          <h3>Myrázs — Feather Mirage kollekció</h3>
-          <span>@myrazs.by.mira</span>
-        </div>
-      </button>
-
+    <div class="sec-head rv"><span class="eyebrow">KORÁBBI ESTÉINK</span><h2>Amit már megrendeztünk.</h2></div>
+    <div class="event-cards-row rv-stagger">
+{chr(10).join(_event_card(ev) for ev in PAST_EVENTS)}
     </div>
   </div>
 </section>

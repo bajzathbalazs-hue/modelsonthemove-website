@@ -11,7 +11,7 @@ from shell import page, breadcrumb, service_page, BASE_URL
 from content_home import HOME_BODY, HOME_FAQ_JSONLD
 from content_services import SERVICES
 from content_pages import MUNKAINK_BODY, ROLUNK_BODY, KAPCSOLAT_BODY, NOTFOUND_BODY
-from content_events import EVENTS_BODY, REDIRECT_HTML, EVENT_DETAIL_BODY, EVENT_SLUG, EVENT_TICKET_URL, EVENT_TABLE_URL
+from content_events import EVENTS_BODY, REDIRECT_HTML, EVENT_DETAIL_BODY, EVENT_SLUG, EVENT_TICKET_URL, EVENT_TABLE_URL, PAST_EVENTS, past_event_detail_body
 
 
 def write(rel_path, content):
@@ -147,6 +147,20 @@ def main():
     )
     write(f"esemenyek/{EVENT_SLUG}/index.html", html)
     routes.append((f"esemenyek/{EVENT_SLUG}/", "0.9", "daily"))
+
+    # ---- KORÁBBI ESEMÉNYEK (egy aloldal eseményenként) ----
+    for ev in PAST_EVENTS:
+        html = page(
+            title=f"{ev['title']} — Models on the Move",
+            description=f"{ev['venue']} · {ev['date_label']} — {ev['teaser']}",
+            canonical_path=f"esemenyek/{ev['slug']}/",
+            body=past_event_detail_body(ev),
+            depth=2,
+            active="events",
+            og_image=f"assets/{ev['cover']}",
+        )
+        write(f"esemenyek/{ev['slug']}/index.html", html)
+        routes.append((f"esemenyek/{ev['slug']}/", "0.5", "yearly"))
 
     # old flat esemenyek.html -> redirect to esemenyek/
     write("esemenyek.html", REDIRECT_HTML.format(base=BASE_URL))
