@@ -474,18 +474,24 @@ html[lang="en"] .legal-box .lang-en{display:block;}
 nav a:focus-visible,.btn:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,.chip-opt:focus-visible{outline:2px solid var(--bronze-bright);outline-offset:3px;}
 
 /* mobile submenu */
-.msub-toggle{display:flex;align-items:center;gap:8px;background:none;border:none;font:inherit;color:inherit;cursor:pointer;}
-.msub-toggle svg{width:14px;height:14px;transition:transform .3s ease;}
+.msub-toggle{display:flex;align-items:center;gap:8px;background:none;border:none;font:inherit;color:inherit;cursor:pointer;font-family:var(--mono) !important;font-size:12px !important;letter-spacing:.12em !important;font-weight:400 !important;color:var(--ivory-dimmer) !important;}
+.msub-toggle svg{width:12px;height:12px;transition:transform .3s ease;}
 .msub-toggle[aria-expanded="true"] svg{transform:rotate(180deg);}
-.msub-panel{display:none;flex-direction:column;gap:16px;align-items:center;margin-top:6px;}
-.msub-panel.open{display:flex;}
-.msub-panel a{font-family:var(--sans);font-size:15px;font-weight:600;letter-spacing:.01em;color:var(--ivory-dim);}
-.mobile-menu{overflow-y:auto;padding:100px 24px 60px;}
+.msub-panel{display:none;grid-template-columns:1fr 1fr;gap:12px 18px;margin-top:14px;width:100%;max-width:300px;}
+.msub-panel.open{display:grid;}
+.msub-panel a{font-family:var(--sans) !important;font-size:12.5px !important;font-weight:600 !important;letter-spacing:.01em;color:var(--ivory-dim);text-align:left;line-height:1.35;text-transform:none !important;}
+.mmenu-rule{width:44px;height:1px;background:var(--line-strong);margin:2px 0;}
 
-/* A hamburger-menü fő linkjei (Események, Munkáink, Rólunk, Kapcsolat) korábban dőlt
-   szerif betűtípussal jelentek meg — ez nem illett a lap többi részén használt
-   letisztult, nem dőlt egységes betűstílushoz, ezért itt is arra váltottunk. */
-.mobile-menu a{font-family:var(--sans);font-style:normal;font-weight:700;text-transform:uppercase;letter-spacing:.02em;font-size:22px;}
+/* A teljes képernyős menü korábban túlméretezett, egyenetlen volt, és a
+   bezár gomb (mivel a görgethető .mobile-menu leszármazottja volt, aminek
+   backdrop-filter-je új containing blockot hoz létre position:fixed alá is)
+   görgetéskor elúszott. Megoldás: a bezár gomb saját magában, nem görgethető
+   szinten marad, a linkek egy külön .mmenu-body wrapperben görgethetők —
+   plusz kisebb méret és egyértelmű hierarchia (halvány almenü vs. fő linkek). */
+.mobile-menu{overflow:visible;padding:0;}
+.mobile-close{position:absolute;top:26px;right:24px;z-index:2;}
+.mmenu-body{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;width:100%;height:100%;overflow-y:auto;padding:90px 24px 50px;}
+.mobile-menu a{font-family:var(--sans);font-style:normal;font-weight:700;text-transform:uppercase;letter-spacing:.02em;font-size:19px;}
 
 /* ================= EXT: BREADCRUMB ================= */
 .breadcrumb{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:var(--ivory-dimmer);text-transform:uppercase;padding:130px 0 0;}

@@ -136,15 +136,18 @@ def nav(depth=0, active=""):
 
 <div class="mobile-menu" id="mobileMenu">
   <button class="mobile-close" id="mobileClose">BEZÁR ✕</button>
-  <button class="msub-toggle mlink" id="mSubBtn" aria-expanded="false" aria-controls="mSubPanel">SZOLGÁLTATÁSOK <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
-  <div class="msub-panel" id="mSubPanel">
-{chr(10).join(f'    <a href="{r}{slug}/" class="mlink">{label}</a>' for slug, label in SERVICES_NAV)}
+  <div class="mmenu-body">
+    <button class="msub-toggle mlink" id="mSubBtn" aria-expanded="false" aria-controls="mSubPanel">SZOLGÁLTATÁSOK <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+    <div class="msub-panel" id="mSubPanel">
+{chr(10).join(f'      <a href="{r}{slug}/" class="mlink">{label}</a>' for slug, label in SERVICES_NAV)}
+    </div>
+    <div class="mmenu-rule" aria-hidden="true"></div>
+    <a href="{r}esemenyek/" class="mlink">ESEMÉNYEK</a>
+    <a href="{r}munkaink/" class="mlink">MUNKÁINK</a>
+    <a href="{r}rolunk/" class="mlink">RÓLUNK</a>
+    <a href="{r}kapcsolat/" class="mlink">KAPCSOLAT</a>
+    <a href="{r}kapcsolat/" class="btn filled mlink" style="margin-top:8px;">BESZÉLJÜNK A CÉGEDRŐL</a>
   </div>
-  <a href="{r}esemenyek/" class="mlink">ESEMÉNYEK</a>
-  <a href="{r}munkaink/" class="mlink">MUNKÁINK</a>
-  <a href="{r}rolunk/" class="mlink">RÓLUNK</a>
-  <a href="{r}kapcsolat/" class="mlink">KAPCSOLAT</a>
-  <a href="{r}kapcsolat/" class="btn filled mlink" style="margin-top:8px;">BESZÉLJÜNK A CÉGEDRŐL</a>
 </div>
 """
 
