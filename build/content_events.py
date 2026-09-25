@@ -107,14 +107,14 @@ EVENTS_BODY = f"""
     <div class="sec-head rv"><span class="eyebrow">ELŐZŐ ESTÉINK</span><h2>A galéria.</h2></div>
     <div class="gallery-grid rv">
 
-      <a class="gtile wide glow-card" href="{IG_FEATURED}" target="_blank" rel="noopener">
+      <button type="button" class="gtile wide glow-card" data-ig-permalink="{IG_FEATURED}">
         <div class="plate photo grain" style="background-image:url('../assets/ig-featured-momleroy.jpg')"></div>
-        <span class="gtile-badge">INSTAGRAM</span>
+        <span class="gtile-badge">▶ INSTAGRAM</span>
         <div class="gtile-meta">
           <h3>MOM Leroy — Fashion Show &amp; Afro House Night</h3>
           <span>@models_on_the_move · Instagram</span>
         </div>
-      </a>
+      </button>
 
       <div class="gtile wide glow-card">
         <div class="plate photo grain" style="background-image:url('../assets/leroy-szezonnyito.jpg')"></div>
@@ -143,68 +143,68 @@ EVENTS_BODY = f"""
         </div>
       </div>
 
-      <a class="gtile glow-card" href="{IG_MYRAZS_RECAP}" target="_blank" rel="noopener">
+      <button type="button" class="gtile glow-card" data-ig-permalink="{IG_MYRAZS_RECAP}">
         <div class="plate photo grain" style="background-image:url('../assets/ig-myrazs-recap.jpg')"></div>
         <span class="gtile-badge">INSTAGRAM</span>
         <div class="gtile-meta">
           <h3>Myrázs — Fashion Show &amp; After Party</h3>
           <span>MOM Leroy · Január 9.</span>
         </div>
-      </a>
+      </button>
 
-      <a class="gtile glow-card" href="{IG_FASHIONSHOW_REPORT}" target="_blank" rel="noopener">
+      <button type="button" class="gtile glow-card" data-ig-permalink="{IG_FASHIONSHOW_REPORT}">
         <div class="plate photo grain" style="background-image:url('../assets/ig-fashionshow-videoreport.jpg')"></div>
-        <span class="gtile-badge">INSTAGRAM</span>
+        <span class="gtile-badge">▶ INSTAGRAM</span>
         <div class="gtile-meta">
           <h3>Fashion Show — Video Report</h3>
           <span>@mavreels</span>
         </div>
-      </a>
+      </button>
 
-      <a class="gtile glow-card" href="{IG_AFROHOUSE_ANNOUNCE}" target="_blank" rel="noopener">
+      <button type="button" class="gtile glow-card" data-ig-permalink="{IG_AFROHOUSE_ANNOUNCE}">
         <div class="plate photo grain" style="background-image:url('../assets/ig-afrohouse-announce.jpg')"></div>
-        <span class="gtile-badge">INSTAGRAM</span>
+        <span class="gtile-badge">▶ INSTAGRAM</span>
         <div class="gtile-meta">
           <h3>Afro House Night</h3>
           <span>@models_on_the_move</span>
         </div>
-      </a>
+      </button>
 
-      <a class="gtile glow-card" href="{IG_MOMLEROY_TEASER}" target="_blank" rel="noopener">
+      <button type="button" class="gtile glow-card" data-ig-permalink="{IG_MOMLEROY_TEASER}">
         <div class="plate photo grain" style="background-image:url('../assets/ig-momleroy-teaser.jpg')"></div>
-        <span class="gtile-badge">INSTAGRAM</span>
+        <span class="gtile-badge">▶ INSTAGRAM</span>
         <div class="gtile-meta">
           <h3>MOM Leroy Bistro</h3>
           <span>@momleroy</span>
         </div>
-      </a>
+      </button>
 
-      <a class="gtile glow-card" href="{IG_AFTERPARTY_TICKETS}" target="_blank" rel="noopener">
+      <button type="button" class="gtile glow-card" data-ig-permalink="{IG_AFTERPARTY_TICKETS}">
         <div class="plate photo grain" style="background-image:url('../assets/ig-afterparty-tickets.jpg')"></div>
-        <span class="gtile-badge">INSTAGRAM</span>
+        <span class="gtile-badge">▶ INSTAGRAM</span>
         <div class="gtile-meta">
           <h3>Models on the Move After Party</h3>
           <span>@models_on_the_move</span>
         </div>
-      </a>
+      </button>
 
-      <a class="gtile glow-card" href="{IG_MYRAZS_TICKET_PROMO}" target="_blank" rel="noopener">
+      <button type="button" class="gtile glow-card" data-ig-permalink="{IG_MYRAZS_TICKET_PROMO}">
         <div class="plate photo grain" style="background-image:url('../assets/ig-myrazs-ticket-promo.jpg')"></div>
-        <span class="gtile-badge">INSTAGRAM</span>
+        <span class="gtile-badge">▶ INSTAGRAM</span>
         <div class="gtile-meta">
           <h3>Myrázs</h3>
           <span>@myrazs.by.mira</span>
         </div>
-      </a>
+      </button>
 
-      <a class="gtile glow-card" href="{IG_MYRAZS_FEATHER_MIRAGE}" target="_blank" rel="noopener">
+      <button type="button" class="gtile glow-card" data-ig-permalink="{IG_MYRAZS_FEATHER_MIRAGE}">
         <div class="plate photo grain" style="background-image:url('../assets/ig-myrazs-feather-mirage.jpg')"></div>
-        <span class="gtile-badge">INSTAGRAM</span>
+        <span class="gtile-badge">▶ INSTAGRAM</span>
         <div class="gtile-meta">
           <h3>Myrázs — Feather Mirage kollekció</h3>
           <span>@myrazs.by.mira</span>
         </div>
-      </a>
+      </button>
 
     </div>
   </div>
@@ -216,6 +216,43 @@ EVENTS_BODY = f"""
     <div class="ctas"><a href="../rendezvenyszervezes/" class="btn filled magnetic">TERVEZZÜK MEG EGYÜTT</a></div>
   </div>
 </section>
+
+<div class="ig-modal" id="igModal" role="dialog" aria-modal="true" aria-label="Instagram bejegyzés">
+  <div class="ig-modal-backdrop" data-ig-close></div>
+  <div class="ig-modal-panel">
+    <button type="button" class="ig-modal-close" data-ig-close aria-label="Bezárás">&times;</button>
+    <div class="ig-modal-body" id="igModalBody"></div>
+  </div>
+</div>
+<script>
+(function(){{
+  var modal = document.getElementById('igModal');
+  var body = document.getElementById('igModalBody');
+  function tryProcess(retries){{
+    if(window.instgrm){{ window.instgrm.Embeds.process(); }}
+    else if(retries > 0){{ setTimeout(function(){{ tryProcess(retries - 1); }}, 300); }}
+  }}
+  function openModal(permalink){{
+    body.innerHTML = '<blockquote class="instagram-media" data-instgrm-permalink="' + permalink + '" data-instgrm-version="14" style="margin:0;width:100%;"></blockquote>';
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    tryProcess(10);
+  }}
+  function closeModal(){{
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+    body.innerHTML = '';
+  }}
+  document.querySelectorAll('[data-ig-permalink]').forEach(function(el){{
+    el.addEventListener('click', function(){{ openModal(el.getAttribute('data-ig-permalink')); }});
+  }});
+  modal.querySelectorAll('[data-ig-close]').forEach(function(el){{
+    el.addEventListener('click', closeModal);
+  }});
+  document.addEventListener('keydown', function(e){{ if(e.key === 'Escape' && modal.classList.contains('open')) closeModal(); }});
+}})();
+</script>
+<script async src="https://www.instagram.com/embed.js"></script>
 """
 
 # ---- dedicated event detail page: /esemenyek/dubai-style/ ----
