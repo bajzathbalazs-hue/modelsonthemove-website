@@ -61,7 +61,7 @@ HOME_BODY = """
       <p style="max-width:720px;">A Models on the Move ott kapcsolja össze az üzletet a kreatív világgal, ahol egy kampányhoz, márkához vagy eseményhez nem egyetlen szolgáltatásra, hanem jól összehangolt emberekre van szükség.</p>
       <p style="max-width:720px;">Segítünk megtalálni a megfelelő modelleket és influencereket, felépítjük a kommunikációt, elkészítjük a szükséges fotókat, videókat és digitális felületeket, valamint a teljes produkciót vagy eseményt is koordináljuk.</p>
       <p style="max-width:720px;font-weight:600;color:var(--ivory);">Egyetlen részfeladattal és hosszú távú, teljes körű együttműködéssel is megkereshetsz minket.</p>
-      <div class="stat-row rv">
+      <div class="stat-row rv-stagger">
         <div><b>2025</b><span>ALAPÍTVA</span></div>
         <div><b>3</b><span>SZERVEZETT ESEMÉNY</span></div>
         <div><b>40+</b><span>MODELL A HÁLÓZATBAN</span></div>
@@ -79,7 +79,7 @@ HOME_BODY = """
       <span class="eyebrow">04 — MIVEL FOGLALKOZUNK</span>
       <h2>Három terület.<br>Egy összehangolt csapat.</h2>
     </div>
-    <div class="pillar-grid rv">
+    <div class="pillar-grid rv-stagger">
       <div class="pillar-card glow-card">
         <div class="plate photo dim-top" style="position:absolute;inset:0;z-index:-1;opacity:.4;background-image:url('assets/vibe-cellar-detail.jpg');"></div>
         <span class="n">01</span>
@@ -135,8 +135,7 @@ HOME_BODY = """
       <span class="eyebrow">TELJES KÖRŰ MARKETINGMENEDZSMENT</span>
       <h2>A külső marketingcsapatod.</h2>
       <p style="font-family:var(--serif);font-size:19px;color:var(--bronze-bright);margin-top:20px;">Nem kell öt különböző szolgáltató. Egy jól összehangolt csapat kell.</p>
-      <p style="max-width:680px;">Ha nem külön szolgáltatókat szeretnél koordinálni, a vállalkozásod teljes marketingtevékenységét is ránk bízhatod.</p>
-      <p style="max-width:680px;">Stratégiát készítünk, kezeljük a digitális felületeidet, tartalmat gyártunk, fejlesztjük a weboldaladat, optimalizáljuk a keresőben való jelenlétedet, kezeljük a hirdetéseidet, és szükség esetén modelleket, influencereket, fotóst, videóst vagy további kreatív szakembereket vonunk be.</p>
+      <p style="max-width:680px;">Bízd ránk a teljes marketingedet: stratégia, digitális felületek, tartalomgyártás, weboldal, SEO, hirdetések — és ha kell, modellek, influencerek, fotós, videós is egy helyről.</p>
       <p style="max-width:680px;font-weight:700;color:var(--ivory);font-size:16px;">Te a vállalkozásoddal foglalkozol. Mi összehangoljuk a marketingedet.</p>
       <div style="margin-top:34px;">
         <a href="kapcsolat/" class="btn filled magnetic">BESZÉLJÜNK A CÉGEDRŐL</a>
@@ -152,7 +151,7 @@ HOME_BODY = """
       <span class="eyebrow">HOGYAN DOLGOZUNK</span>
       <h2>Egy kapcsolat. A szükséges csapat.<br>Teljes koordináció.</h2>
     </div>
-    <div class="process-grid rv">
+    <div class="process-grid rv-stagger">
       <div class="process-step"><span class="idx">01</span><h4>Megismerjük a célt</h4><p>Nem előre gyártott csomagot próbálunk eladni. Először megértjük a márkát, a célközönséget és az üzleti feladatot.</p></div>
       <div class="process-step"><span class="idx">02</span><h4>Összeállítjuk a megoldást</h4><p>Kiválasztjuk a szükséges szolgáltatásokat, szakembereket, modelleket, influencereket és partnereket.</p></div>
       <div class="process-step"><span class="idx">03</span><h4>Megvalósítjuk és koordináljuk</h4><p>Egy kézben tartjuk a kommunikációt, a tartalomgyártást, a digitális felületeket vagy a teljes produkciót.</p></div>
@@ -168,7 +167,7 @@ HOME_BODY = """
       <span class="eyebrow">KINEK DOLGOZUNK</span>
       <h2>Márkák, amelyeknek<br>számít a megjelenés.</h2>
     </div>
-    <div class="audience-row rv">
+    <div class="audience-row rv-stagger">
       <span class="tag">Vendéglátás</span><span class="tag">Szállodák</span><span class="tag">Szórakozóhelyek</span>
       <span class="tag">Autó</span><span class="tag">Ingatlan</span><span class="tag">Divat</span>
       <span class="tag">Szépségápolás</span><span class="tag">Lifestyle</span><span class="tag">Prémium szolgáltatások</span>
@@ -183,10 +182,9 @@ HOME_BODY = """
     <div class="sec-head rv" style="max-width:760px;">
       <span class="eyebrow">ESEMÉNYEK ÉS PRODUKCIÓK</span>
       <h2>Egy ötletből teljes élmény.</h2>
-      <p style="max-width:680px;">Saját Models on the Move rendezvényeink mellett márkák és vállalkozások eseményeinek, kampányainak és produkcióinak teljes körű megszervezését is vállaljuk.</p>
-      <p style="max-width:680px;">Budapesti helyszínekkel, modellekkel, influencerekkel, DJ-kkel, fotósokkal, videósokkal, dekorációs és további kreatív partnerekkel dolgozunk együtt, így a koncepciótól a megvalósításig egy kézben tudjuk koordinálni a projektet.</p>
+      <p style="max-width:680px;">Saját rendezvényeink mellett márkák eseményeit is megszervezzük — helyszín, modellek, DJ-k, fotós, videós, dekoráció egy kézben, a koncepciótól a megvalósításig.</p>
     </div>
-    <div class="audience-row rv" style="margin-bottom:50px;">
+    <div class="audience-row rv-stagger" style="margin-bottom:50px;">
       <span class="tag">Márka- és termékbemutatók</span><span class="tag">Étterem- és helyszínnyitók</span>
       <span class="tag">Influencer események</span><span class="tag">Divatbemutatók</span>
       <span class="tag">Kampányfotózások</span><span class="tag">Reklámforgatások</span>
@@ -195,6 +193,33 @@ HOME_BODY = """
     <div class="rv" style="text-align:center;padding:50px 0;border-top:1px solid var(--line);">
       <p style="font-family:var(--serif);font-size:clamp(22px,3.2vw,32px);max-width:680px;margin:0 auto 30px;line-height:1.4;">Mondd el, mit szeretnél létrehozni. Mi megtaláljuk hozzá az embereket, a helyszínt és a megoldást.</p>
       <a href="rendezvenyszervezes/" class="btn filled magnetic">TERVEZZÜK MEG EGYÜTT</a>
+    </div>
+  </div>
+</section>
+
+<!-- 08 MIÉRT MI -->
+<section class="pad rule">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="eyebrow">MIÉRT MI</span><h2>Miben más ez, mint egy hagyományos megoldás.</h2></div>
+    <div class="compare-grid rv-stagger">
+      <div class="compare-col">
+        <h4>Hagyományos megoldás</h4>
+        <ul>
+          <li>Külön ügynökség modellekhez, marketinghez, eseményekhez</li>
+          <li>Sok körös egyeztetés, lassú válaszok</li>
+          <li>Sablon csomagok, nem a te projektedre szabva</li>
+          <li>Nem mindig egyértelmű, ki miért felel</li>
+        </ul>
+      </div>
+      <div class="compare-col compare-col--us">
+        <h4>Models on the Move</h4>
+        <ul>
+          <li>Egy csapat, egy kapcsolattartó mindenre</li>
+          <li>Gyors, közvetlen egyeztetés</li>
+          <li>Minden ajánlat a projektedre szabva</li>
+          <li>Végig tudod, kivel beszélsz</li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>

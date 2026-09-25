@@ -105,7 +105,7 @@ EVENTS_BODY = f"""
 <section class="pad rule">
   <div class="wrap">
     <div class="sec-head rv"><span class="eyebrow">ELŐZŐ ESTÉINK</span><h2>A galéria.</h2></div>
-    <div class="gallery-grid rv">
+    <div class="gallery-grid rv-stagger">
 
       <button type="button" class="gtile wide glow-card" data-ig-permalink="{IG_FEATURED}">
         <div class="plate photo grain" style="background-image:url('../assets/ig-featured-momleroy.jpg')"></div>
@@ -342,7 +342,7 @@ EVENT_DETAIL_BODY = f"""
     <div class="sec-head rv"><span class="eyebrow">A HELYSZÍN</span><h2>Ízelítő a VIBE hangulatából.</h2>
       <p>Az esemény napján és utána itt jelennek meg a friss fotók és az összefoglaló videó is.</p>
     </div>
-    <div class="gallery-grid rv">
+    <div class="gallery-grid rv-stagger">
       <div class="gtile wide glow-card"><div class="plate photo grain" style="background-image:url('../../assets/vibe-jungle-lounge.jpg');"></div></div>
       <div class="gtile glow-card"><div class="plate photo grain" style="background-image:url('../../assets/vibe-bartrio-final.jpg');background-position:center 30%;"></div></div>
       <div class="gtile glow-card"><div class="plate photo grain" style="background-image:url('../../assets/vibe-redroom-group.jpg');background-position:center 15%;"></div></div>

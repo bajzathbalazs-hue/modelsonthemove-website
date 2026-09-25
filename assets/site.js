@@ -103,7 +103,7 @@ window.addEventListener('keydown', (e)=>{
 const io = new IntersectionObserver((entries)=>{
   entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
 },{threshold:.15});
-document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+document.querySelectorAll('.rv, .rv-stagger').forEach(el=>io.observe(el));
 
 /* ============ magnetic buttons (desktop only) ============ */
 if(window.matchMedia('(hover:hover) and (pointer:fine)').matches){

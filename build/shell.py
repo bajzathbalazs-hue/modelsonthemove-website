@@ -320,7 +320,7 @@ window.addEventListener('keydown', (e)=>{
 const io = new IntersectionObserver((entries)=>{
   entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
 },{threshold:.15});
-document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+document.querySelectorAll('.rv, .rv-stagger').forEach(el=>io.observe(el));
 
 /* ============ magnetic buttons (desktop only) ============ */
 if(window.matchMedia('(hover:hover) and (pointer:fine)').matches){
@@ -458,7 +458,7 @@ def service_page(d):
         <div class="num">{i:02d}</div>
         <div><h3>{h3}</h3>{p_html}</div>
       </div>""")
-    features_html = '<div class="feature-list">\n' + "\n".join(feature_rows) + "\n    </div>"
+    features_html = '<div class="feature-list rv-stagger">\n' + "\n".join(feature_rows) + "\n    </div>"
 
     related_html = ""
     if d.get("related"):
@@ -470,7 +470,7 @@ def service_page(d):
 <section class="pad rule">
   <div class="wrap">
     <div class="sec-head rv"><span class="eyebrow">KAPCSOLÓDÓ SZOLGÁLTATÁSOK</span></div>
-    <div class="related-grid rv">{"".join(cards)}</div>
+    <div class="related-grid rv-stagger">{"".join(cards)}</div>
   </div>
 </section>"""
 
@@ -513,7 +513,7 @@ def service_page(d):
 </section>
 {dual_path_html}
 <section class="pad rule">
-  <div class="wrap rv">
+  <div class="wrap">
     {features_html}
   </div>
 </section>
