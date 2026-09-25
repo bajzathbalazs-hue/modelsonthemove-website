@@ -188,8 +188,9 @@ def footer(depth=0):
       </div>
       <div>
         <h5>KÖVESS</h5>
-        <a href="#" rel="noopener">Instagram</a>
-        <a href="#" rel="noopener">TikTok</a>
+        <a href="https://www.instagram.com/models_on_the_move/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.facebook.com/profile.php?id=61586682312593" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://www.tiktok.com/@models.on.the.move" target="_blank" rel="noopener">TikTok</a>
       </div>
     </div>
     <div class="foot-bottom">

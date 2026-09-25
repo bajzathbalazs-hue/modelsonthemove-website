@@ -4,6 +4,17 @@ EVENT_TICKET_URL = "https://www.sevenrooms.com/events/vibebudapest/models-on-the
 EVENT_TABLE_URL = "https://www.sevenrooms.com/experiences/vibebudapest/vibe-x-models-on-the-move-5074707521585152?lang=hu"
 EVENT_SLUG = "dubai-style"
 
+# ---- Instagram poszt-linkek a galéria csempékhez (kattintásra a valódi posztra/reelre visz) ----
+IG_FEATURED = "https://www.instagram.com/p/DYm2IkFilaO/"
+IG_FASHIONSHOW_REPORT = "https://www.instagram.com/p/DV13-0SCPjM/"
+IG_POPOUT = "https://www.instagram.com/p/DVopDD_DTAr/"
+IG_AFROHOUSE_ANNOUNCE = "https://www.instagram.com/p/DUgQUjGgjmC/"
+IG_MOMLEROY_TEASER = "https://www.instagram.com/p/DUThgzQEhK4/"
+IG_MYRAZS_RECAP = "https://www.instagram.com/p/DT8UZeBAgkQ/"
+IG_AFTERPARTY_TICKETS = "https://www.instagram.com/p/DU8rIVhgjz3/"
+IG_MYRAZS_TICKET_PROMO = "https://www.instagram.com/p/DXuTi24DD-C/"
+IG_MYRAZS_FEATHER_MIRAGE = "https://www.instagram.com/p/DaNzhxwCTw9/"
+
 # ---- homepage teaser (placed directly under the hero) ----
 EVENT_HOME_TEASER = f"""
 <!-- 02 AKTUÁLIS ESEMÉNY -->
@@ -96,6 +107,15 @@ EVENTS_BODY = f"""
     <div class="sec-head rv"><span class="eyebrow">ELŐZŐ ESTÉINK</span><h2>A galéria.</h2></div>
     <div class="gallery-grid rv">
 
+      <a class="gtile wide glow-card" href="{IG_FEATURED}" target="_blank" rel="noopener">
+        <div class="plate photo grain" style="background-image:url('../assets/ig-featured-momleroy.jpg')"></div>
+        <span class="gtile-badge">INSTAGRAM</span>
+        <div class="gtile-meta">
+          <h3>MOM Leroy — Fashion Show &amp; Afro House Night</h3>
+          <span>@models_on_the_move · Instagram</span>
+        </div>
+      </a>
+
       <div class="gtile wide glow-card">
         <div class="plate photo grain" style="background-image:url('../assets/leroy-szezonnyito.jpg')"></div>
         <div class="gtile-meta">
@@ -123,11 +143,68 @@ EVENTS_BODY = f"""
         </div>
       </div>
 
-      <div class="gtile soon"><div class="plate plate--bronze"></div><span class="soon-label">FOTÓ HAMAROSAN</span></div>
-      <div class="gtile soon"><div class="plate plate--night"></div><span class="soon-label">▶ VIDEÓ HAMAROSAN</span></div>
-      <div class="gtile soon"><div class="plate plate--forest"></div><span class="soon-label">FOTÓ HAMAROSAN</span></div>
-      <div class="gtile soon"><div class="plate plate--jewel"></div><span class="soon-label">FOTÓ HAMAROSAN</span></div>
-      <div class="gtile soon"><div class="plate plate--champagne"></div><span class="soon-label">▶ VIDEÓ HAMAROSAN</span></div>
+      <a class="gtile glow-card" href="{IG_MYRAZS_RECAP}" target="_blank" rel="noopener">
+        <div class="plate photo grain" style="background-image:url('../assets/ig-myrazs-recap.jpg')"></div>
+        <span class="gtile-badge">INSTAGRAM</span>
+        <div class="gtile-meta">
+          <h3>Myrázs — Fashion Show &amp; After Party</h3>
+          <span>MOM Leroy · Január 9.</span>
+        </div>
+      </a>
+
+      <a class="gtile glow-card" href="{IG_FASHIONSHOW_REPORT}" target="_blank" rel="noopener">
+        <div class="plate photo grain" style="background-image:url('../assets/ig-fashionshow-videoreport.jpg')"></div>
+        <span class="gtile-badge">INSTAGRAM</span>
+        <div class="gtile-meta">
+          <h3>Fashion Show — Video Report</h3>
+          <span>@mavreels</span>
+        </div>
+      </a>
+
+      <a class="gtile glow-card" href="{IG_AFROHOUSE_ANNOUNCE}" target="_blank" rel="noopener">
+        <div class="plate photo grain" style="background-image:url('../assets/ig-afrohouse-announce.jpg')"></div>
+        <span class="gtile-badge">INSTAGRAM</span>
+        <div class="gtile-meta">
+          <h3>Afro House Night</h3>
+          <span>@models_on_the_move</span>
+        </div>
+      </a>
+
+      <a class="gtile glow-card" href="{IG_MOMLEROY_TEASER}" target="_blank" rel="noopener">
+        <div class="plate photo grain" style="background-image:url('../assets/ig-momleroy-teaser.jpg')"></div>
+        <span class="gtile-badge">INSTAGRAM</span>
+        <div class="gtile-meta">
+          <h3>MOM Leroy Bistro</h3>
+          <span>@momleroy</span>
+        </div>
+      </a>
+
+      <a class="gtile glow-card" href="{IG_AFTERPARTY_TICKETS}" target="_blank" rel="noopener">
+        <div class="plate photo grain" style="background-image:url('../assets/ig-afterparty-tickets.jpg')"></div>
+        <span class="gtile-badge">INSTAGRAM</span>
+        <div class="gtile-meta">
+          <h3>Models on the Move After Party</h3>
+          <span>@models_on_the_move</span>
+        </div>
+      </a>
+
+      <a class="gtile glow-card" href="{IG_MYRAZS_TICKET_PROMO}" target="_blank" rel="noopener">
+        <div class="plate photo grain" style="background-image:url('../assets/ig-myrazs-ticket-promo.jpg')"></div>
+        <span class="gtile-badge">INSTAGRAM</span>
+        <div class="gtile-meta">
+          <h3>Myrázs</h3>
+          <span>@myrazs.by.mira</span>
+        </div>
+      </a>
+
+      <a class="gtile glow-card" href="{IG_MYRAZS_FEATHER_MIRAGE}" target="_blank" rel="noopener">
+        <div class="plate photo grain" style="background-image:url('../assets/ig-myrazs-feather-mirage.jpg')"></div>
+        <span class="gtile-badge">INSTAGRAM</span>
+        <div class="gtile-meta">
+          <h3>Myrázs — Feather Mirage kollekció</h3>
+          <span>@myrazs.by.mira</span>
+        </div>
+      </a>
 
     </div>
   </div>

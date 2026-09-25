@@ -238,6 +238,18 @@ nav a:focus-visible,.btn:focus-visible,button:focus-visible,input:focus-visible,
   .wordmark-img{height:38px;}
 }
 
+/* ================= EXT: glow-card négyzetes "kilógás" javítása mobilon ================= */
+/* A .glow-card::before egy blur()-özött fényglória, ami desktopon hoverre erősödik fel.
+   Mobil Safariban/Chrome-ban a blur filter nem mindig vágódik a szülő lekerekített
+   sarkaihoz, ezért egy szögletes folt látszott ki a lekerekítés mögül. Mivel touch-eszközön
+   hover amúgy sincs, egyszerűbb és biztonságosabb kikapcsolni 760px alatt. */
+@media(max-width:760px){
+  .glow-card::before{content:none;}
+}
+
+/* ================= EXT: galéria-csempe linkként (Instagram posztokra mutat) ================= */
+a.gtile{display:block;}
+
 /* ================= EXT: generic helpers ================= */
 .mt-64{margin-top:64px;}
 .skip-link{position:absolute;left:-9999px;top:0;background:var(--bronze-bright);color:#0a0a09;padding:14px 22px;border-radius:0 0 var(--r-md) 0;font-family:var(--mono);font-size:12px;letter-spacing:.05em;z-index:999;}
