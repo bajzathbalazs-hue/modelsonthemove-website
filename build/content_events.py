@@ -291,7 +291,7 @@ EVENT_DETAIL_BODY = f"""
     <div class="event-two-col rv">
       <div>
         <span class="eyebrow">AZ ESTE</span>
-        <h2 style="font-family:var(--serif);font-style:italic;font-size:clamp(26px,3.6vw,40px);font-weight:400;margin-top:14px;line-height:1.2;">Egy este Dubaiból,<br>Budapest szívében.</h2>
+        <h2 style="font-family:var(--serif);font-size:clamp(26px,3.6vw,40px);font-weight:400;margin-top:14px;line-height:1.2;">Egy este Dubaiból,<br>Budapest szívében.</h2>
         <p style="font-size:15px;line-height:1.9;color:var(--ivory-dim);margin-top:24px;max-width:520px;">2026. október 16-án a Models on the Move × VIBE Budapest — Dubai Style elhozza a dubai éjszakák stílusát és energiáját Budapestre.</p>
         <p style="font-size:15px;line-height:1.9;color:var(--ivory-dim);margin-top:18px;max-width:520px;">A divat világa találkozik a VIBE karakteres hangulatával: Fabios és Mandmil Afro House szettjei, táncosok és élő előadók emelik új szintre az éjszakát.</p>
         <p style="font-size:15px;line-height:1.9;color:var(--ivory-dim);margin-top:18px;max-width:520px;">Exkluzív italok, bottle service és snackek egész este — a választás a tiéd, az élmény az asztalodnál folytatódik.</p>
