@@ -1,5 +1,20 @@
 # -*- coding: utf-8 -*-
 from content_events import EVENT_HOME_TEASER
+from shell import faq_list
+
+HOME_FAQ = [
+    ("Csak teljes körű együttműködést vállaltok, vagy egy konkrét részfeladatot is?",
+     "Mindkettőt. Van, aki a teljes marketingjét vagy egy komplett eseményét ránk bízza, és van, aki csak egy konkrét részfeladatra — pl. modellközvetítésre, egy videóra vagy a közösségi médiára — keres minket."),
+    ("Nem tudom pontosan, mire van szükségem — akkor is érdemes megkeresni titeket?",
+     "Igen, sőt ez a leggyakoribb eset. Mondd el a célt vagy a projektet, mi segítünk kibontani, milyen szolgáltatásokra és emberekre lesz szükség hozzá."),
+    ("Vannak előre meghatározott csomagjaitok és áraitok?",
+     "Nincsenek sablon csomagok. Minden ajánlat a projekt, a cél és a terjedelem alapján, egyedileg készül egy rövid egyeztetés után."),
+    ("Csak nightlife-eseményekben van tapasztalatotok, vagy üzleti rendezvényekben is?",
+     "A saját rendezvényeink nightlife-közeliek, de a modellközvetítés, a marketing és a rendezvényszervezés szolgáltatásunk is kiterjed üzleti eseményekre, nyitókra, termékbemutatókra és céges alkalmakra."),
+    ("Mennyi idővel korábban érdemes megkeresni titeket?",
+     "Minél komplexebb a projekt (esemény, több szereplős produkció), annál előbb érdemes elindítani az egyeztetést — de rövidebb határidejű megkeresésekben is segítünk, ha a naptárunk engedi."),
+]
+HOME_FAQ_HTML, HOME_FAQ_JSONLD = faq_list(HOME_FAQ)
 
 HOME_BODY = """
 <!-- 01 HERO -->
@@ -174,6 +189,14 @@ HOME_BODY = """
       <p style="font-family:var(--serif);font-style:italic;font-size:clamp(22px,3.2vw,32px);max-width:680px;margin:0 auto 30px;line-height:1.4;">Mondd el, mit szeretnél létrehozni. Mi megtaláljuk hozzá az embereket, a helyszínt és a megoldást.</p>
       <a href="rendezvenyszervezes/" class="btn filled magnetic">TERVEZZÜK MEG EGYÜTT</a>
     </div>
+  </div>
+</section>
+
+<!-- 09 GYAKORI KÉRDÉSEK -->
+<section class="pad rule">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="eyebrow">GYAKORI KÉRDÉSEK</span><h2>Amit a legtöbben kérdeznek.</h2></div>
+    <div class="rv">""" + HOME_FAQ_HTML + """</div>
   </div>
 </section>
 
