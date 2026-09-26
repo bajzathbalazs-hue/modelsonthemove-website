@@ -11,7 +11,7 @@ from shell import page, breadcrumb, service_page, BASE_URL
 from content_home import HOME_BODY, HOME_FAQ_JSONLD
 from content_services import SERVICES
 from content_pages import MUNKAINK_BODY, ROLUNK_BODY, KAPCSOLAT_BODY, NOTFOUND_BODY
-from content_events import EVENTS_BODY, REDIRECT_HTML, EVENT_DETAIL_BODY, EVENT_SLUG, EVENT_TICKET_URL, EVENT_TABLE_URL, PAST_EVENTS, past_event_detail_body
+from content_events import EVENTS_BODY, EVENT_DETAIL_BODY, EVENT_SLUG, EVENT_TICKET_URL, EVENT_TABLE_URL, PAST_EVENTS, past_event_detail_body
 
 
 def write(rel_path, content):
@@ -162,8 +162,12 @@ def main():
         write(f"esemenyek/{ev['slug']}/index.html", html)
         routes.append((f"esemenyek/{ev['slug']}/", "0.5", "yearly"))
 
-    # old flat esemenyek.html -> redirect to esemenyek/
-    write("esemenyek.html", REDIRECT_HTML.format(base=BASE_URL))
+    # NOTE: intentionally NOT writing a physical esemenyek.html file here.
+    # On Netlify, a static esemenyek.html sitting next to the esemenyek/ directory
+    # makes Netlify's pretty-URL resolution treat esemenyek.html as canonical and
+    # 301-redirect esemenyek/ -> esemenyek, whose content then meta-refreshes back
+    # to esemenyek/ — an infinite redirect loop (broke hard in Safari). The legacy
+    # /esemenyek.html bookmark is instead handled by the _redirects rule below.
 
     # ---- 404 ----
     write("404.html", page(
@@ -198,7 +202,12 @@ Sitemap: {BASE_URL}/sitemap.xml
     domain = BASE_URL.replace("https://", "").replace("http://", "").rstrip("/")
     write("CNAME", domain + "\n")
 
-    print(f"\nKész: {len(routes)} indexelhető route + 404 + sitemap + robots + CNAME ({domain}).")
+    # ---- _redirects (Netlify) ----
+    # Legacy bookmark for the old flat events page — single-hop redirect,
+    # no physical file, so it can't collide with the esemenyek/ directory.
+    write("_redirects", "/esemenyek.html  /esemenyek/  301\n")
+
+    print(f"\nKész: {len(routes)} indexelhető route + 404 + sitemap + robots + CNAME + _redirects ({domain}).")
 
 
 if __name__ == "__main__":

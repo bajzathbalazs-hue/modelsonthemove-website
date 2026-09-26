@@ -43,7 +43,7 @@ PAST_EVENTS = [
             ("Moani (Zsombor Dudás-Kass)", "DJ"),
         ],
         "extras": ["Tombola értékes nyereményekkel", "Myrázs After Party"],
-        "gallery": ["ig-myrazs-recap.jpg", "ig-fashionshow-videoreport.jpg", "ig-afterparty-tickets.jpg", "ig-myrazs-ticket-promo.jpg", "ig-myrazs-feather-mirage.jpg"],
+        "gallery": ["ig-myrazs-recap.jpg", "ig-fashionshow-videoreport.jpg", "ig-afterparty-tickets.jpg", "ig-myrazs-ticket-promo.jpg"],
         "video": None,
     },
     {
@@ -430,16 +430,3 @@ EVENT_DETAIL_BODY = f"""
 </section>
 """
 
-REDIRECT_HTML = """<!DOCTYPE html>
-<html lang="hu">
-<head>
-<meta charset="UTF-8">
-<meta http-equiv="refresh" content="0; url=esemenyek/">
-<link rel="canonical" href="{base}/esemenyek/">
-<title>Models on the Move — Események</title>
-</head>
-<body>
-<p>Ez az oldal átköltözött: <a href="esemenyek/">Models on the Move — Események</a>.</p>
-</body>
-</html>
-"""
