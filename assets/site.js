@@ -97,6 +97,13 @@ window.addEventListener('keydown', (e)=>{
   document.addEventListener('visibilitychange', ()=>{
     if(!document.hidden) vids.forEach(tryPlay);
   });
+  /* végső tartalék: ha a fentiek mind lepattannak (pl. a böngésző még nem
+     "melegítette be" az oldalt autoplay-hez), az első bármilyen érintésre/
+     scrollra is újrapróbáljuk — ez már garantáltan túljut a policy-blokkon */
+  const retryOnInteraction = () => { vids.forEach(tryPlay); };
+  ['touchstart','pointerdown','scroll','click','keydown'].forEach(evt=>{
+    window.addEventListener(evt, retryOnInteraction, {once:true, passive:true});
+  });
 })();
 
 /* ============ scroll reveal ============ */
