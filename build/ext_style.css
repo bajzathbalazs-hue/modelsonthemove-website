@@ -364,3 +364,21 @@ img[loading="lazy"]{background:#0c0c0b;}
 .event-card .meta-line{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:var(--ivory-dimmer);text-transform:uppercase;margin-bottom:12px;}
 .event-card p{font-size:14px;line-height:1.7;color:var(--ivory-dim);}
 @media(max-width:640px){.event-card{flex-basis:78vw;}}
+
+/* ================= COOKIE-CONSENT SÁV (GA4) ================= */
+.cookie-banner{
+  position:fixed;left:16px;right:16px;bottom:16px;z-index:9998;
+  max-width:640px;margin:0 auto;
+  background:var(--panel);border:1px solid var(--line-strong);border-radius:var(--r-lg);
+  padding:18px 20px;box-shadow:var(--shadow-float);
+  display:none;flex-wrap:wrap;align-items:center;gap:14px 20px;
+  transform:translateY(12px);opacity:0;transition:transform .4s ease,opacity .4s ease;
+}
+.cookie-banner.show{display:flex;transform:translateY(0);opacity:1;}
+.cookie-banner p{flex:1 1 260px;font-size:13.5px;line-height:1.6;color:var(--ivory-dim);margin:0;}
+.cookie-actions{display:flex;gap:10px;flex:0 0 auto;}
+.cookie-actions .btn{padding:9px 18px;font-size:12.5px;}
+@media(max-width:520px){
+  .cookie-banner{flex-direction:column;align-items:stretch;}
+  .cookie-actions{justify-content:flex-end;}
+}

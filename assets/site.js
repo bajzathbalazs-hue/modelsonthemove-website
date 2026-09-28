@@ -5,7 +5,7 @@ window.MOTM_CONFIG = {
      hogy sikeresen elküldték az adatot — helyette egy tájékoztató üzenetet mutatnak. */
   formEndpoint: "",
   analytics: {
-    ga4MeasurementId: "",       /* TODO: Google Analytics 4 mérési azonosító */
+    ga4MeasurementId: "G-EGGQF205M5",
     googleSearchConsole: "",    /* TODO: Search Console verifikációs kód */
     metaPixelId: "",            /* TODO: Meta Pixel azonosító */
     googleAdsConversionId: ""   /* TODO: Google Ads konverziókövetési azonosító */
@@ -103,6 +103,32 @@ window.addEventListener('keydown', (e)=>{
   const retryOnInteraction = () => { vids.forEach(tryPlay); };
   ['touchstart','pointerdown','scroll','click','keydown'].forEach(evt=>{
     window.addEventListener(evt, retryOnInteraction, {once:true, passive:true});
+  });
+})();
+
+/* ============ cookie-consent sáv (GA4) ============ */
+(function(){
+  const KEY = 'motm-cookie-consent';
+  const banner = document.getElementById('cookieBanner');
+  if(!banner) return;
+  const saved = localStorage.getItem(KEY);
+  function grant(){
+    if(window.gtag){
+      gtag('consent', 'update', { analytics_storage: 'granted' });
+    }
+  }
+  if(saved === 'accepted'){ grant(); }
+  else if(saved !== 'declined'){ banner.classList.add('show'); }
+  const acceptBtn = document.getElementById('cookieAccept');
+  const declineBtn = document.getElementById('cookieDecline');
+  if(acceptBtn) acceptBtn.addEventListener('click', ()=>{
+    localStorage.setItem(KEY, 'accepted');
+    grant();
+    banner.classList.remove('show');
+  });
+  if(declineBtn) declineBtn.addEventListener('click', ()=>{
+    localStorage.setItem(KEY, 'declined');
+    banner.classList.remove('show');
   });
 })();
 

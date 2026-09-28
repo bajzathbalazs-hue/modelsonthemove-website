@@ -11,6 +11,26 @@ BASE_URL = "https://modelsonthemove.hu"
 
 SITE_NAME = "Models on the Move"
 
+GA4_MEASUREMENT_ID = "G-EGGQF205M5"
+
+# Consent Mode v2: alapból minden tárolás elutasítva, amíg a látogató el nem
+# fogadja a cookie-sávon (lásd COOKIE_BANNER a SCRIPT-ben) — így a gtag.js
+# betöltődik és a GA4 property adatokat lát, de személyes/cookie-alapú
+# méréshez a beleegyezés megadásáig nem jut hozzá.
+GA4_SNIPPET = f"""<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){{ dataLayer.push(arguments); }}
+gtag('consent', 'default', {{
+  'analytics_storage': 'denied',
+  'ad_storage': 'denied',
+  'ad_user_data': 'denied',
+  'ad_personalization': 'denied'
+}});
+gtag('js', new Date());
+gtag('config', '{GA4_MEASUREMENT_ID}', {{ 'anonymize_ip': true }});
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id={GA4_MEASUREMENT_ID}"></script>"""
+
 with open(os.path.join(HERE, "shared_style.css"), encoding="utf-8") as f:
     SHARED_STYLE = f.read()
 with open(os.path.join(HERE, "ext_style.css"), encoding="utf-8") as f:
@@ -97,6 +117,7 @@ def head(title, description, canonical_path, depth=0, og_image="assets/hero-myra
 <link rel="stylesheet" href="{r}assets/site.css">
 {org_jsonld}
 {extra_jsonld}
+{GA4_SNIPPET}
 </head>
 """
 
@@ -222,7 +243,7 @@ window.MOTM_CONFIG = {
      hogy sikeresen elküldték az adatot — helyette egy tájékoztató üzenetet mutatnak. */
   formEndpoint: "",
   analytics: {
-    ga4MeasurementId: "",       /* TODO: Google Analytics 4 mérési azonosító */
+    ga4MeasurementId: "G-EGGQF205M5",
     googleSearchConsole: "",    /* TODO: Search Console verifikációs kód */
     metaPixelId: "",            /* TODO: Meta Pixel azonosító */
     googleAdsConversionId: ""   /* TODO: Google Ads konverziókövetési azonosító */
@@ -320,6 +341,32 @@ window.addEventListener('keydown', (e)=>{
   const retryOnInteraction = () => { vids.forEach(tryPlay); };
   ['touchstart','pointerdown','scroll','click','keydown'].forEach(evt=>{
     window.addEventListener(evt, retryOnInteraction, {once:true, passive:true});
+  });
+})();
+
+/* ============ cookie-consent sáv (GA4) ============ */
+(function(){
+  const KEY = 'motm-cookie-consent';
+  const banner = document.getElementById('cookieBanner');
+  if(!banner) return;
+  const saved = localStorage.getItem(KEY);
+  function grant(){
+    if(window.gtag){
+      gtag('consent', 'update', { analytics_storage: 'granted' });
+    }
+  }
+  if(saved === 'accepted'){ grant(); }
+  else if(saved !== 'declined'){ banner.classList.add('show'); }
+  const acceptBtn = document.getElementById('cookieAccept');
+  const declineBtn = document.getElementById('cookieDecline');
+  if(acceptBtn) acceptBtn.addEventListener('click', ()=>{
+    localStorage.setItem(KEY, 'accepted');
+    grant();
+    banner.classList.remove('show');
+  });
+  if(declineBtn) declineBtn.addEventListener('click', ()=>{
+    localStorage.setItem(KEY, 'declined');
+    banner.classList.remove('show');
   });
 })();
 
@@ -594,6 +641,17 @@ MODEL_APPLICATION_FORM = """
 """
 
 
+COOKIE_BANNER = """
+<div class="cookie-banner" id="cookieBanner" role="dialog" aria-live="polite" aria-label="Süti-tájékoztató">
+  <p>Az oldal látogatottsági statisztikákhoz sütiket használ (Google Analytics). Elfogadod?</p>
+  <div class="cookie-actions">
+    <button type="button" class="btn" id="cookieDecline">Elutasítom</button>
+    <button type="button" class="btn filled" id="cookieAccept">Elfogadom</button>
+  </div>
+</div>
+"""
+
+
 def page(title, description, canonical_path, body, depth=None, active="", og_image="assets/hero-myrazs-poster.jpg", robots="index,follow", extra_jsonld=""):
     if depth is None:
         depth = 0 if canonical_path == "" else canonical_path.count("/")
@@ -601,6 +659,7 @@ def page(title, description, canonical_path, body, depth=None, active="", og_ima
     return (
         head(title, description, canonical_path, depth=depth, og_image=og_image, robots=robots, extra_jsonld=extra_jsonld)
         + "<body>\n"
+        + COOKIE_BANNER
         + nav(depth=depth, active=active)
         + '\n<main id="main">\n'
         + body
