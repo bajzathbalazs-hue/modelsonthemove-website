@@ -290,10 +290,11 @@ nav a:focus-visible,.btn:focus-visible,button:focus-visible,input:focus-visible,
 
 /* ================= EXT: mobile nav logo fix ================= */
 /* A logófájl korábban rosszul volt méretezve (sok átlátszó szegéllyel),
-   ezért kellett kicsire venni. A kép mostantól szorosan a tartalomra van
-   vágva, így mobilon nagyobbra vehető és jól látszik. */
+   ezért kellett kicsire venni. A kép szorosan a tartalomra van vágva
+   (ellenőrizve: csak ~16px margó van a PNG-ben), ezért mobilon a
+   burger gomb (48px) magasságához igazítva, jól láthatóan nagyobbra vettük. */
 @media(max-width:900px){
-  .wordmark-img{height:38px;}
+  .wordmark-img{height:42px;}
 }
 
 /* ================= EXT: glow-card négyzetes "kilógás" javítása mobilon ================= */
@@ -366,13 +367,16 @@ img[loading="lazy"]{background:#0c0c0b;}
 @media(max-width:640px){.event-card{flex-basis:78vw;}}
 
 /* ================= COOKIE-CONSENT SÁV (GA4) ================= */
+/* Szándékosan a tetején, nem alul: a Netlify "Powered by Netlify" jelvény
+   (iframe, nagyon magas z-index-szel) a jobb alsó sarokban ül, és egy alsó
+   sávon az "Elfogadom" gombra kattintást teljesen elnyelte volna mobilon. */
 .cookie-banner{
-  position:fixed;left:16px;right:16px;bottom:16px;z-index:9998;
+  position:fixed;left:16px;right:16px;top:96px;z-index:9998;
   max-width:640px;margin:0 auto;
   background:var(--panel);border:1px solid var(--line-strong);border-radius:var(--r-lg);
   padding:18px 20px;box-shadow:var(--shadow-float);
   display:none;flex-wrap:wrap;align-items:center;gap:14px 20px;
-  transform:translateY(12px);opacity:0;transition:transform .4s ease,opacity .4s ease;
+  transform:translateY(-12px);opacity:0;transition:transform .4s ease,opacity .4s ease;
 }
 .cookie-banner.show{display:flex;transform:translateY(0);opacity:1;}
 .cookie-banner p{flex:1 1 260px;font-size:13.5px;line-height:1.6;color:var(--ivory-dim);margin:0;}
