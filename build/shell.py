@@ -31,6 +31,13 @@ gtag('config', '{GA4_MEASUREMENT_ID}', {{ 'anonymize_ip': true }});
 </script>
 <script async src="https://www.googletagmanager.com/gtag/js?id={GA4_MEASUREMENT_ID}"></script>"""
 
+# Jegyértékesítés: Cooltix (korábban SevenRooms). A widget.js figyeli a
+# [data-cooltix-event-products] gombokat és rákattintva nyitja meg a
+# jegy-/asztalvásárló felületet — nincs hozzá közvetlen URL.
+COOLTIX_EVENT_PRODUCT_ID = "6abfc851b1af33780adbc91b"
+COOLTIX_WIDGET_SCRIPT = '<script src="https://static.cooltix.com/widget.js" defer></script>'
+COOLTIX_WIDGET_URL = f"https://cooltix.com/widget/event-products/{COOLTIX_EVENT_PRODUCT_ID}"
+
 with open(os.path.join(HERE, "shared_style.css"), encoding="utf-8") as f:
     SHARED_STYLE = f.read()
 with open(os.path.join(HERE, "ext_style.css"), encoding="utf-8") as f:
@@ -118,6 +125,7 @@ def head(title, description, canonical_path, depth=0, og_image="assets/hero-myra
 {org_jsonld}
 {extra_jsonld}
 {GA4_SNIPPET}
+{COOLTIX_WIDGET_SCRIPT}
 </head>
 """
 

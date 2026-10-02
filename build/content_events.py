@@ -1,8 +1,14 @@
 # -*- coding: utf-8 -*-
+from shell import COOLTIX_EVENT_PRODUCT_ID, COOLTIX_WIDGET_URL
 
-EVENT_TICKET_URL = "https://www.sevenrooms.com/events/vibebudapest/models-on-the-move-meta-2"
-EVENT_TABLE_URL = "https://www.sevenrooms.com/experiences/vibebudapest/vibe-x-models-on-the-move-5074707521585152?lang=hu"
+# Jegyértékesítés 2026.10.02-től Cooltix-on fut (korábban SevenRooms) — a
+# gombok a Cooltix widget.js-t hívják (lásd shell.py COOLTIX_WIDGET_SCRIPT),
+# nem közvetlen linkek. EVENT_TICKET_URL csak a JSON-LD structured datának kell.
+EVENT_TICKET_URL = COOLTIX_WIDGET_URL
 EVENT_SLUG = "dubai-style"
+
+COOLTIX_TICKET_BTN = f'<button type="button" class="btn filled magnetic" data-cooltix-event-products=\'{COOLTIX_EVENT_PRODUCT_ID}\'>JEGYVÁSÁRLÁS</button>'
+COOLTIX_TABLE_BTN = f'<button type="button" class="btn magnetic" data-cooltix-event-products=\'{COOLTIX_EVENT_PRODUCT_ID}\'>ASZTALFOGLALÁS</button>'
 
 # ---- Instagram poszt-linkek a galéria csempékhez (kattintásra a valódi posztra/reelre visz) ----
 IG_FEATURED = "https://www.instagram.com/p/DYm2IkFilaO/"
@@ -229,7 +235,7 @@ EVENT_HOME_TEASER = f"""
       </a>
     </div>
     <div class="event-cta" style="margin-top:24px;">
-      <a href="{EVENT_TICKET_URL}" class="btn filled magnetic" target="_blank" rel="noopener">JEGYVÁSÁRLÁS</a>
+      {COOLTIX_TICKET_BTN}
       <a href="esemenyek/{EVENT_SLUG}/" class="btn magnetic">RÉSZLETEK →</a>
     </div>
   </div>
@@ -332,8 +338,8 @@ EVENT_DETAIL_BODY = f"""
   <a href="../" class="event-hero-back rv" style="position:absolute;top:110px;left:48px;z-index:3;">← ÖSSZES ESEMÉNY</a>
   <div class="hero-inner" style="padding-bottom:44px;">
     <div class="hero-ctas rv">
-      <a href="{EVENT_TICKET_URL}" class="btn filled magnetic" target="_blank" rel="noopener">JEGYVÁSÁRLÁS</a>
-      <a href="{EVENT_TABLE_URL}" class="btn magnetic" target="_blank" rel="noopener">ASZTALFOGLALÁS</a>
+      {COOLTIX_TICKET_BTN}
+      {COOLTIX_TABLE_BTN}
     </div>
   </div>
 </section>
@@ -387,7 +393,7 @@ EVENT_DETAIL_BODY = f"""
         </div>
         <p style="font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;color:var(--peach-bright);margin-top:14px;">Az Early Bird jegyek egy nap alatt elfogytak — elővételes jegyek még elérhetők.</p>
         <div class="event-cta-row">
-          <a href="{EVENT_TICKET_URL}" class="btn filled magnetic" target="_blank" rel="noopener">JEGYVÁSÁRLÁS</a>
+          {COOLTIX_TICKET_BTN}
         </div>
 
         <h3 style="font-family:var(--sans);font-weight:800;text-transform:uppercase;font-size:19px;margin-top:50px;margin-bottom:16px;">Asztaljegyek</h3>
@@ -396,7 +402,7 @@ EVENT_DETAIL_BODY = f"""
           <b>Fontos:</b> az asztalfoglalás díja nem fogyasztási minimum — a foglalási díj egyben a belépődet is tartalmazza. Ha asztalt foglalsz, külön állójegyet már nem kell vásárolnod.
         </div>
         <div class="event-cta-row">
-          <a href="{EVENT_TABLE_URL}" class="btn magnetic" target="_blank" rel="noopener">ASZTALFOGLALÁS</a>
+          {COOLTIX_TABLE_BTN}
         </div>
       </div>
     </div>
@@ -423,8 +429,8 @@ EVENT_DETAIL_BODY = f"""
   <div class="wrap rv">
     <h2>Biztosítsd a helyed, és légy részese a VIBE energiájának.</h2>
     <div class="ctas">
-      <a href="{EVENT_TICKET_URL}" class="btn filled magnetic" target="_blank" rel="noopener">JEGYVÁSÁRLÁS</a>
-      <a href="{EVENT_TABLE_URL}" class="btn magnetic" target="_blank" rel="noopener">ASZTALFOGLALÁS</a>
+      {COOLTIX_TICKET_BTN}
+      {COOLTIX_TABLE_BTN}
     </div>
   </div>
 </section>

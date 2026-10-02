@@ -11,7 +11,7 @@ from shell import page, breadcrumb, service_page, BASE_URL
 from content_home import HOME_BODY, HOME_FAQ_JSONLD
 from content_services import SERVICES
 from content_pages import MUNKAINK_BODY, ROLUNK_BODY, KAPCSOLAT_BODY, NOTFOUND_BODY
-from content_events import EVENTS_BODY, EVENT_DETAIL_BODY, EVENT_SLUG, EVENT_TICKET_URL, EVENT_TABLE_URL, PAST_EVENTS, past_event_detail_body
+from content_events import EVENTS_BODY, EVENT_DETAIL_BODY, EVENT_SLUG, EVENT_TICKET_URL, PAST_EVENTS, past_event_detail_body
 
 
 def write(rel_path, content):
