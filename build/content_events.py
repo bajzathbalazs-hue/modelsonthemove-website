@@ -406,6 +406,13 @@ EVENT_DETAIL_BODY = f"""
         <div class="event-cta-row">
           {COOLTIX_TABLE_BTN}
         </div>
+
+        <div class="note-box" style="margin-top:32px;">
+          <b>Segítségre van szükséged?</b> Ha bármi kérdésed van a jegyekkel, az asztalokkal vagy az estével kapcsolatban, hívj minket bátran.
+        </div>
+        <div class="event-cta-row">
+          <a href="tel:+36309404148" class="btn magnetic">HÍVJ MINKET — +36 30 940 4148</a>
+        </div>
       </div>
     </div>
   </div>
