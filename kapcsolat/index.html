@@ -146,7 +146,8 @@ gtag('config', 'G-EGGQF205M5', { 'anonymize_ip': true });
 <section class="pad rule">
   <div class="wrap">
     <div class="biz-grid rv">
-      <form class="form-panel" id="bizForm" data-motm-form data-msg-id="bizMsg" data-event="contact_form_submit" novalidate>
+      <form class="form-panel" id="bizForm" name="kapcsolat" data-netlify="true" data-netlify-honeypot="website" data-motm-form data-msg-id="bizMsg" data-event="contact_form_submit" novalidate>
+        <input type="hidden" name="form-name" value="kapcsolat">
         <div class="hp-field" aria-hidden="true"><label>Weboldal (ne töltsd ki)</label><input type="text" name="website" tabindex="-1" autocomplete="off"></div>
 
         <div class="field">

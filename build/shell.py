@@ -246,10 +246,6 @@ SCRIPT = """
 <script>
 window.MOTM_CONFIG = {
   baseUrl: "%BASE_URL%",
-  /* TODO: állítsd be az éles form-beküldési endpointot (pl. egy saját szerverless függvény
-     vagy egy form-kezelő szolgáltatás URL-je). Amíg üres marad, az űrlapok NEM állítják,
-     hogy sikeresen elküldték az adatot — helyette egy tájékoztató üzenetet mutatnak. */
-  formEndpoint: "",
   analytics: {
     ga4MeasurementId: "G-EGGQF205M5",
     googleSearchConsole: "",    /* TODO: Search Console verifikációs kód */
@@ -415,7 +411,14 @@ document.querySelectorAll('.faq-item').forEach(item=>{
   });
 });
 
-/* ============ generic form handling (honeypot + validation + configurable endpoint) ============ */
+/* ============ generic form handling (honeypot + validation + Netlify Forms beküldés) ============ */
+/* Az űrlapok a Netlify Forms szolgáltatását használják (nincs külön szerver/endpoint
+   szükséges) — a <form> elemeken a data-netlify="true" + name attribútum és a rejtett
+   form-name mező teszi lehetővé, hogy a Netlify build-bot regisztrálja és a beállított
+   e-mail-értesítésen (Netlify admin → Forms) keresztül kézbesítse a beküldéseket. */
+function motmEncode(data){
+  return Object.keys(data).map(k => encodeURIComponent(k) + '=' + encodeURIComponent(data[k])).join('&');
+}
 function motmHandleForm(form, opts){
   opts = opts || {};
   form.addEventListener('submit', async (e)=>{
@@ -438,25 +441,16 @@ function motmHandleForm(form, opts){
 
     const btn = form.querySelector('button[type=submit]');
     const msg = document.getElementById(opts.msgId);
-    const endpoint = window.MOTM_CONFIG && window.MOTM_CONFIG.formEndpoint;
-
-    if(!endpoint){
-      if(msg){
-        msg.classList.add('show','notice');
-        msg.querySelector('h4').textContent = opts.pendingTitle || 'Az űrlap-beküldés jelenleg beállítás alatt áll.';
-        msg.querySelector('p').textContent = opts.pendingText || 'Kérjük, addig írj közvetlenül a hello@modelsonthemove.hu címre, vagy hívj minket — a fenti adatok elküldve NEM kerültek rögzítésre.';
-        msg.querySelector('h4').classList.add('err');
-      }
-      return;
-    }
+    const data = Object.fromEntries(new FormData(form).entries());
+    const chips = form.querySelectorAll('.chips .chip-opt.on');
+    if(chips.length){ data.services = Array.from(chips).map(c=>c.textContent.trim()).join(', '); }
 
     if(btn){ btn.disabled = true; btn.textContent = 'KÜLDÉS...'; }
     try{
-      const data = Object.fromEntries(new FormData(form).entries());
-      const res = await fetch(endpoint, {
+      const res = await fetch('/', {
         method: 'POST',
-        headers: {'Content-Type':'application/json'},
-        body: JSON.stringify(data)
+        headers: {'Content-Type':'application/x-www-form-urlencoded'},
+        body: motmEncode(data)
       });
       if(!res.ok) throw new Error('bad status');
       form.style.display = 'none';
@@ -622,7 +616,8 @@ MODEL_APPLICATION_FORM = """
       <p>Nem kell hivatásos portfólió — pár jó minőségű kép és néhány mondat rólad elég az első lépéshez.</p>
     </div>
     <div class="wrap rv" style="padding:0;max-width:640px;">
-      <form class="form-panel" data-motm-form data-msg-id="modelMsg" data-event="model_application_submit" novalidate>
+      <form class="form-panel" name="modell-jelentkezes" data-netlify="true" data-netlify-honeypot="company_website" data-motm-form data-msg-id="modelMsg" data-event="model_application_submit" novalidate>
+        <input type="hidden" name="form-name" value="modell-jelentkezes">
         <div class="hp-field" aria-hidden="true"><label>Cégnév (ne töltsd ki)</label><input type="text" name="company_website" tabindex="-1" autocomplete="off"></div>
         <div class="row2">
           <div class="field"><label for="ma-name">TELJES NÉV</label><input id="ma-name" name="name" type="text" required></div>
