@@ -198,9 +198,12 @@ function motmHandleForm(form, opts){
 
     const btn = form.querySelector('button[type=submit]');
     const msg = document.getElementById(opts.msgId);
+    const servicesField = form.querySelector('[name="services"]');
+    if(servicesField){
+      const chips = form.querySelectorAll('.chips .chip-opt.on');
+      servicesField.value = Array.from(chips).map(c=>c.textContent.trim()).join(', ');
+    }
     const data = Object.fromEntries(new FormData(form).entries());
-    const chips = form.querySelectorAll('.chips .chip-opt.on');
-    if(chips.length){ data.services = Array.from(chips).map(c=>c.textContent.trim()).join(', '); }
 
     if(btn){ btn.disabled = true; btn.textContent = 'KÜLDÉS...'; }
     try{
