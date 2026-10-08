@@ -169,7 +169,10 @@ document.querySelectorAll('.faq-item').forEach(item=>{
 /* Az űrlapok a Netlify Forms szolgáltatását használják (nincs külön szerver/endpoint
    szükséges) — a <form> elemeken a data-netlify="true" + name attribútum és a rejtett
    form-name mező teszi lehetővé, hogy a Netlify build-bot regisztrálja és a beállított
-   e-mail-értesítésen (Netlify admin → Forms) keresztül kézbesítse a beküldéseket. */
+   e-mail-értesítésen (Netlify admin → Forms) keresztül kézbesítse a beküldéseket.
+   Form detection a Netlify admin felületén manuálisan bekapcsolva — ez a build
+   az első, ami már detektált állapotban fut, hogy a bot ténylegesen regisztrálja
+   a két űrlapot (kapcsolat, modell-jelentkezes). */
 function motmEncode(data){
   return Object.keys(data).map(k => encodeURIComponent(k) + '=' + encodeURIComponent(data[k])).join('&');
 }
