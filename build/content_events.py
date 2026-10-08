@@ -396,11 +396,13 @@ EVENT_DETAIL_BODY = f"""
           {COOLTIX_TICKET_BTN}
         </div>
 
-        <h3 style="font-family:var(--sans);font-weight:800;text-transform:uppercase;font-size:19px;margin-top:50px;margin-bottom:16px;">Asztaljegyek</h3>
-        <p style="font-size:14px;line-height:1.85;color:var(--ivory-dim);max-width:480px;">Ha az állójegy helyett inkább ülőhelyet szeretnél, foglald le az asztalodat — a részleteket és az elérhető asztalokat a foglalási oldalon találod. Az asztalok limitált számban foglalhatók.</p>
-        <div class="note-box">
-          <b>Fontos:</b> az asztalfoglalás díja nem fogyasztási minimum — a foglalási díj egyben a belépődet is tartalmazza. Ha asztalt foglalsz, külön állójegyet már nem kell vásárolnod.
+        <h3 style="font-family:var(--sans);font-weight:800;text-transform:uppercase;font-size:19px;margin-top:50px;margin-bottom:6px;">Asztaljegyek</h3>
+        <p style="font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;color:var(--ivory-dimmer);text-transform:uppercase;margin-bottom:16px;">Az árak személyenként (/ fő) értendők</p>
+        <div class="ticket-tiers">
+          <div class="tier"><span class="k">Classic asztal</span><span class="v">10 000 Ft / fő</span></div>
+          <div class="tier"><span class="k">Deluxe asztal</span><span class="v">15 000 Ft / fő</span></div>
         </div>
+        <p style="font-size:14px;line-height:1.85;color:var(--ivory-dim);max-width:480px;margin-top:14px;">A Classic asztalok a DJ-pulttól távolabb, nyugodtabb elhelyezkedésűek; a Deluxe asztalok közelebb vannak a zenéhez és a party középpontjához. Az ár az asztalnál ülő minden egyes fő belépőjegyét jelenti — ha asztalt foglalsz, külön állójegyet nem kell vásárolnod. Az asztalok limitált számban foglalhatók.</p>
         <div class="event-cta-row">
           {COOLTIX_TABLE_BTN}
         </div>
