@@ -24,6 +24,35 @@ IG_MYRAZS_FEATHER_MIRAGE = "https://www.instagram.com/p/DaNzhxwCTw9/"
 # ---- korábbi események: egy kártya = egy esemény, kattintásra saját aloldal ----
 PAST_EVENTS = [
     {
+        "slug": "dubai-style",
+        "title": "Models on the Move × VIBE — Dubai Style",
+        "venue": "VIBE Budapest",
+        "date_label": "2026.10.16.",
+        "date_full": "2026. október 16., péntek",
+        "time_label": None,
+        "cover": "dubai-style-flyer.jpg",
+        "teaser": "A divat világa találkozott a VIBE karakteres hangulatával — Fabios és Mandmil Afro House szettjei egy felejthetetlen estén.",
+        "intro": [
+            "2026. október 16-án a Models on the Move × VIBE Budapest — Dubai Style elhozta a dubai éjszakák stílusát és energiáját Budapestre.",
+            "A divat világa találkozott a VIBE karakteres hangulatával: Fabios és Mandmil Afro House szettjei, táncosok és élő előadók emelték új szintre az éjszakát.",
+            "Exkluzív italok, bottle service és snackek egész este — az Early Bird jegyek egy nap alatt elfogytak, a terem hajnalig tartó Afro House partyvá változott.",
+        ],
+        "facts": [
+            ("DÁTUM", "2026. október 16., péntek"),
+            ("IDŐPONT", "23:00–03:00"),
+            ("HELYSZÍN", "VIBE Budapest"),
+            ("DRESS CODE", "Elegáns party stílus"),
+            ("KORHATÁR", "18+"),
+        ],
+        "lineup": [
+            ("Fabios", "Afro House"),
+            ("Mandmil", "Afro House"),
+        ],
+        "extras": ["Exkluzív italok", "Bottle service", "Early Bird jegyek 1 nap alatt elfogytak"],
+        "gallery": ["vibe-jungle-lounge.jpg", "vibe-bartrio-final.jpg", "vibe-redroom-group.jpg", "vibe-table-group.jpg", "vibe-cellar-table.jpg"],
+        "video": None,
+    },
+    {
         "slug": "myrazs-fashion-show",
         "title": "Myrázs Szülinapi Divatbemutató & After Party",
         "venue": "MOM Leroy Bistro",
@@ -211,32 +240,20 @@ def past_event_detail_body(ev):
 
 # ---- homepage teaser (placed directly under the hero) ----
 EVENT_HOME_TEASER = f"""
-<!-- 02 AKTUÁLIS ESEMÉNY -->
+<!-- 02 KÖVETKEZŐ ESEMÉNY -->
 <section class="pad rule" style="padding-top:100px;">
   <div class="wrap">
     <div class="event-head rv">
       <div>
-        <span class="eyebrow">02 — AKTUÁLIS ESEMÉNYÜNK</span>
-        <h2 style="margin-top:14px;">MODELS ON THE MOVE<br><em>× VIBE</em> — DUBAI STYLE</h2>
+        <span class="eyebrow">02 — KÖVETKEZŐ ESEMÉNYÜNK</span>
+        <h2 style="margin-top:14px;">HAMAROSAN<br><em>ÉRKEZÜNK</em> A RÉSZLETEKKEL.</h2>
       </div>
       <div class="event-side">
-        <p>2026. október 16. · VIBE Budapest — Afro House szettek, exkluzív italok, bottle service.</p>
+        <p>A következő Models on the Move estét hamarosan jelentjük be — addig is nézd meg a korábbi estéinket.</p>
       </div>
     </div>
-    <div class="event-cards-row rv-stagger">
-      <a class="event-card glow-card" href="esemenyek/{EVENT_SLUG}/">
-        <div class="plate photo grain" style="background-image:url('assets/dubai-style-flyer.jpg');background-position:center 22%;"></div>
-        <div class="event-card-body">
-          <span class="event-card-badge">AKTUÁLIS ESEMÉNY</span>
-          <h3>Dubai Style</h3>
-          <div class="meta-line">VIBE Budapest · 2026.10.16.</div>
-          <p>Fabios és Mandmil Afro House szettjei egy estén.</p>
-        </div>
-      </a>
-    </div>
-    <div class="event-cta" style="margin-top:24px;">
-      {COOLTIX_TICKET_BTN}
-      <a href="esemenyek/{EVENT_SLUG}/" class="btn magnetic">RÉSZLETEK →</a>
+    <div class="event-cta" style="margin-top:10px;">
+      <a href="esemenyek/" class="btn filled magnetic">KORÁBBI ESTÉINK →</a>
     </div>
   </div>
 </section>
@@ -250,25 +267,15 @@ EVENTS_BODY = f"""
     <div class="rv">
       <span class="eyebrow">ESEMÉNYEK</span>
       <h1>Korábbi esték.<br>Maradandó pillanatok.</h1>
-      <p>Minden Models on the Move est egy saját világ — fotók és összefoglaló videók, ahogy egyre több esemény kerül fel ide. Ha lemaradtál egy estéről, itt éled újra. Alább a legközelebbi eseményünket is megtalálod.</p>
-      <a href="{EVENT_SLUG}/" class="btn filled magnetic">AKTUÁLIS ESEMÉNY: DUBAI STYLE →</a>
+      <p>Minden Models on the Move est egy saját világ — fotók és összefoglaló videók, ahogy egyre több esemény kerül fel ide. A következő esténk részleteit hamarosan jelentjük be.</p>
     </div>
   </div>
 </section>
 
-<section class="pad rule" id="aktualis" style="padding-top:60px;">
+<section class="pad rule" id="kovetkezo" style="padding-top:60px;">
   <div class="wrap">
-    <div class="sec-head rv"><span class="eyebrow">AKTUÁLIS ESEMÉNY</span><h2>Ami most jön.</h2></div>
-    <div class="event-cards-row rv-stagger">
-      <a class="event-card glow-card" href="{EVENT_SLUG}/">
-        <div class="plate photo grain" style="background-image:url('../assets/dubai-style-flyer.jpg');background-position:center 22%;"></div>
-        <div class="event-card-body">
-          <span class="event-card-badge">AKTUÁLIS ESEMÉNY</span>
-          <h3>Dubai Style</h3>
-          <div class="meta-line">VIBE Budapest · 2026.10.16.</div>
-          <p>Fabios és Mandmil Afro House szettjei egy estén.</p>
-        </div>
-      </a>
+    <div class="sec-head rv"><span class="eyebrow">KÖVETKEZŐ ESEMÉNYÜNK</span><h2>Hamarosan érkezünk a részletekkel.</h2>
+      <p>A következő Models on the Move estét hamarosan jelentjük be itt és a közösségi médiánkon — addig is nézd meg a korábbi estéinket alább.</p>
     </div>
   </div>
 </section>
@@ -327,121 +334,4 @@ EVENTS_BODY = f"""
 <script async src="https://www.instagram.com/embed.js"></script>
 """
 
-# ---- dedicated event detail page: /esemenyek/dubai-style/ ----
-EVENT_DETAIL_BODY = f"""
-<style>
-.event-hero-bg{{background-image:url('../../assets/dubai-style-flyer.jpg');background-position:center 22%;}}
-@media(max-width:680px){{.event-hero-bg{{background-image:url('../../assets/dubai-style-flyer-portrait.jpg');background-position:center top;}}}}
-</style>
-<section class="hero" style="min-height:82vh;">
-  <div class="plate photo event-hero-bg"></div>
-  <a href="../" class="event-hero-back rv" style="position:absolute;top:110px;left:48px;z-index:3;">← ÖSSZES ESEMÉNY</a>
-  <div class="hero-inner" style="padding-bottom:44px;">
-    <div class="hero-ctas rv">
-      {COOLTIX_TICKET_BTN}
-      {COOLTIX_TABLE_BTN}
-    </div>
-  </div>
-</section>
-
-<section class="pad rule" style="padding-top:70px;padding-bottom:70px;">
-  <div class="wrap">
-    <div class="hero-kicker rv"><span class="dot"></span><span class="eyebrow">MODELS ON THE MOVE × VIBE BUDAPEST</span></div>
-    <h1 class="rv" style="font-family:var(--sans);font-weight:800;text-transform:uppercase;font-size:clamp(38px,7vw,90px);line-height:.98;letter-spacing:-.01em;margin-top:18px;">DUBAI STYLE.</h1>
-    <p class="rv" style="font-size:15.5px;line-height:1.85;color:var(--ivory-dim);max-width:620px;margin-top:26px;">A divat világa találkozik a VIBE karakteres hangulatával — Fabios és Mandmil Afro House szettjei, táncosok és élő előadók emelik új szintre az estét. Exkluzív italok, bottle service és snackek egész este.</p>
-    <div class="hero-meta rv">
-      <div><b>2026.10.16.</b><span>DÁTUM · PÉNTEK</span></div>
-      <div><b>23:00–03:00</b><span>IDŐPONT</span></div>
-      <div><b>VIBE Budapest</b><span>HELYSZÍN</span></div>
-      <div><b>18+</b><span>KORHATÁR</span></div>
-    </div>
-  </div>
-</section>
-
-<section class="pad rule">
-  <div class="wrap">
-    <div class="event-two-col rv">
-      <div>
-        <span class="eyebrow">AZ ESTE</span>
-        <h2 style="font-family:var(--serif);font-size:clamp(26px,3.6vw,40px);font-weight:400;margin-top:14px;line-height:1.2;">Egy este Dubaiból,<br>Budapest szívében.</h2>
-        <p style="font-size:15px;line-height:1.9;color:var(--ivory-dim);margin-top:24px;max-width:520px;">2026. október 16-án a Models on the Move × VIBE Budapest — Dubai Style elhozza a dubai éjszakák stílusát és energiáját Budapestre.</p>
-        <p style="font-size:15px;line-height:1.9;color:var(--ivory-dim);margin-top:18px;max-width:520px;">A divat világa találkozik a VIBE karakteres hangulatával: Fabios és Mandmil Afro House szettjei, táncosok és élő előadók emelik új szintre az éjszakát.</p>
-        <p style="font-size:15px;line-height:1.9;color:var(--ivory-dim);margin-top:18px;max-width:520px;">Exkluzív italok, bottle service és snackek egész este — a választás a tiéd, az élmény az asztalodnál folytatódik.</p>
-
-        <div class="lineup" style="margin-top:40px;">
-          <h4>DJ LINE-UP</h4>
-          <div class="dj"><span class="name">Fabios</span><span class="meta"><span class="genre">Afro House</span><span class="ig">23:00–01:00</span></span></div>
-          <div class="dj"><span class="name">Mandmil</span><span class="meta"><span class="genre">Afro House</span><span class="ig">01:00–03:00</span></span></div>
-        </div>
-
-        <div class="event-facts" style="margin-top:40px;max-width:480px;">
-          <div><span>DÁTUM</span><span>2026. október 16., péntek</span></div>
-          <div><span>IDŐPONT</span><span>23:00–03:00</span></div>
-          <div><span>HELYSZÍN</span><span>VIBE Budapest</span></div>
-          <div><span>DRESS CODE</span><span>Elegáns party stílus</span></div>
-          <div><span>KORHATÁR</span><span>18+</span></div>
-        </div>
-      </div>
-
-      <div>
-        <span class="eyebrow">JEGYEK ÉS ASZTALFOGLALÁS</span>
-        <h3 style="font-family:var(--sans);font-weight:800;text-transform:uppercase;font-size:19px;margin-top:14px;margin-bottom:22px;">Állójegyek</h3>
-        <div class="ticket-tiers">
-          <div class="tier soldout"><span class="k">Early Bird <span class="tier-badge">ELFOGYOTT</span></span><span class="v">4 000 Ft</span></div>
-          <div class="tier"><span class="k">Elővételes jegy</span><span class="v">6 000 Ft</span></div>
-          <div class="tier"><span class="k">Helyszíni jegy</span><span class="v">8 000 Ft</span></div>
-        </div>
-        <p style="font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;color:var(--peach-bright);margin-top:14px;">Az Early Bird jegyek egy nap alatt elfogytak — elővételes jegyek még elérhetők.</p>
-        <div class="event-cta-row">
-          {COOLTIX_TICKET_BTN}
-        </div>
-
-        <h3 style="font-family:var(--sans);font-weight:800;text-transform:uppercase;font-size:19px;margin-top:50px;margin-bottom:6px;">Asztaljegyek</h3>
-        <p style="font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;color:var(--ivory-dimmer);text-transform:uppercase;margin-bottom:16px;">Az árak személyenként (/ fő) értendők</p>
-        <div class="ticket-tiers">
-          <div class="tier"><span class="k">Classic asztal</span><span class="v">10 000 Ft / fő</span></div>
-          <div class="tier"><span class="k">Deluxe asztal</span><span class="v">15 000 Ft / fő</span></div>
-        </div>
-        <p style="font-size:14px;line-height:1.85;color:var(--ivory-dim);max-width:480px;margin-top:14px;">A Classic asztalok a DJ-pulttól távolabb, nyugodtabb elhelyezkedésűek; a Deluxe asztalok közelebb vannak a zenéhez és a party középpontjához. Az ár az asztalnál ülő minden egyes fő belépőjegyét jelenti — ha asztalt foglalsz, külön állójegyet nem kell vásárolnod. Az asztalok limitált számban foglalhatók.</p>
-        <div class="event-cta-row">
-          {COOLTIX_TABLE_BTN}
-        </div>
-
-        <div class="note-box" style="margin-top:32px;">
-          <b>Segítségre van szükséged?</b> Ha bármi kérdésed van a jegyekkel, az asztalokkal vagy az estével kapcsolatban, hívj minket bátran.
-        </div>
-        <div class="event-cta-row">
-          <a href="tel:+36309404148" class="btn magnetic">HÍVJ MINKET — +36 30 940 4148</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="pad rule">
-  <div class="wrap">
-    <div class="sec-head rv"><span class="eyebrow">A HELYSZÍN</span><h2>Ízelítő a VIBE hangulatából.</h2>
-      <p>Az esemény napján és utána itt jelennek meg a friss fotók és az összefoglaló videó is.</p>
-    </div>
-    <div class="gallery-grid rv-stagger">
-      <div class="gtile wide glow-card"><div class="plate photo grain" style="background-image:url('../../assets/vibe-jungle-lounge.jpg');"></div></div>
-      <div class="gtile glow-card"><div class="plate photo grain" style="background-image:url('../../assets/vibe-bartrio-final.jpg');background-position:center 30%;"></div></div>
-      <div class="gtile glow-card"><div class="plate photo grain" style="background-image:url('../../assets/vibe-redroom-group.jpg');background-position:center 15%;"></div></div>
-      <div class="gtile glow-card"><div class="plate photo grain" style="background-image:url('../../assets/vibe-table-group.jpg');background-position:center 15%;"></div></div>
-      <div class="gtile glow-card"><div class="plate photo grain" style="background-image:url('../../assets/vibe-cellar-table.jpg');"></div></div>
-      <div class="gtile soon"><div class="plate plate--forest"></div><span class="soon-label">▶ VIDEÓ HAMAROSAN</span></div>
-    </div>
-  </div>
-</section>
-
-<section class="cta-band rule">
-  <div class="wrap rv">
-    <h2>Biztosítsd a helyed, és légy részese a VIBE energiájának.</h2>
-    <div class="ctas">
-      {COOLTIX_TICKET_BTN}
-      {COOLTIX_TABLE_BTN}
-    </div>
-  </div>
-</section>
-"""
 

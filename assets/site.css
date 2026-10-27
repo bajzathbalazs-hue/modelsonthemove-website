@@ -822,6 +822,9 @@ img[loading="lazy"]{background:#0c0c0b;}
 .event-card p{font-size:14px;line-height:1.7;color:var(--ivory-dim);}
 @media(max-width:640px){.event-card{flex-basis:78vw;}}
 
+/* ================= EXT: neon magenta ambient blob (nightlife akcentus a .statement szekcióhoz) ================= */
+.blob.neon{background:radial-gradient(circle at 40% 35%, rgba(224,81,122,.8) 0%, rgba(180,40,90,.5) 35%, transparent 72%);filter:blur(60px);opacity:.4;animation:driftA 19s ease-in-out infinite reverse, pulse 8s ease-in-out infinite;}
+
 /* ================= COOKIE-CONSENT SÁV (GA4) ================= */
 /* Szándékosan a tetején, nem alul: a Netlify "Powered by Netlify" jelvény
    (iframe, nagyon magas z-index-szel) a jobb alsó sarokban ül, és egy alsó

@@ -560,9 +560,14 @@ def service_page(d):
 </section>
 {MODEL_APPLICATION_FORM}"""
 
+    subhero_bg = ""
+    if d.get("image"):
+        subhero_bg = f'<div class="plate photo dim-top grain" style="position:absolute;inset:0;z-index:-1;opacity:.5;background-image:url(\'../assets/{d["image"]}\');"></div>'
+
     body = f"""
 {breadcrumb([(d['nav_label'], None)], depth=1)}
-<section class="subhero">
+<section class="subhero" style="position:relative;overflow:hidden;">
+  {subhero_bg}
   <div class="wrap">
     <span class="eyebrow rv">SZOLGÁLTATÁS</span>
     <h1 class="rv">{d['h1']}</h1>
