@@ -337,9 +337,20 @@ window.addEventListener('keydown', (e)=>{
   document.addEventListener('visibilitychange', ()=>{
     if(!document.hidden) vids.forEach(tryPlay);
   });
-  /* végső tartalék: ha a fentiek mind lepattannak (pl. a böngésző még nem
-     "melegítette be" az oldalt autoplay-hez), az első bármilyen érintésre/
-     scrollra is újrapróbáljuk — ez már garantáltan túljut a policy-blokkon */
+  /* automatikus, interakció nélküli ismétlés: ha az első próbálkozások
+     elakadnak (pl. a böngésző még nem "melegítette be" az oldalt), ~300ms-
+     enként újrapróbáljuk, amíg mindegyik videó el nem indul — így nem kell
+     megvárni, amíg a látogató érint/görget valamit */
+  let retryCount = 0;
+  const retryTimer = setInterval(()=>{
+    retryCount++;
+    const stillPaused = vids.filter(v=>v.paused);
+    if(!stillPaused.length || retryCount>20){ clearInterval(retryTimer); return; }
+    stillPaused.forEach(tryPlay);
+  }, 300);
+  /* végső tartalék: ha a fentiek is mind lepattannak, az első bármilyen
+     érintésre/scrollra is újrapróbáljuk — ez már garantáltan túljut a
+     policy-blokkon */
   const retryOnInteraction = () => { vids.forEach(tryPlay); };
   ['touchstart','pointerdown','scroll','click','keydown'].forEach(evt=>{
     window.addEventListener(evt, retryOnInteraction, {once:true, passive:true});

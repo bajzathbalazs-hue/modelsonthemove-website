@@ -20,7 +20,7 @@ HOME_BODY = """
 <!-- 01 HERO -->
 <section class="hero" id="top">
   <div class="plate photo grain">
-    <video class="hero-video" autoplay muted loop playsinline poster="assets/hero-myrazs-poster.jpg">
+    <video class="hero-video" autoplay muted loop playsinline preload="auto" fetchpriority="high" poster="assets/hero-myrazs-poster.jpg">
       <source src="assets/hero-myrazs.mp4" type="video/mp4">
     </video>
   </div>
@@ -164,7 +164,7 @@ HOME_BODY = """
 <!-- 04C STATEMENT -->
 <section class="statement">
   <div class="plate grain">
-    <video class="hero-video" autoplay muted loop playsinline poster="assets/vibe-cocktail-bg-poster.jpg">
+    <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="assets/vibe-cocktail-bg-poster.jpg">
       <source src="assets/vibe-cocktail-bg.mp4" type="video/mp4">
     </video>
   </div>
