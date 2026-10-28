@@ -24,9 +24,6 @@ HOME_BODY = """
       <source src="assets/hero-myrazs.mp4" type="video/mp4">
     </video>
   </div>
-  <div class="blob gold" style="width:560px;height:560px;top:-140px;left:-140px;" aria-hidden="true"></div>
-  <div class="blob ember" style="width:480px;height:480px;bottom:-140px;right:-120px;" aria-hidden="true"></div>
-  <div class="blob ice" style="width:340px;height:340px;top:30%;right:8%;" aria-hidden="true"></div>
   <div class="hero-inner">
     <div class="hero-kicker"><span class="dot"></span><span class="eyebrow">MODELS ON THE MOVE — BUDAPEST</span></div>
     <div class="collab">
@@ -128,30 +125,25 @@ HOME_BODY = """
     <div class="sec-head rv"><span class="eyebrow">PILLANATOK</span><h2>Ízelítő az estéinkből.</h2></div>
   </div>
   <div class="hscroll rv-stagger">
-    <a class="gcard wide" href="esemenyek/szezonnyito/">
-      <div class="plate photo grain" style="background-image:url('assets/leroy-fashionshow.jpg');"></div>
-      <div class="meta"><h4>Szezonnyitó — Fashion Show</h4><span class="loc">MOM Leroy Bistro</span></div>
+    <a class="gcard wide" href="esemenyek/dubai-style/">
+      <div class="plate photo grain" style="background-image:url('assets/vibe-mainroom.jpg');"></div>
+      <div class="meta"><h4>Dubai Style</h4><span class="loc">VIBE Budapest</span></div>
     </a>
     <a class="gcard" href="esemenyek/myrazs-fashion-show/">
       <div class="plate photo grain" style="background-image:url('assets/ig-myrazs-recap.jpg');"></div>
       <div class="meta"><h4>Myrázs Divatbemutató</h4><span class="loc">MOM Leroy Bistro</span></div>
     </a>
-    <a class="gcard" href="esemenyek/afro-house-night/">
-      <div class="plate photo grain" style="background-image:url('assets/ig-popout-night.jpg');"></div>
-      <div class="meta"><h4>Afro House Night</h4><span class="loc">MOM Leroy Bistro</span></div>
-    </a>
-    <a class="gcard" href="esemenyek/myrazs-fashion-show/">
-      <div class="plate photo grain" style="background-image:url('assets/ig-myrazs-feather-mirage.jpg');"></div>
-      <div class="meta"><h4>Myrázs — Feather Mirage</h4><span class="loc">MOM Leroy Bistro</span></div>
-    </a>
-    <a class="gcard" href="esemenyek/szezonnyito/">
-      <div class="plate photo grain" style="background-image:url('assets/leroy-szezonnyito.jpg');"></div>
-      <div class="meta"><h4>Szezonnyitó — Day Party</h4><span class="loc">MOM Leroy Bistro</span></div>
-    </a>
-    <a class="gcard wide" href="esemenyek/dubai-style/">
-      <div class="plate photo grain" style="background-image:url('assets/vibe-mainroom.jpg');"></div>
+    <a class="gcard" href="esemenyek/dubai-style/">
+      <div class="plate photo grain" style="background-image:url('assets/vibe-redroom-group.jpg');background-position:center 15%;"></div>
       <div class="meta"><h4>Dubai Style</h4><span class="loc">VIBE Budapest</span></div>
     </a>
+    <a class="gcard" href="esemenyek/dubai-style/">
+      <div class="plate photo grain" style="background-image:url('assets/vibe-bartrio-final.jpg');background-position:center 30%;"></div>
+      <div class="meta"><h4>Dubai Style</h4><span class="loc">VIBE Budapest</span></div>
+    </a>
+  </div>
+  <div class="wrap">
+    <p style="margin-top:24px;font-size:12.5px;color:var(--ivory-dimmer);">Több fotó hamarosan — a legutóbbi estéink friss anyagait töltjük fel.</p>
   </div>
 </section>
 
@@ -176,8 +168,6 @@ HOME_BODY = """
       <source src="assets/vibe-cocktail-bg.mp4" type="video/mp4">
     </video>
   </div>
-  <div class="blob ice" style="width:420px;height:420px;top:-80px;left:-80px;" aria-hidden="true"></div>
-  <div class="blob neon" style="width:460px;height:460px;bottom:-100px;right:-80px;" aria-hidden="true"></div>
   <div class="statement-inner rv">
     <h2>EZ NEM CSAK EGY ESTE.<br><span class="thin">ez egy élmény, amit felépítünk.</span></h2>
     <p class="brandline">MODELS ON THE MOVE × A BUDAPESTI ÉJSZAKA</p>
@@ -221,10 +211,10 @@ HOME_BODY = """
   <div class="wrap">
     <div class="event-two-col rv">
       <div>
-        <div class="sec-head" style="margin-bottom:26px;">
+        <div class="sec-head" style="margin:0 0 26px;text-align:left;">
           <span class="eyebrow">ESEMÉNYEK ÉS PRODUKCIÓK</span>
           <h2>Egy ötletből<br>teljes élmény.</h2>
-          <p style="max-width:480px;">Saját estéink mellett márkák eseményeit is megszervezzük — helyszíntől a dekorációig, egy kézben.</p>
+          <p style="max-width:480px;margin-left:0;">Saját estéink mellett márkák eseményeit is megszervezzük — helyszíntől a dekorációig, egy kézben.</p>
         </div>
         <div class="audience-row" style="margin-top:26px;">
           <span class="tag">Márka- és termékbemutatók</span><span class="tag">Divatbemutatók</span>
@@ -277,7 +267,6 @@ HOME_BODY = """
 
 <!-- 10 ZÁRÓ AJÁNLATKÉRŐ -->
 <section class="cta-band rule">
-  <div class="blob gold" style="width:420px;height:420px;top:-100px;left:10%;" aria-hidden="true"></div>
   <div class="wrap rv">
     <span class="eyebrow">BESZÉLJÜNK</span>
     <h2 style="margin-top:18px;">Mondd el, mit szeretnél elérni.</h2>

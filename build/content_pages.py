@@ -15,7 +15,7 @@ MUNKAINK_BODY = """
   <div class="wrap">
     <div class="work-grid rv-stagger">
       <a class="work-card glow-card" href="../esemenyek/szezonnyito/">
-        <div class="plate photo grain" style="background-image:url('../assets/ig-featured-momleroy.jpg');"></div>
+        <div class="plate photo grain" style="background-image:url('../assets/leroy-szezonnyito.jpg');background-position:center 25%;"></div>
         <div class="info">
           <span class="industry">SZEZONNYITÓ · NAPKÖZBENI EXPERIENCE</span>
           <h3>Szezonnyitó</h3>

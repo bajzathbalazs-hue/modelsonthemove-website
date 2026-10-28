@@ -3,7 +3,7 @@
 SERVICES = [
     {
         "slug": "modellugynokseg",
-        "image": "hero-champagne.jpg",
+        "image": "svc-modellugynokseg.png",
         "nav_label": "Modellek és casting",
         "seo_title": "Modellügynökség Budapest – modellek kampányokhoz",
         "meta_desc": "Modelleket és reklámarcokat közvetítünk kampányokhoz, forgatásokhoz, fotózásokhoz és rendezvényekhez Budapesten. Casting és produkció egy csapattól.",
@@ -43,7 +43,7 @@ SERVICES = [
     },
     {
         "slug": "influencer-marketing",
-        "image": "vibe-table-group.jpg",
+        "image": "svc-influencer-marketing.png",
         "nav_label": "Influencer marketing",
         "seo_title": "Influencer marketing ügynökség – kampányok és közvetítés",
         "meta_desc": "Influencer kampányok, közvetítés, menedzsment és UGC éttermeknek, szállodáknak, divat-, szépség- és lifestyle márkáknak.",
@@ -86,7 +86,7 @@ SERVICES = [
     },
     {
         "slug": "marketing-ugynokseg",
-        "image": "hero-champagne.jpg",
+        "image": "svc-marketing-ugynokseg.png",
         "nav_label": "Teljes körű marketing",
         "seo_title": "Online marketing ügynökség Budapest – teljes körű marketing",
         "meta_desc": "Kiszervezett, teljes körű marketing: stratégia, weboldal, SEO, hirdetések, social, videó és influencerek egy összehangolt budapesti csapattól.",
@@ -133,7 +133,7 @@ SERVICES = [
     },
     {
         "slug": "rendezvenyszervezes",
-        "image": "vibe-nightclub-wide.jpg",
+        "image": "svc-rendezvenyszervezes.png",
         "nav_label": "Rendezvényszervezés",
         "seo_title": "Rendezvényszervezés Budapest – márka- és VIP események",
         "meta_desc": "Márkaesemények, nyitók, termékbemutatók, divatbemutatók, influencer- és VIP események Budapesten, teljes koordinációval.",
@@ -174,7 +174,7 @@ SERVICES = [
     },
     {
         "slug": "reklamfilm-keszites",
-        "image": "vibe-jungle.jpg",
+        "image": "svc-reklamfilm-keszites.png",
         "nav_label": "Reklámfilm és videó",
         "seo_title": "Reklámfilm készítés Budapest – videógyártás márkáknak",
         "meta_desc": "Reklámfilm, imázsfilm, céges videó és social tartalom teljes produkcióval: koncepció, modellek, helyszín, stáb és utómunka.",
@@ -213,7 +213,7 @@ SERVICES = [
     },
     {
         "slug": "weboldal-keszites",
-        "image": "vibe-champagne-cellar.jpg",
+        "image": "svc-weboldal-keszites.png",
         "nav_label": "Weboldalkészítés",
         "seo_title": "Weboldal készítés Budapest – céges honlapok prémium márkáknak",
         "meta_desc": "Gyors, mobilra optimalizált és SEO-alapú céges weboldalak tervezése, fejlesztése és kezelése saját fotó- és videótartalommal.",
@@ -254,7 +254,7 @@ SERVICES = [
     },
     {
         "slug": "kozossegi-media-kezeles",
-        "image": "vibe-cellar-table.jpg",
+        "image": "svc-kozossegi-media-kezeles.png",
         "nav_label": "Közösségi média",
         "seo_title": "Közösségi média kezelés – social media és tartalomgyártás",
         "meta_desc": "Instagram, Facebook, TikTok, YouTube és LinkedIn kezelés stratégiával, fotó- és videógyártással, Reels és TikTok tartalmakkal.",

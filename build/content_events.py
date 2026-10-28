@@ -78,7 +78,7 @@ PAST_EVENTS = [
             ("Moani (Zsombor Dudás-Kass)", "DJ"),
         ],
         "extras": ["Tombola értékes nyereményekkel", "Myrázs After Party"],
-        "gallery": ["ig-myrazs-recap.jpg", "ig-fashionshow-videoreport.jpg", "ig-afterparty-tickets.jpg", "ig-myrazs-ticket-promo.jpg"],
+        "gallery": ["ig-myrazs-recap.jpg"],
         "video": None,
     },
     {
@@ -108,7 +108,7 @@ PAST_EVENTS = [
             ("Moani", "DJ"),
         ],
         "extras": ["Welcome drink early bird jeggyel", "Tombola értékes nyereményekkel", "Dress code: Cool – Elegant"],
-        "gallery": ["ig-afrohouse-announce.jpg", "ig-momleroy-teaser.jpg"],
+        "gallery": [],
         "video": None,
     },
     {
@@ -118,7 +118,7 @@ PAST_EVENTS = [
         "date_label": "2026.05.29.",
         "date_full": "2026. május 29., péntek",
         "time_label": "16:00–00:00",
-        "cover": "ig-featured-momleroy.jpg",
+        "cover": "leroy-szezonnyito.jpg",
         "teaser": "Két fashion show, élő DJ-k és napközbeni luxury hangulat a MOM Leroy teraszán.",
         "intro": [
             "A szezonnyitó estén a divat, a zene és a közösség találkozott a MOM Leroy Bistróban — napközbeni luxury experience-ként indult, és éjszakába nyúló partyvá alakult.",
@@ -137,7 +137,7 @@ PAST_EVENTS = [
             ("Fabiosz x Soma", "DJ"),
         ],
         "extras": ["Pop-up store", "Tombola és meglepetések", "Teljes terasz élmény", "Food & drink experience"],
-        "gallery": ["ig-featured-momleroy.jpg", "leroy-szezonnyito.jpg", "leroy-fashionshow.jpg"],
+        "gallery": [],
         "video": {"src": "hero-myrazs.mp4", "poster": "hero-myrazs-poster.jpg"},
     },
 ]
@@ -197,6 +197,17 @@ def _gallery_html(ev):
 def past_event_detail_body(ev):
     intro_html = "\n        ".join(f"<p>{p}</p>" for p in ev["intro"])
     time_row = f'\n          <div><span>IDŐPONT</span><span>{ev["time_label"]}</span></div>' if ev.get("time_label") else ""
+    gallery_section = ""
+    if ev.get("video") or ev.get("gallery"):
+        gallery_section = f"""
+<section class="pad rule">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="eyebrow">GALÉRIA</span><h2>Ízelítő az estéből.</h2></div>
+    <div class="gallery-grid rv-stagger">
+{_gallery_html(ev)}
+    </div>
+  </div>
+</section>"""
     return f"""
 <section class="hero" style="min-height:56vh;">
   <div class="plate photo grain" style="background-image:url('../../assets/{ev['cover']}');background-position:center 28%;"></div>
@@ -220,14 +231,7 @@ def past_event_detail_body(ev):
   </div>
 </section>
 
-<section class="pad rule">
-  <div class="wrap">
-    <div class="sec-head rv"><span class="eyebrow">GALÉRIA</span><h2>Ízelítő az estéből.</h2></div>
-    <div class="gallery-grid rv-stagger">
-{_gallery_html(ev)}
-    </div>
-  </div>
-</section>
+{gallery_section}
 
 <section class="cta-band rule">
   <div class="wrap rv">
