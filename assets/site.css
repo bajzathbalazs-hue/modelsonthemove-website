@@ -208,7 +208,7 @@ section{position:relative;}
 .hero-meta b{display:block;font-family:var(--sans);font-weight:700;font-size:16px;font-variant-numeric:tabular-nums;}
 .hero-meta span{font-family:var(--sans);font-size:9px;letter-spacing:.1em;color:var(--ivory-dimmer);}
 .hero-tag{margin-top:26px;font-size:15px;color:var(--ivory-dim);max-width:460px;line-height:1.7;}
-.hero-ctas{display:flex;align-items:center;gap:16px;margin-top:38px;flex-wrap:wrap;}
+.hero-ctas{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:38px;flex-wrap:wrap;}
 .hero-ctas .sub{font-family:var(--sans);font-size:10.5px;letter-spacing:.1em;color:var(--ivory-dim);border-bottom:1px solid var(--line-strong);padding-bottom:3px;transition:color .3s,border-color .3s;}
 .hero-ctas .sub:hover{color:var(--bronze-bright);border-color:var(--bronze-bright);}
 .hero-current{
@@ -566,6 +566,15 @@ nav a:focus-visible,.btn:focus-visible,button:focus-visible,input:focus-visible,
 /* ================= EXT: AUDIENCE / CATEGORY TAGS ================= */
 .audience-row{display:flex;flex-wrap:wrap;gap:12px;}
 .audience-row .tag{cursor:default;}
+.sec-head+.audience-row{justify-content:center;}
+
+/* ================= EXT: HOMEPAGE EVENT TEASER (mobile-centered, desktop left two-col) ================= */
+.event-two-col .ctas{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;}
+@media(min-width:901px){
+  .event-two-col .sec-head{text-align:left;margin:0 0 26px;}
+  .event-two-col .sec-head p{margin-left:0;}
+  .event-two-col .audience-row,.event-two-col .ctas{justify-content:flex-start;}
+}
 
 /* ================= EXT: RELATED SERVICES ================= */
 .related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}

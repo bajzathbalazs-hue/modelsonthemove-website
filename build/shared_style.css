@@ -208,7 +208,7 @@ section{position:relative;}
 .hero-meta b{display:block;font-family:var(--sans);font-weight:700;font-size:16px;font-variant-numeric:tabular-nums;}
 .hero-meta span{font-family:var(--sans);font-size:9px;letter-spacing:.1em;color:var(--ivory-dimmer);}
 .hero-tag{margin-top:26px;font-size:15px;color:var(--ivory-dim);max-width:460px;line-height:1.7;}
-.hero-ctas{display:flex;align-items:center;gap:16px;margin-top:38px;flex-wrap:wrap;}
+.hero-ctas{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:38px;flex-wrap:wrap;}
 .hero-ctas .sub{font-family:var(--sans);font-size:10.5px;letter-spacing:.1em;color:var(--ivory-dim);border-bottom:1px solid var(--line-strong);padding-bottom:3px;transition:color .3s,border-color .3s;}
 .hero-ctas .sub:hover{color:var(--bronze-bright);border-color:var(--bronze-bright);}
 .hero-current{
