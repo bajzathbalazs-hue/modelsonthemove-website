@@ -263,7 +263,12 @@ section{position:relative;}
 .campaign-strip{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:28px;}
 .campaign-strip .plate{aspect-ratio:3/4;border-radius:var(--r-md);}
 .campaign-strip .plate:hover{transform:translateY(-6px) scale(1.02);box-shadow:var(--shadow-soft);}
-@media(max-width:900px){.event-head,.event-grid{grid-template-columns:1fr;}}
+@media(max-width:900px){
+  .event-head,.event-grid{grid-template-columns:1fr;}
+  .event-head{text-align:center;}
+  .event-side p{margin:0 auto;}
+  .event-cta{justify-content:center;}
+}
 
 /* ================= EXPERIENCE (03) ================= */
 .experience{position:relative;padding:0;}

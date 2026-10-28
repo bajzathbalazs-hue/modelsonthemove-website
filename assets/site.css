@@ -263,7 +263,12 @@ section{position:relative;}
 .campaign-strip{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:28px;}
 .campaign-strip .plate{aspect-ratio:3/4;border-radius:var(--r-md);}
 .campaign-strip .plate:hover{transform:translateY(-6px) scale(1.02);box-shadow:var(--shadow-soft);}
-@media(max-width:900px){.event-head,.event-grid{grid-template-columns:1fr;}}
+@media(max-width:900px){
+  .event-head,.event-grid{grid-template-columns:1fr;}
+  .event-head{text-align:center;}
+  .event-side p{margin:0 auto;}
+  .event-cta{justify-content:center;}
+}
 
 /* ================= EXPERIENCE (03) ================= */
 .experience{position:relative;padding:0;}
@@ -629,11 +634,11 @@ nav a:focus-visible,.btn:focus-visible,button:focus-visible,input:focus-visible,
 /* ================= EXT: ABOUT / PROFILE (rolunk builds on .founders) ================= */
 .model-block{display:grid;grid-template-columns:1.1fr .9fr;gap:70px;align-items:start;}
 @media(max-width:900px){.model-block{grid-template-columns:1fr;gap:44px;}}
-.stat-row{display:flex;gap:0;margin-top:40px;padding-top:24px;border-top:1px solid var(--bronze-dim);flex-wrap:wrap;}
-.stat-row div{flex:1;min-width:140px;padding:0 20px;border-left:1px solid var(--line);}
-.stat-row div:first-child{border-left:none;padding-left:0;}
-.stat-row b{display:block;font-family:var(--serif);font-size:20px;color:var(--bronze-bright);margin-bottom:6px;}
-.stat-row span{font-family:var(--sans);font-size:10px;letter-spacing:.07em;color:var(--ivory-dim);text-transform:uppercase;}
+.stat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(128px,1fr));gap:12px;margin-top:40px;}
+.stat-row div{border:1px solid var(--line);border-radius:var(--r-md);padding:20px 16px;text-align:center;transition:border-color .3s,background .3s;}
+.stat-row div:hover{border-color:var(--bronze-bright);background:rgba(255,255,255,.03);}
+.stat-row b{display:block;font-family:var(--serif);font-size:21px;color:var(--bronze-bright);margin-bottom:6px;}
+.stat-row span{font-family:var(--sans);font-size:9.5px;letter-spacing:.07em;color:var(--ivory-dim);text-transform:uppercase;}
 
 /* ================= EXT: FORMS shared (contact + model application) ================= */
 .form-panel{background:rgba(255,255,255,.03);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:var(--r-xl);padding:38px;box-shadow:var(--shadow-float);}
