@@ -164,7 +164,7 @@ KAPCSOLAT_BODY = """
       </form>
 
       <div class="biz-facts">
-        <div class="biz-fact"><div class="k">KÖZVETLEN ELÉRHETŐSÉG</div><div class="v">E-mail: <a class="inline" href="mailto:hello@modelsonthemove.hu" style="color:var(--bronze-bright);">hello@modelsonthemove.hu</a><br>Telefon: <a class="inline" href="tel:+36309404148" style="color:var(--bronze-bright);">+36 30 940 4148</a></div></div>
+        <div class="biz-fact"><div class="k">KÖZVETLEN ELÉRHETŐSÉG</div><div class="v">Telefon: <a class="inline" href="tel:+36309404148" style="color:var(--bronze-bright);">+36 30 940 4148</a><br>Árajánlatot csak a mellette lévő űrlap kitöltésével tudunk küldeni.</div></div>
         <div class="biz-fact"><div class="k">MIT KAPSZ</div><div class="v">Kreatív koncepció, produkció és végrehajtás egy kézből — modellektől és influencerektől a marketingen át az élő eseményig.</div></div>
         <div class="biz-fact"><div class="k">KIKNEK</div><div class="v">Vendéglátóhelyeknek, szállodáknak, szórakozóhelyeknek, autós, ingatlanos, divat-, szépségápolási és lifestyle márkáknak.</div></div>
         <div class="biz-fact"><div class="k">HOGYAN</div><div class="v">Megkeresés → rövid egyeztetés → testre szabott ajánlat. Nincs sablon csomag.</div></div>

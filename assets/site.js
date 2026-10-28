@@ -222,7 +222,7 @@ function motmHandleForm(form, opts){
         msg.classList.add('show','notice');
         msg.querySelector('h4').textContent = 'Hiba történt a küldés közben.';
         msg.querySelector('h4').classList.add('err');
-        msg.querySelector('p').textContent = 'Kérjük, próbáld újra, vagy írj a hello@modelsonthemove.hu címre.';
+        msg.querySelector('p').textContent = 'Kérjük, próbáld újra, vagy hívj minket: +36 30 940 4148.';
       }
     }
   });

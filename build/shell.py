@@ -72,7 +72,6 @@ def head(title, description, canonical_path, depth=0, og_image="assets/hero-myra
   "logo": "%s/assets/motm_logo_dark.png",
   "description": "Modellek és influencerek, marketing és márképítés, események és produkciók — egy összehangolt budapesti csapattól.",
   "areaServed": "HU",
-  "email": "hello@modelsonthemove.hu",
   "telephone": "+36309404148"
 }
 </script>
@@ -83,7 +82,6 @@ def head(title, description, canonical_path, depth=0, og_image="assets/hero-myra
   "name": "Models on the Move",
   "image": "%s/assets/motm_logo_dark.png",
   "url": "%s/",
-  "email": "hello@modelsonthemove.hu",
   "telephone": "+36309404148",
   "address": {
     "@type": "PostalAddress",
@@ -468,7 +466,7 @@ function motmHandleForm(form, opts){
         msg.classList.add('show','notice');
         msg.querySelector('h4').textContent = 'Hiba történt a küldés közben.';
         msg.querySelector('h4').classList.add('err');
-        msg.querySelector('p').textContent = 'Kérjük, próbáld újra, vagy írj a hello@modelsonthemove.hu címre.';
+        msg.querySelector('p').textContent = 'Kérjük, próbáld újra, vagy hívj minket: +36 30 940 4148.';
       }
     }
   });
