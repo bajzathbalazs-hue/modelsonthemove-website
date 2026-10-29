@@ -119,6 +119,94 @@ window.addEventListener('keydown', (e)=>{
   });
 })();
 
+/* ============ CTA-szint rendszer (1/2/3) — brief "2. A látogatói út és a
+   CTA-szintek" szakasza. Minden tárolóhozzáférés try/catch-ben, hogy a
+   böngésző storage-tiltása esetén is simán működjön az oldal (ekkor az
+   1. szintű alap-CTA marad érvényben). ============ */
+(function(){
+  function safeGet(storage, key){ try{ return storage.getItem(key); }catch(e){ return null; } }
+  function safeSet(storage, key, val){ try{ storage.setItem(key, val); }catch(e){} }
+  function hasConsent(){ return safeGet(localStorage, 'motm-cookie-consent') === 'accepted'; }
+  function gaEvent(name, params){ if(window.gtag) gtag('event', name, params||{}); }
+
+  let pageCount = parseInt(safeGet(sessionStorage,'motm_pagecount') || '0', 10) + 1;
+  safeSet(sessionStorage, 'motm_pagecount', String(pageCount));
+
+  let sessionStart = safeGet(sessionStorage, 'motm_session_start');
+  if(!sessionStart){ sessionStart = String(Date.now()); safeSet(sessionStorage, 'motm_session_start', sessionStart); }
+  function timeOnSiteSec(){ return Math.round((Date.now() - parseInt(sessionStart,10)) / 1000); }
+
+  let visited = [];
+  try{ visited = JSON.parse(safeGet(sessionStorage, 'motm_visited') || '[]'); }catch(e){}
+  if(visited.indexOf(location.pathname) === -1){
+    visited.push(location.pathname);
+    safeSet(sessionStorage, 'motm_visited', JSON.stringify(visited));
+  }
+  const visitedRolunkOrKorabbi = visited.some(p => p.indexOf('/rolunk/') !== -1 || p.indexOf('/korabbi-esemenyek/') !== -1);
+
+  // 66%-os görgetési mélység — csak a 4 nagy szolgáltatás-oldalon számít
+  let deepScroll = safeGet(sessionStorage, 'motm_deepscroll') === '1';
+  if(document.body.hasAttribute('data-service-page') && !deepScroll){
+    window.addEventListener('scroll', function onScroll(){
+      const doc = document.documentElement;
+      const pct = (window.scrollY + window.innerHeight) / doc.scrollHeight;
+      if(pct >= 0.66){
+        deepScroll = true;
+        safeSet(sessionStorage, 'motm_deepscroll', '1');
+        window.removeEventListener('scroll', onScroll);
+      }
+    }, {passive:true});
+  }
+
+  // 7 napon belüli visszatérés — csak süti-hozzájárulás után (localStorage)
+  let returning7d = false;
+  if(hasConsent()){
+    const lastVisit = safeGet(localStorage, 'motm_last_visit');
+    if(lastVisit && (Date.now() - parseInt(lastVisit,10)) < 7*24*60*60*1000){ returning7d = true; }
+    safeSet(localStorage, 'motm_last_visit', String(Date.now()));
+  }
+
+  function computeTier(){
+    const tier3Signals = [pageCount >= 4, timeOnSiteSec() > 120, visitedRolunkOrKorabbi, returning7d].filter(Boolean).length;
+    if(tier3Signals >= 2) return 3;
+    if(deepScroll || pageCount >= 3) return 2;
+    return 1;
+  }
+
+  function applyTier(tier){
+    document.querySelectorAll('[data-tier-cta]').forEach(function(el){
+      try{
+        const variants = JSON.parse(el.dataset.tierCta);
+        const v = variants[tier] || variants['1'];
+        if(v){ el.textContent = v.label; el.setAttribute('href', v.href); }
+      }catch(e){}
+    });
+    gaEvent('cta_tier_active', {tier: tier});
+    if(tier === 3) showTier3Bar();
+  }
+
+  function showTier3Bar(){
+    if(document.getElementById('tier3Bar')) return;
+    if(safeGet(sessionStorage, 'motm_tier3_dismissed') === '1') return;
+    const bar = document.createElement('div');
+    bar.id = 'tier3Bar';
+    bar.className = 'tier3-bar';
+    bar.innerHTML = '<p>Látjuk, hogy komolyan gondolod. Három perc, és személyre szabott javaslatot kapsz.</p>'
+      + '<div class="tier3-bar-ctas"><a href="/projekt-inditasa/" class="btn filled magnetic">INDÍTSUK EL A PROJEKTED</a>'
+      + '<button type="button" class="tier3-bar-close" aria-label="Bezárás">&times;</button></div>';
+    document.body.appendChild(bar);
+    requestAnimationFrame(function(){ bar.classList.add('show'); });
+    bar.querySelector('.tier3-bar-close').addEventListener('click', function(){
+      bar.classList.remove('show');
+      safeSet(sessionStorage, 'motm_tier3_dismissed', '1');
+      setTimeout(function(){ bar.remove(); }, 400);
+    });
+    gaEvent('cta_tier3_bar_shown', {});
+  }
+
+  applyTier(computeTier());
+})();
+
 /* ============ scroll reveal ============ */
 const io = new IntersectionObserver((entries)=>{
   entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
@@ -138,10 +226,21 @@ if(window.matchMedia('(hover:hover) and (pointer:fine)').matches){
   });
 }
 
-/* ============ chip multi-select (any .chips container) ============ */
+/* ============ chip multi-select / single-select (any .chips container) ============
+   .chips = szabad többszörös választás. .chips.chips-single = csak egy chip
+   lehet aktív (a meglévő kijelölés törlődik, mielőtt az újat bejelölnénk) —
+   így radio-gomb-szerű viselkedés, a meglévő chip-vizuál megtartásával. */
 document.querySelectorAll('.chips .chip-opt').forEach(c=>{
   c.setAttribute('role','checkbox'); c.setAttribute('aria-checked','false'); c.setAttribute('tabindex','0');
-  function toggle(){ const on = c.classList.toggle('on'); c.setAttribute('aria-checked', on?'true':'false'); }
+  function toggle(){
+    const group = c.closest('.chips');
+    const single = group && group.classList.contains('chips-single');
+    if(single && !c.classList.contains('on')){
+      group.querySelectorAll('.chip-opt.on').forEach(o=>{ o.classList.remove('on'); o.setAttribute('aria-checked','false'); });
+    }
+    const on = c.classList.toggle('on');
+    c.setAttribute('aria-checked', on?'true':'false');
+  }
   c.addEventListener('click', toggle);
   c.addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); toggle(); } });
 });

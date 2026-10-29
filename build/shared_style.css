@@ -170,7 +170,11 @@ section{position:relative;}
 .burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
 .burger.open span:nth-child(2){opacity:0;}
 .burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
-@media(max-width:900px){.nav-links,.langsw,.nav-right .btn{display:none;}.burger{display:flex;}}
+/* 1500px: a 2026.10.29-i IA-átépítés óta néhány nav-címke jóval hosszabb
+   (pl. "ARCULAT ÉS WEBFEJLESZTÉS", "INFLUENCER-EGYÜTTMŰKÖDÉS") — ezek a régi
+   900px-es törésnél már egymásba lógtak, sőt 1440px-en is szorosan a logóhoz
+   értek (0px hézag), ezért a törés jóval följebb, 1500px-re került. */
+@media(max-width:1500px){.nav-links,.langsw,.nav-right .btn{display:none;}.burger{display:flex;}}
 
 /* mobile full-screen menu */
 .mobile-menu{

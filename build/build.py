@@ -7,11 +7,15 @@ SITE_ROOT = os.path.dirname(HERE)
 sys.path.insert(0, HERE)
 
 import shell
-from shell import page, breadcrumb, service_page, BASE_URL
+from shell import page, breadcrumb, BASE_URL
 from content_home import HOME_BODY
-from content_services import SERVICES
-from content_pages import MUNKAINK_BODY, ROLUNK_BODY, KAPCSOLAT_BODY, NOTFOUND_BODY
-from content_events import EVENTS_BODY, PAST_EVENTS, past_event_detail_body
+from content_pages import ROLUNK_BODY, KAPCSOLAT_BODY, NOTFOUND_BODY
+from content_events import EVENTS_BODY, KORABBI_ESEMENYEK_BODY, PAST_EVENTS, past_event_detail_body
+from content_arculat import ARCULAT_BODY
+from content_marketing_ai import MARKETING_AI_BODY
+from content_influencer import INFLUENCER_BODY
+from content_tartalomgyartas import TARTALOMGYARTAS_BODY
+from content_projekt import PROJEKT_BODY
 
 
 def write(rel_path, content):
@@ -36,8 +40,8 @@ def main():
 
     # ---- HOME ----
     home_html = page(
-        title="Models on the Move — Modellek, influencerek, marketing és események, Budapest",
-        description="Modellek és influencerek, teljes körű marketing, kreatív produkciók és események egyetlen összehangolt budapesti csapattól. Embereket, márkákat és élményeket kapcsolunk össze.",
+        title="Models on the Move — Élményt és láthatóságot teremtünk | Budapest",
+        description="Prémium eseményeket szervezünk, és segítünk, hogy a vállalkozásod az online térben is ugyanilyen erős benyomást keltsen. Arculat, weboldal, marketing, influencer-együttműködés.",
         canonical_path="",
         body=HOME_BODY,
         depth=0,
@@ -46,66 +50,33 @@ def main():
     write("index.html", home_html)
     routes.append(("", "1.0", "weekly"))
 
-    # ---- SERVICE PAGES ----
-    for svc in SERVICES:
-        html = service_page(svc)
-        write(f"{svc['slug']}/index.html", html)
-        routes.append((svc["slug"] + "/", "0.9", "monthly"))
-
-    # ---- MUNKAINK ----
-    body = MUNKAINK_BODY.replace("%%BREADCRUMB%%", breadcrumb([("Munkáink", None)], depth=1))
-    html = page(
-        title="Munkáink — Models on the Move referenciák",
-        description="Weboldalak, marketingrendszerek, kampányok, tartalmak és események, amelyeket a Models on the Move összehangolt egészként valósított meg.",
-        canonical_path="munkaink/",
-        body=body,
-        depth=1,
-        active="works",
-    )
-    write("munkaink/index.html", html)
-    routes.append(("munkaink/", "0.7", "monthly"))
-
-    # ---- ROLUNK ----
-    body = ROLUNK_BODY.replace("%%BREADCRUMB%%", breadcrumb([("Rólunk", None)], depth=1))
-    html = page(
-        title="Rólunk — Models on the Move csapata",
-        description="A Models on the Move Molnár Mira és Bajzáth Balázs közös projektje — két világ, modellek, marketing és események, egy közös vízió.",
-        canonical_path="rolunk/",
-        body=body,
-        depth=1,
-        active="about",
-    )
-    write("rolunk/index.html", html)
-    routes.append(("rolunk/", "0.7", "monthly"))
-
-    # ---- KAPCSOLAT ----
-    body = KAPCSOLAT_BODY.replace("%%BREADCRUMB%%", breadcrumb([("Kapcsolat", None)], depth=1))
-    html = page(
-        title="Kapcsolat — Ajánlatkérés | Models on the Move",
-        description="Kérj ajánlatot modellközvetítésre, marketingre, rendezvényszervezésre vagy weboldalkészítésre. Mondd el, mit szeretnél elérni — beszéljük át személyesen.",
-        canonical_path="kapcsolat/",
-        body=body,
-        depth=1,
-        active="contact",
-    )
-    write("kapcsolat/index.html", html)
-    routes.append(("kapcsolat/", "0.9", "monthly"))
-
-    # ---- ESEMENYEK ----
+    # ---- ESEMÉNYEK ----
     body = EVENTS_BODY.replace("%%BREADCRUMB%%", breadcrumb([("Események", None)], depth=1))
     html = page(
         title="Események — Models on the Move Budapest",
-        description="A Models on the Move aktuális és korábbi eseményei Budapesten — fotók, összefoglaló videók és a következő est részletei.",
+        description="A Models on the Move következő estje: válogatott vendégkör, prémium helyszín, VIP-asztalok.",
         canonical_path="esemenyek/",
         body=body,
         depth=1,
         active="events",
     )
     write("esemenyek/index.html", html)
-    routes.append(("esemenyek/", "0.8", "weekly"))
+    routes.append(("esemenyek/", "0.9", "weekly"))
 
-    # ---- KORÁBBI ESEMÉNYEK (egy aloldal eseményenként, a Dubai Style is ide tartozik
-    # már, mivel az esemény 2026.10.16-án megtörtént) ----
+    # ---- KORÁBBI ESEMÉNYEK (összefoglaló oldal) ----
+    body = KORABBI_ESEMENYEK_BODY.replace("%%BREADCRUMB%%", breadcrumb([("Események", "esemenyek/"), ("Korábbi események", None)], depth=1))
+    html = page(
+        title="Korábbi események — Models on the Move Budapest",
+        description="Galéria és eredmények a Models on the Move korábbi estjeiről.",
+        canonical_path="korabbi-esemenyek/",
+        body=body,
+        depth=1,
+        active="events",
+    )
+    write("korabbi-esemenyek/index.html", html)
+    routes.append(("korabbi-esemenyek/", "0.7", "monthly"))
+
+    # ---- egy esemény részletező aloldalak (változatlan szerkezet) ----
     for ev in PAST_EVENTS:
         html = page(
             title=f"{ev['title']} — Models on the Move",
@@ -118,6 +89,97 @@ def main():
         )
         write(f"esemenyek/{ev['slug']}/index.html", html)
         routes.append((f"esemenyek/{ev['slug']}/", "0.5", "yearly"))
+
+    # ---- ARCULAT ÉS WEBFEJLESZTÉS ----
+    body = ARCULAT_BODY.replace("%%BREADCRUMB%%", breadcrumb([("Arculat és webfejlesztés", None)], depth=1))
+    html = page(
+        title="Arculat és webfejlesztés — Models on the Move",
+        description="Logótól a weboldalig: márkaarculat, weboldal, webshop tervezése és fejlesztése, prémium kivitelben.",
+        canonical_path="arculat-es-webfejlesztes/",
+        body=body,
+        depth=1,
+        active="arculat",
+    )
+    write("arculat-es-webfejlesztes/index.html", html)
+    routes.append(("arculat-es-webfejlesztes/", "0.9", "monthly"))
+
+    # ---- MARKETING ÉS AI ----
+    body = MARKETING_AI_BODY.replace("%%BREADCRUMB%%", breadcrumb([("Marketing és AI", None)], depth=1))
+    html = page(
+        title="Marketing és AI — Models on the Move",
+        description="Marketing, amelyből bevétel lesz. SEO, Google Ads, Meta- és TikTok-hirdetések, közösségi média, AI és automatizáció cégeknek.",
+        canonical_path="marketing-es-ai/",
+        body=body,
+        depth=1,
+        active="marketing",
+    )
+    write("marketing-es-ai/index.html", html)
+    routes.append(("marketing-es-ai/", "0.9", "monthly"))
+
+    # ---- INFLUENCER-EGYÜTTMŰKÖDÉS ----
+    body = INFLUENCER_BODY.replace("%%BREADCRUMB%%", breadcrumb([("Influencer-együttműködés", None)], depth=1))
+    html = page(
+        title="Influencer-együttműködés — Models on the Move",
+        description="Állandó influencerhálózatunkkal hiteles megjelenést építünk, a kiválasztástól a mérhető eredményig.",
+        canonical_path="influencer-egyuttmukodes/",
+        body=body,
+        depth=1,
+        active="influencer",
+    )
+    write("influencer-egyuttmukodes/index.html", html)
+    routes.append(("influencer-egyuttmukodes/", "0.9", "monthly"))
+
+    # ---- TARTALOMGYÁRTÁS ----
+    body = TARTALOMGYARTAS_BODY.replace("%%BREADCRUMB%%", breadcrumb([("Tartalomgyártás", None)], depth=1))
+    html = page(
+        title="Tartalomgyártás — Models on the Move",
+        description="Reklámfilm, közösségi videók, fotózás és eseményfilm — teljes gyártásszervezéssel, egy kapcsolattartóval.",
+        canonical_path="tartalomgyartas/",
+        body=body,
+        depth=1,
+        active="tartalom",
+    )
+    write("tartalomgyartas/index.html", html)
+    routes.append(("tartalomgyartas/", "0.8", "monthly"))
+
+    # ---- ROLUNK ----
+    body = ROLUNK_BODY.replace("%%BREADCRUMB%%", breadcrumb([("Rólunk", None)], depth=1))
+    html = page(
+        title="Rólunk — Models on the Move csapata",
+        description="A Models on the Move Molnár Mira és Bajzáth Balázs közös projektje.",
+        canonical_path="rolunk/",
+        body=body,
+        depth=1,
+        active="about",
+    )
+    write("rolunk/index.html", html)
+    routes.append(("rolunk/", "0.6", "monthly"))
+
+    # ---- KAPCSOLAT ----
+    body = KAPCSOLAT_BODY.replace("%%BREADCRUMB%%", breadcrumb([("Kapcsolat", None)], depth=1))
+    html = page(
+        title="Kapcsolat | Models on the Move",
+        description="Kérdésed van? Írj nyugodtan — egy munkanapon belül válaszolunk.",
+        canonical_path="kapcsolat/",
+        body=body,
+        depth=1,
+        active="contact",
+    )
+    write("kapcsolat/index.html", html)
+    routes.append(("kapcsolat/", "0.8", "monthly"))
+
+    # ---- PROJEKT INDÍTÁSA ----
+    body = PROJEKT_BODY.replace("%%BREADCRUMB%%", breadcrumb([("Projekt indítása", None)], depth=1))
+    html = page(
+        title="Projekt indítása — Models on the Move",
+        description="Mondd el, mit szeretnél. A többit mi intézzük — néhány kérdés, és személyre szabott javaslattal jelentkezünk.",
+        canonical_path="projekt-inditasa/",
+        body=body,
+        depth=1,
+        active="",
+    )
+    write("projekt-inditasa/index.html", html)
+    routes.append(("projekt-inditasa/", "0.9", "monthly"))
 
     # NOTE: intentionally NOT writing a physical esemenyek.html file here.
     # On Netlify, a static esemenyek.html sitting next to the esemenyek/ directory
@@ -160,9 +222,20 @@ Sitemap: {BASE_URL}/sitemap.xml
     write("CNAME", domain + "\n")
 
     # ---- _redirects (Netlify) ----
-    # Legacy bookmark for the old flat events page — single-hop redirect,
-    # no physical file, so it can't collide with the esemenyek/ directory.
-    write("_redirects", "/esemenyek.html  /esemenyek/  301\n")
+    # 2026.10.29: a site teljes IA-átépítése (10-oldalas sitemap). A régi
+    # szolgáltatás-oldalak URL-jei 301-gyel a legközelebbi új oldalra mutatnak,
+    # hogy a meglévő linkek/keresőbeli helyezés ne vesszen el.
+    redirects = """/esemenyek.html  /esemenyek/  301
+/modellugynokseg/*  /influencer-egyuttmukodes/  301
+/influencer-marketing/*  /influencer-egyuttmukodes/  301
+/marketing-ugynokseg/*  /marketing-es-ai/  301
+/rendezvenyszervezes/*  /esemenyek/  301
+/reklamfilm-keszites/*  /tartalomgyartas/  301
+/weboldal-keszites/*  /arculat-es-webfejlesztes/  301
+/kozossegi-media-kezeles/*  /marketing-es-ai/  301
+/munkaink/*  /  301
+"""
+    write("_redirects", redirects)
 
     print(f"\nKész: {len(routes)} indexelhető route + 404 + sitemap + robots + CNAME + _redirects ({domain}).")
 

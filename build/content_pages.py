@@ -81,8 +81,8 @@ ROLUNK_BODY = """
       </div>
       <div class="feature">
         <div class="num">03</div>
-        <div><h3>A három üzletág kapcsolata</h3>
-        <p>A modellek és influencerek, a marketing és márkaépítés, valamint az események és produkciók nálunk nem külön szolgáltatásként, hanem egymást erősítő rendszerként működnek — ugyanaz a csapat és kapcsolatrendszer áll mindhárom terület mögött.</p></div>
+        <div><h3>A területek kapcsolata</h3>
+        <p>Az események, az arculat és weboldal, a marketing és az influencer-együttműködések nálunk nem külön szolgáltatásként, hanem egymást erősítő rendszerként működnek — ugyanaz a csapat és kapcsolatrendszer áll minden terület mögött.</p></div>
       </div>
       <div class="feature">
         <div class="num">04</div>
@@ -114,63 +114,39 @@ KAPCSOLAT_BODY = """
 <section class="subhero">
   <div class="wrap">
     <span class="eyebrow rv">KAPCSOLAT</span>
-    <h1 class="rv">Miben segíthetünk?</h1>
-    <p class="lead rv">Nem tudod pontosan, mire van szükséged? Nem probléma. Mondd el, mit szeretnél elérni, és beszéljük át személyesen.</p>
+    <h1 class="rv">Kérdésed van? Írj nyugodtan.</h1>
+    <p class="lead rv">Egy munkanapon belül válaszolunk.</p>
   </div>
 </section>
 
 <section class="pad rule">
   <div class="wrap">
     <div class="biz-grid rv">
-      <form class="form-panel" id="bizForm" name="kapcsolat" data-netlify="true" data-netlify-honeypot="website" data-motm-form data-msg-id="bizMsg" data-event="contact_form_submit" novalidate>
+      <form class="form-panel" id="bizForm" name="kapcsolat" data-netlify="true" data-netlify-honeypot="website" data-motm-form data-msg-id="bizMsg" data-event="contact_form_submit" novalidate style="max-width:560px;">
         <input type="hidden" name="form-name" value="kapcsolat">
-        <input type="hidden" name="services" value="">
         <input type="hidden" name="page_url" value="">
         <input type="hidden" name="referrer_url" value="">
         <div class="hp-field" aria-hidden="true"><label>Weboldal (ne töltsd ki)</label><input type="text" name="website" tabindex="-1" autocomplete="off"></div>
 
-        <div class="field">
-          <label>MIBEN SEGÍTHETÜNK? (VÁLASZTHATÓ TÖBB IS)</label>
-          <div class="chips" id="bizChips">
-            <span class="chip-opt" data-value="teljes-marketing">Teljes körű marketing</span>
-            <span class="chip-opt" data-value="weboldal">Weboldal / webáruház</span>
-            <span class="chip-opt" data-value="seo">SEO</span>
-            <span class="chip-opt" data-value="ppc">PPC / hirdetéskezelés</span>
-            <span class="chip-opt" data-value="social">Közösségi média</span>
-            <span class="chip-opt" data-value="foto-video">Fotó / videó</span>
-            <span class="chip-opt" data-value="influencer">Influencer marketing</span>
-            <span class="chip-opt" data-value="modell">Modellközvetítés</span>
-            <span class="chip-opt" data-value="influencer-kozvetites">Influencerközvetítés</span>
-            <span class="chip-opt" data-value="rendezveny">Rendezvény / produkció</span>
-            <span class="chip-opt" data-value="arculat">Arculat / márkaépítés</span>
-            <span class="chip-opt" data-value="egyeb">Egyéb / még nem tudom pontosan</span>
-          </div>
-        </div>
-
-        <div class="row2">
-          <div class="field"><label for="k-name">NÉV</label><input id="k-name" name="name" type="text" required></div>
-          <div class="field"><label for="k-company">CÉGNÉV</label><input id="k-company" name="company" type="text" required></div>
-        </div>
-        <div class="row2">
-          <div class="field"><label for="k-email">E-MAIL</label><input id="k-email" name="email" type="email" required></div>
-          <div class="field"><label for="k-phone">TELEFONSZÁM (OPCIONÁLIS)</label><input id="k-phone" name="phone" type="tel"></div>
-        </div>
-        <div class="field"><label for="k-desc">MESÉLJ A PROJEKTRŐL</label><textarea id="k-desc" name="description" required></textarea></div>
-        <div class="field"><label for="k-timing">TERVEZETT INDULÁS / IDŐZÍTÉS (OPCIONÁLIS)</label><input id="k-timing" name="timing" type="text"></div>
+        <div class="field"><label for="k-name">NÉV</label><input id="k-name" name="name" type="text" required></div>
+        <div class="field"><label for="k-email">E-MAIL</label><input id="k-email" name="email" type="email" required></div>
+        <div class="field"><label for="k-msg">ÜZENET</label><textarea id="k-msg" name="message" required></textarea></div>
         <label class="check"><input type="checkbox" name="consent" required> Elfogadom az Adatvédelmi tájékoztatót.</label>
 
         <div class="submit-row">
-          <button type="submit" class="btn filled magnetic">ÜZLETI MEGKERESÉS KÜLDÉSE</button>
+          <button type="submit" class="btn filled magnetic">ÜZENET KÜLDÉSE</button>
         </div>
-        <div class="form-msg" id="bizMsg"><h4>KÖSZÖNJÜK.</h4><p>Hamarosan jelentkezünk.</p></div>
+        <div class="form-msg" id="bizMsg"><h4>KÖSZÖNJÜK.</h4><p>Egy munkanapon belül válaszolunk.</p></div>
       </form>
 
       <div class="biz-facts">
-        <div class="biz-fact"><div class="k">KÖZVETLEN ELÉRHETŐSÉG</div><div class="v">Telefon: <a class="inline" href="tel:+36309404148" style="color:var(--bronze-bright);">+36 30 940 4148</a><br>Árajánlatot csak a mellette lévő űrlap kitöltésével tudunk küldeni.</div></div>
-        <div class="biz-fact"><div class="k">MIT KAPSZ</div><div class="v">Kreatív koncepció, produkció és végrehajtás egy kézből — modellektől és influencerektől a marketingen át az élő eseményig.</div></div>
-        <div class="biz-fact"><div class="k">KIKNEK</div><div class="v">Vendéglátóhelyeknek, szállodáknak, szórakozóhelyeknek, autós, ingatlanos, divat-, szépségápolási és lifestyle márkáknak.</div></div>
-        <div class="biz-fact"><div class="k">HOGYAN</div><div class="v">Megkeresés → rövid egyeztetés → testre szabott ajánlat. Nincs sablon csomag.</div></div>
-        <div class="biz-fact"><div class="k">MODELLKÉNT JELENTKEZNÉL?</div><div class="v">A modelljelentkezés külön űrlapon fut — <a href="../modellugynokseg/#jelentkezes" style="color:var(--bronze-bright);">itt találod</a>.</div></div>
+        <div class="biz-fact"><div class="k">KÖZVETLEN ELÉRHETŐSÉG</div><div class="v">Telefon: <a class="inline" href="tel:+36309404148" style="color:var(--bronze-bright);">+36 30 940 4148</a></div></div>
+        <div class="biz-fact"><div class="k">KÖVESS</div><div class="v">
+          <a href="https://www.instagram.com/models_on_the_move/" target="_blank" rel="noopener" style="color:var(--bronze-bright);">Instagram</a> ·
+          <a href="https://www.facebook.com/profile.php?id=61586682312593" target="_blank" rel="noopener" style="color:var(--bronze-bright);">Facebook</a> ·
+          <a href="https://www.tiktok.com/@models.on.the.move" target="_blank" rel="noopener" style="color:var(--bronze-bright);">TikTok</a>
+        </div></div>
+        <div class="biz-fact"><div class="k">KOMOLYABB PROJEKTED VAN?</div><div class="v">Indítsuk el együtt — <a href="../projekt-inditasa/" style="color:var(--bronze-bright);">itt kezdheted</a>.</div></div>
       </div>
     </div>
   </div>

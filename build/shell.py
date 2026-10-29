@@ -47,24 +47,18 @@ with open(os.path.join(HERE, "legal_modals.html"), encoding="utf-8") as f:
 
 FULL_STYLE = SHARED_STYLE + "\n" + EXT_STYLE
 
-SERVICES_NAV = [
-    ("modellugynokseg", "Modellek és casting"),
-    ("influencer-marketing", "Influencer marketing"),
-    ("marketing-ugynokseg", "Teljes körű marketing"),
-    ("rendezvenyszervezes", "Rendezvényszervezés"),
-    ("reklamfilm-keszites", "Reklámfilm és videó"),
-    ("weboldal-keszites", "Weboldalkészítés"),
-    ("kozossegi-media-kezeles", "Közösségi média"),
-]
-
-# 3-pilléres fő navigáció (a "MOTM weboldal – építési terv" PDF Alapok szakasza).
-# A "web-marketing" és "influencer" slugok TEMP-ek: amíg a valódi /web-marketing
-# és /influencer pillér-oldalak el nem készülnek (3. szakasz), a legközelebbi
-# meglévő oldalra mutatnak. Cseréld le, amint a pillér-oldalak élesednek.
-PILLARS_NAV = [
-    ("esemenyek", "esemenyek", "Események"),
-    ("marketing-ugynokseg", "web-marketing", "Web és marketing"),  # TEMP cél
-    ("modellugynokseg", "influencer", "Influencer és tartalom"),  # TEMP cél
+# Fő navigáció — a "Models on the Move – weboldal-brief és szövegek (1. változat)"
+# 10-oldalas sitemapja szerint (2026.10.29). A "Korábbi események" nem önálló
+# nav-elem, hanem az Események oldalról érhető el (hogy a fejléc ne legyen
+# túlzsúfolt) — lásd content_events.py.
+MAIN_NAV = [
+    ("esemenyek", "events", "Események"),
+    ("arculat-es-webfejlesztes", "arculat", "Arculat és webfejlesztés"),
+    ("marketing-es-ai", "marketing", "Marketing és AI"),
+    ("influencer-egyuttmukodes", "influencer", "Influencer-együttműködés"),
+    ("tartalomgyartas", "tartalom", "Tartalomgyártás"),
+    ("rolunk", "about", "Rólunk"),
+    ("kapcsolat", "contact", "Kapcsolat"),
 ]
 
 
@@ -147,24 +141,21 @@ def nav(depth=0, active=""):
     r = _root(depth)
     def cls(key):
         return ' style="color:var(--bronze-bright);"' if active == key else ""
-    pillar_links = "\n    ".join(
-        f'<a href="{r}{slug}/"{cls(key)}>{label.upper()}</a>' for slug, key, label in PILLARS_NAV
+    main_links = "\n    ".join(
+        f'<a href="{r}{slug}/"{cls(key)}>{label.upper()}</a>' for slug, key, label in MAIN_NAV
     )
-    m_pillar_links = "\n    ".join(
-        f'<a href="{r}{slug}/" class="mlink">{label}</a>' for slug, key, label in PILLARS_NAV
+    m_main_links = "\n    ".join(
+        f'<a href="{r}{slug}/" class="mlink">{label}</a>' for slug, key, label in MAIN_NAV
     )
     return f"""
 <a href="#main" class="skip-link">Ugrás a tartalomhoz</a>
 <nav id="nav">
   <a href="{r}index.html" aria-label="Models on the Move — kezdőlap"><img class="wordmark-img" src="{r}assets/motm_logo_dark.png" alt="Models on the Move"></a>
   <div class="nav-links">
-    {pillar_links}
-    <a href="{r}munkaink/"{cls('works')}>MUNKÁINK</a>
-    <a href="{r}rolunk/"{cls('about')}>RÓLUNK</a>
-    <a href="{r}kapcsolat/"{cls('contact')}>KAPCSOLAT</a>
+    {main_links}
   </div>
   <div class="nav-right">
-    <a href="{r}kapcsolat/" class="btn filled">BESZÉLJÜNK A CÉGEDRŐL</a>
+    <a href="{r}projekt-inditasa/" class="btn filled">PROJEKT INDÍTÁSA</a>
   </div>
   <button class="burger" id="burgerBtn" aria-label="Menü" aria-expanded="false" aria-controls="mobileMenu"><span></span><span></span><span></span></button>
 </nav>
@@ -172,11 +163,8 @@ def nav(depth=0, active=""):
 <div class="mobile-menu" id="mobileMenu">
   <button class="mobile-close" id="mobileClose">BEZÁR ✕</button>
   <div class="mmenu-body">
-    {m_pillar_links}
-    <a href="{r}munkaink/" class="mlink">MUNKÁINK</a>
-    <a href="{r}rolunk/" class="mlink">RÓLUNK</a>
-    <a href="{r}kapcsolat/" class="mlink">KAPCSOLAT</a>
-    <a href="{r}kapcsolat/" class="btn filled mlink" style="margin-top:8px;">BESZÉLJÜNK A CÉGEDRŐL</a>
+    {m_main_links}
+    <a href="{r}projekt-inditasa/" class="btn filled mlink" style="margin-top:8px;">PROJEKT INDÍTÁSA</a>
   </div>
 </div>
 """
@@ -198,23 +186,23 @@ def breadcrumb(items, depth=1):
 
 def footer(depth=0):
     r = _root(depth)
-    svc_links = "\n        ".join(f'<a href="{r}{slug}/">{label}</a>' for slug, _key, label in PILLARS_NAV)
+    nav_links = "\n        ".join(f'<a href="{r}{slug}/">{label}</a>' for slug, _key, label in MAIN_NAV)
     return f"""
 <footer>
   <div class="wrap">
     <div class="foot-grid">
       <div>
         <img class="wordmark-img lg" src="{r}assets/motm_logo_dark.png" alt="Models on the Move">
-        <p style="margin-top:10px;font-size:13px;color:var(--ivory-dim);font-weight:600;">Modellek. Influencerek. Marketing. Események.</p>
-        <p style="margin-top:12px;font-size:12.5px;color:var(--ivory-dimmer);max-width:260px;line-height:1.7;">Embereket, márkákat és élményeket kapcsolunk össze. Budapest.</p>
+        <p style="margin-top:10px;font-size:13px;color:var(--ivory-dim);font-weight:600;">Események. Arculat és weboldal. Marketing. Influencerek.</p>
+        <p style="margin-top:12px;font-size:12.5px;color:var(--ivory-dimmer);max-width:260px;line-height:1.7;">Élményt és láthatóságot teremtünk. Budapest.</p>
       </div>
       <div>
-        <h5>SZOLGÁLTATÁSOK</h5>
-        {svc_links}
+        <h5>OLDALAK</h5>
+        {nav_links}
       </div>
       <div>
         <h5>MODELS ON THE MOVE</h5>
-        <a href="{r}munkaink/">Munkáink</a>
+        <a href="{r}projekt-inditasa/">Projekt indítása</a>
         <a href="{r}rolunk/">Rólunk</a>
         <a href="{r}kapcsolat/">Kapcsolat</a>
       </div>
@@ -363,6 +351,94 @@ window.addEventListener('keydown', (e)=>{
   });
 })();
 
+/* ============ CTA-szint rendszer (1/2/3) — brief "2. A látogatói út és a
+   CTA-szintek" szakasza. Minden tárolóhozzáférés try/catch-ben, hogy a
+   böngésző storage-tiltása esetén is simán működjön az oldal (ekkor az
+   1. szintű alap-CTA marad érvényben). ============ */
+(function(){
+  function safeGet(storage, key){ try{ return storage.getItem(key); }catch(e){ return null; } }
+  function safeSet(storage, key, val){ try{ storage.setItem(key, val); }catch(e){} }
+  function hasConsent(){ return safeGet(localStorage, 'motm-cookie-consent') === 'accepted'; }
+  function gaEvent(name, params){ if(window.gtag) gtag('event', name, params||{}); }
+
+  let pageCount = parseInt(safeGet(sessionStorage,'motm_pagecount') || '0', 10) + 1;
+  safeSet(sessionStorage, 'motm_pagecount', String(pageCount));
+
+  let sessionStart = safeGet(sessionStorage, 'motm_session_start');
+  if(!sessionStart){ sessionStart = String(Date.now()); safeSet(sessionStorage, 'motm_session_start', sessionStart); }
+  function timeOnSiteSec(){ return Math.round((Date.now() - parseInt(sessionStart,10)) / 1000); }
+
+  let visited = [];
+  try{ visited = JSON.parse(safeGet(sessionStorage, 'motm_visited') || '[]'); }catch(e){}
+  if(visited.indexOf(location.pathname) === -1){
+    visited.push(location.pathname);
+    safeSet(sessionStorage, 'motm_visited', JSON.stringify(visited));
+  }
+  const visitedRolunkOrKorabbi = visited.some(p => p.indexOf('/rolunk/') !== -1 || p.indexOf('/korabbi-esemenyek/') !== -1);
+
+  // 66%-os görgetési mélység — csak a 4 nagy szolgáltatás-oldalon számít
+  let deepScroll = safeGet(sessionStorage, 'motm_deepscroll') === '1';
+  if(document.body.hasAttribute('data-service-page') && !deepScroll){
+    window.addEventListener('scroll', function onScroll(){
+      const doc = document.documentElement;
+      const pct = (window.scrollY + window.innerHeight) / doc.scrollHeight;
+      if(pct >= 0.66){
+        deepScroll = true;
+        safeSet(sessionStorage, 'motm_deepscroll', '1');
+        window.removeEventListener('scroll', onScroll);
+      }
+    }, {passive:true});
+  }
+
+  // 7 napon belüli visszatérés — csak süti-hozzájárulás után (localStorage)
+  let returning7d = false;
+  if(hasConsent()){
+    const lastVisit = safeGet(localStorage, 'motm_last_visit');
+    if(lastVisit && (Date.now() - parseInt(lastVisit,10)) < 7*24*60*60*1000){ returning7d = true; }
+    safeSet(localStorage, 'motm_last_visit', String(Date.now()));
+  }
+
+  function computeTier(){
+    const tier3Signals = [pageCount >= 4, timeOnSiteSec() > 120, visitedRolunkOrKorabbi, returning7d].filter(Boolean).length;
+    if(tier3Signals >= 2) return 3;
+    if(deepScroll || pageCount >= 3) return 2;
+    return 1;
+  }
+
+  function applyTier(tier){
+    document.querySelectorAll('[data-tier-cta]').forEach(function(el){
+      try{
+        const variants = JSON.parse(el.dataset.tierCta);
+        const v = variants[tier] || variants['1'];
+        if(v){ el.textContent = v.label; el.setAttribute('href', v.href); }
+      }catch(e){}
+    });
+    gaEvent('cta_tier_active', {tier: tier});
+    if(tier === 3) showTier3Bar();
+  }
+
+  function showTier3Bar(){
+    if(document.getElementById('tier3Bar')) return;
+    if(safeGet(sessionStorage, 'motm_tier3_dismissed') === '1') return;
+    const bar = document.createElement('div');
+    bar.id = 'tier3Bar';
+    bar.className = 'tier3-bar';
+    bar.innerHTML = '<p>Látjuk, hogy komolyan gondolod. Három perc, és személyre szabott javaslatot kapsz.</p>'
+      + '<div class="tier3-bar-ctas"><a href="/projekt-inditasa/" class="btn filled magnetic">INDÍTSUK EL A PROJEKTED</a>'
+      + '<button type="button" class="tier3-bar-close" aria-label="Bezárás">&times;</button></div>';
+    document.body.appendChild(bar);
+    requestAnimationFrame(function(){ bar.classList.add('show'); });
+    bar.querySelector('.tier3-bar-close').addEventListener('click', function(){
+      bar.classList.remove('show');
+      safeSet(sessionStorage, 'motm_tier3_dismissed', '1');
+      setTimeout(function(){ bar.remove(); }, 400);
+    });
+    gaEvent('cta_tier3_bar_shown', {});
+  }
+
+  applyTier(computeTier());
+})();
+
 /* ============ scroll reveal ============ */
 const io = new IntersectionObserver((entries)=>{
   entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
@@ -382,10 +458,21 @@ if(window.matchMedia('(hover:hover) and (pointer:fine)').matches){
   });
 }
 
-/* ============ chip multi-select (any .chips container) ============ */
+/* ============ chip multi-select / single-select (any .chips container) ============
+   .chips = szabad többszörös választás. .chips.chips-single = csak egy chip
+   lehet aktív (a meglévő kijelölés törlődik, mielőtt az újat bejelölnénk) —
+   így radio-gomb-szerű viselkedés, a meglévő chip-vizuál megtartásával. */
 document.querySelectorAll('.chips .chip-opt').forEach(c=>{
   c.setAttribute('role','checkbox'); c.setAttribute('aria-checked','false'); c.setAttribute('tabindex','0');
-  function toggle(){ const on = c.classList.toggle('on'); c.setAttribute('aria-checked', on?'true':'false'); }
+  function toggle(){
+    const group = c.closest('.chips');
+    const single = group && group.classList.contains('chips-single');
+    if(single && !c.classList.contains('on')){
+      group.querySelectorAll('.chip-opt.on').forEach(o=>{ o.classList.remove('on'); o.setAttribute('aria-checked','false'); });
+    }
+    const on = c.classList.toggle('on');
+    c.setAttribute('aria-checked', on?'true':'false');
+  }
   c.addEventListener('click', toggle);
   c.addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); toggle(); } });
 });
@@ -521,123 +608,6 @@ def _jsonstr(s):
     return _json.dumps(s)
 
 
-def service_page(d):
-    """d: dict with keys slug, nav_label, seo_title, meta_desc, h1, position, lead,
-    sections (list of (h2,[paragraphs])), related (list of slugs), faq (list of (q,a)),
-    dual_path (bool, optional)."""
-    faq_html, faqld = faq_list(d["faq"])
-
-    feature_rows = []
-    for i, (h3, paras) in enumerate(d["sections"], start=1):
-        p_html = "\n".join(f"<p>{p}</p>" for p in paras)
-        feature_rows.append(f"""      <div class="feature">
-        <div class="num">{i:02d}</div>
-        <div><h3>{h3}</h3>{p_html}</div>
-      </div>""")
-    features_html = '<div class="feature-list rv-stagger">\n' + "\n".join(feature_rows) + "\n    </div>"
-
-    related_html = ""
-    if d.get("related"):
-        cards = []
-        for slug in d["related"]:
-            label = dict(SERVICES_NAV).get(slug, slug)
-            cards.append(f'<a href="../{slug}/" class="related-card glow-card"><span class="k">Kapcsolódó szolgáltatás</span><h4>{label}</h4></a>')
-        related_html = f"""
-<section class="pad rule">
-  <div class="wrap">
-    <div class="sec-head rv"><span class="eyebrow">KAPCSOLÓDÓ SZOLGÁLTATÁSOK</span></div>
-    <div class="related-grid rv-stagger">{"".join(cards)}</div>
-  </div>
-</section>"""
-
-    dual_path_html = ""
-    if d.get("dual_path"):
-        dual_path_html = f"""
-<section class="pad rule">
-  <div class="wrap">
-    <div class="sec-head rv"><span class="eyebrow">KÉT ÚT</span><h2>Márkaként keresel modellt,<br>vagy modellként jelentkeznél?</h2></div>
-    <div class="dualpath rv">
-      <div class="path-card">
-        <div class="k">Márkáknak és ügynökségeknek</div>
-        <h3>Modellt keresek</h3>
-        <p>Kampányhoz, fotózáshoz, forgatáshoz vagy eseményhez keresel modellt, hostesst vagy reklámarcot? Küldd el a projekt részleteit, és 1-2 munkanapon belül jelentkezünk.</p>
-        <a href="../kapcsolat/" class="btn filled magnetic">MODELLT KERESEK</a>
-      </div>
-      <div class="path-card">
-        <div class="k">Modelleknek és influencereknek</div>
-        <h3>Modellnek jelentkezem</h3>
-        <p>Modellként, hostessként vagy influencerként csatlakoznál a Models on the Move hálózatához? Töltsd ki a jelentkezési űrlapot alább.</p>
-        <a href="#jelentkezes" class="btn magnetic">MODELLNEK JELENTKEZEM</a>
-      </div>
-    </div>
-  </div>
-</section>
-{MODEL_APPLICATION_FORM}"""
-
-    subhero_bg = ""
-    if d.get("image"):
-        subhero_bg = f'<div class="plate photo dim-top grain" style="position:absolute;inset:0;z-index:-1;opacity:.5;background-image:url(\'../assets/{d["image"]}\');"></div>'
-
-    body = f"""
-{breadcrumb([(d['nav_label'], None)], depth=1)}
-<section class="subhero" style="position:relative;overflow:hidden;">
-  {subhero_bg}
-  <div class="wrap">
-    <span class="eyebrow rv">SZOLGÁLTATÁS</span>
-    <h1 class="rv">{d['h1']}</h1>
-    <p class="position rv">{d['position']}</p>
-    <p class="lead rv">{d['lead']}</p>
-    <div class="ctas rv">
-      <a href="../kapcsolat/" class="btn filled magnetic">{d.get('cta_text','BESZÉLJÜNK A PROJEKTRŐL')}</a>
-    </div>
-  </div>
-</section>
-{dual_path_html}
-<section class="pad rule">
-  <div class="wrap">
-    {features_html}
-  </div>
-</section>
-{related_html}
-<section class="pad rule">
-  <div class="wrap">
-    <div class="sec-head rv"><span class="eyebrow">GYAKORI KÉRDÉSEK</span></div>
-    <div class="rv">{faq_html}</div>
-  </div>
-</section>
-<section class="cta-band rule">
-  <div class="wrap rv">
-    <h2>{d.get('closing', 'Beszéljünk a projektről.')}</h2>
-    <div class="ctas"><a href="../kapcsolat/" class="btn filled magnetic">{d.get('cta_text','BESZÉLJÜNK A PROJEKTRŐL')}</a></div>
-  </div>
-</section>
-"""
-    extra_jsonld = f"""
-<script type="application/ld+json">
-{{"@context":"https://schema.org","@type":"Service","name":{_jsonstr(d['h1'])},"serviceType":{_jsonstr(d['nav_label'])},"provider":{{"@type":"Organization","name":"Models on the Move"}},"areaServed":"Magyarország","description":{_jsonstr(d['meta_desc'])}}}
-</script>
-{faqld}
-<script type="application/ld+json">
-{{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
-{{"@type":"ListItem","position":1,"name":"Főoldal","item":"{BASE_URL}/"}},
-{{"@type":"ListItem","position":2,"name":{_jsonstr(d['nav_label'])},"item":"{BASE_URL}/{d['slug']}/"}}
-]}}
-</script>"""
-    # A navigáció pillér-linkjei közül kettő (lásd PILLARS_NAV) átmenetileg erre
-    # a két szolgáltatás-oldalra mutat — ezeken ezért a megfelelő pillér aktívnak
-    # jelölendő a fejlécben, amíg a valódi pillér-oldalak el nem készülnek.
-    _temp_active = {"marketing-ugynokseg": "web-marketing", "modellugynokseg": "influencer"}
-    return page(
-        title=d["seo_title"],
-        description=d["meta_desc"],
-        canonical_path=d["slug"] + "/",
-        body=body,
-        depth=1,
-        active=_temp_active.get(d["slug"], ""),
-        extra_jsonld=extra_jsonld,
-    )
-
-
 MODEL_APPLICATION_FORM = """
 <section class="pad rule" id="jelentkezes">
   <div class="wrap">
@@ -690,9 +660,13 @@ def page(title, description, canonical_path, body, depth=None, active="", og_ima
     if depth is None:
         depth = 0 if canonical_path == "" else canonical_path.count("/")
     r = _root(depth)
+    # data-service-page: a CTA-szint rendszer (ld. SCRIPT) ezen a 4 "mélyebb"
+    # szolgáltatás-oldalon figyeli a 66%-os görgetési mélységet (brief 2. szakasz).
+    is_service_page = active in ("arculat", "marketing", "influencer", "tartalom")
+    body_attrs = f' data-depth="{depth}"' + (' data-service-page="1"' if is_service_page else "")
     return (
         head(title, description, canonical_path, depth=depth, og_image=og_image, robots=robots, extra_jsonld=extra_jsonld)
-        + "<body>\n"
+        + f"<body{body_attrs}>\n"
         + COOKIE_BANNER
         + nav(depth=depth, active=active)
         + '\n<main id="main">\n'

@@ -143,8 +143,8 @@ PAST_EVENTS = [
 ]
 
 
-def _event_card(ev, depth_prefix="../assets/"):
-    return f"""      <a class="event-card glow-card" href="{ev['slug']}/">
+def _event_card(ev, depth_prefix="../assets/", link_prefix="../esemenyek/"):
+    return f"""      <a class="event-card glow-card" href="{link_prefix}{ev['slug']}/">
         <div class="plate photo grain" style="background-image:url('{depth_prefix}{ev['cover']}')"></div>
         <div class="event-card-body">
           <h3>{ev['title']}</h3>
@@ -236,7 +236,7 @@ def past_event_detail_body(ev):
 <section class="cta-band rule">
   <div class="wrap rv">
     <h2>Szerveznél hasonló estét a márkádnak?</h2>
-    <div class="ctas"><a href="../../rendezvenyszervezes/" class="btn filled magnetic">TERVEZZÜK MEG EGYÜTT</a></div>
+    <div class="ctas"><a href="../../projekt-inditasa/" class="btn filled magnetic">INDÍTSUK EL A PROJEKTED</a></div>
   </div>
 </section>
 """
@@ -247,30 +247,79 @@ def past_event_detail_body(ev):
 # ACTIVE_EVENT = {"name": "Esemény neve", "date_label": "2026. november 14., szombat", "venue": "Helyszín"}
 ACTIVE_EVENT = None
 
-# ---- /esemenyek/ index page (overview + gallery) ----
+# ---- /esemenyek/ — a brief 4.2 szerint: szöveg még nem végleges ("később
+# érkezik"), ezért itt csak a tervezett szerkezet épül fel helyőrző szöveggel.
+# Tervezett elemek: következő esemény (dátum, helyszín típusa anonim módon,
+# hangulat), jegyvásárlás gomb, VIP-asztalfoglalás (csak ha az adott bulin
+# elérhető), dress code, GYIK. Helyszín/influencer NEVE nem jelenhet meg —
+# csak típus/hangulat szerinti, anonimizált leírás.
 EVENTS_BODY = f"""
 %%BREADCRUMB%%
 <section class="gal-hero">
   <div class="wrap">
     <div class="rv">
       <span class="eyebrow">ESEMÉNYEK</span>
-      <h1>Korábbi esték.<br>Maradandó pillanatok.</h1>
-      <p>Minden Models on the Move est egy saját világ — fotók és összefoglaló videók, ahogy egyre több esemény kerül fel ide. A következő esténk részleteit hamarosan jelentjük be.</p>
+      <h1>Esték, amelyekről még hetekig beszélnek.</h1>
+      <p>Válogatott közönség, prémium budapesti helyszín, VIP-asztalok — [a következő esemény hangulatának rövid leírása következik ide, helyszín- és névmegjelölés nélkül].</p>
     </div>
   </div>
 </section>
 
 <section class="pad rule" id="kovetkezo" style="padding-top:60px;">
   <div class="wrap">
-    <div class="sec-head rv"><span class="eyebrow">KÖVETKEZŐ ESEMÉNYÜNK</span><h2>Hamarosan érkezünk a részletekkel.</h2>
-      <p>A következő Models on the Move estét hamarosan jelentjük be itt és a közösségi médiánkon — addig is nézd meg a korábbi estéinket alább.</p>
+    <div class="sec-head rv"><span class="eyebrow">KÖVETKEZŐ ESEMÉNYÜNK</span><h2>[Esemény jellege] · [dátum]</h2>
+      <p>[Rövid, hangulati leírás a következő estéről — helyszín típusa, de nem neve; dress code; mire számíthatsz.]</p>
+    </div>
+    <div class="ctas" style="margin-top:30px;justify-content:center;display:flex;gap:16px;flex-wrap:wrap;">
+      <a href="#" class="btn filled magnetic">JEGYVÁSÁRLÁS</a>
+      <a href="../projekt-inditasa/" class="btn magnetic">VIP-ASZTALFOGLALÁS</a>
+    </div>
+    <p style="margin-top:18px;text-align:center;font-size:12.5px;color:var(--ivory-dimmer);">A VIP-asztalfoglalás csak akkor jelenik meg, ha az adott estén elérhető.</p>
+  </div>
+</section>
+
+<section class="pad rule">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="eyebrow">GYAKORI KÉRDÉSEK</span><h2>Amit az esténkről érdemes tudni.</h2>
+      <p>[Helyőrző — a végleges kérdés-válasz lista a részletes szöveg megérkezésével kerül ide: dress code, korhatár, jegytípusok, VIP-asztal.]</p>
     </div>
   </div>
 </section>
 
 <section class="pad rule">
   <div class="wrap">
-    <div class="sec-head rv"><span class="eyebrow">KORÁBBI ESTÉINK</span><h2>Amit már megrendeztünk.</h2></div>
+    <div class="sec-head rv"><span class="eyebrow">KORÁBBI ESTÉINK</span><h2>Nézd meg, mi történt eddig.</h2></div>
+    <div style="text-align:center;"><a href="../korabbi-esemenyek/" class="btn magnetic">KORÁBBI ESEMÉNYEK →</a></div>
+  </div>
+</section>
+
+<section class="cta-band rule">
+  <div class="wrap rv">
+    <h2>Szerveznél hasonló estét a márkádnak?</h2>
+    <div class="ctas"><a href="../projekt-inditasa/" class="btn filled magnetic">INDÍTSUK EL A PROJEKTED</a></div>
+  </div>
+</section>
+"""
+
+# ---- /korabbi-esemenyek/ — a brief 4.3 szerint: szöveg később érkezik,
+# tervezett szerkezet: galéria, eseményfilm, eredmények. Az eseményekre név
+# nélkül hivatkozunk ("legutóbbi eseményünk"), helyszínnév nélkül.
+# A kártyák egyelőre a meglévő esemény-aloldalakra mutatnak (ott még a régi,
+# nem anonimizált részletek — ez külön átnézendő, lásd a végső összefoglalót).
+KORABBI_ESEMENYEK_BODY = f"""
+%%BREADCRUMB%%
+<section class="gal-hero">
+  <div class="wrap">
+    <div class="rv">
+      <span class="eyebrow">KORÁBBI ESEMÉNYEK</span>
+      <h1>Egy pillantás arra, ami már megtörtént.</h1>
+      <p>Galéria és eredmények a korábbi estjeinkről — [a végleges bevezető szöveg később érkezik].</p>
+    </div>
+  </div>
+</section>
+
+<section class="pad rule">
+  <div class="wrap">
     <div class="event-cards-row rv-stagger">
 {chr(10).join(_event_card(ev) for ev in PAST_EVENTS)}
     </div>
@@ -280,46 +329,9 @@ EVENTS_BODY = f"""
 <section class="cta-band rule">
   <div class="wrap rv">
     <h2>Szerveznél hasonló estét a márkádnak?</h2>
-    <div class="ctas"><a href="../rendezvenyszervezes/" class="btn filled magnetic">TERVEZZÜK MEG EGYÜTT</a></div>
+    <div class="ctas"><a href="../projekt-inditasa/" class="btn filled magnetic">INDÍTSUK EL A PROJEKTED</a></div>
   </div>
 </section>
-
-<div class="ig-modal" id="igModal" role="dialog" aria-modal="true" aria-label="Instagram bejegyzés">
-  <div class="ig-modal-backdrop" data-ig-close></div>
-  <div class="ig-modal-panel">
-    <button type="button" class="ig-modal-close" data-ig-close aria-label="Bezárás">&times;</button>
-    <div class="ig-modal-body" id="igModalBody"></div>
-  </div>
-</div>
-<script>
-(function(){{
-  var modal = document.getElementById('igModal');
-  var body = document.getElementById('igModalBody');
-  function tryProcess(retries){{
-    if(window.instgrm){{ window.instgrm.Embeds.process(); }}
-    else if(retries > 0){{ setTimeout(function(){{ tryProcess(retries - 1); }}, 300); }}
-  }}
-  function openModal(permalink){{
-    body.innerHTML = '<blockquote class="instagram-media" data-instgrm-permalink="' + permalink + '" data-instgrm-version="14" style="margin:0;width:100%;"></blockquote>';
-    modal.classList.add('open');
-    document.body.style.overflow = 'hidden';
-    tryProcess(10);
-  }}
-  function closeModal(){{
-    modal.classList.remove('open');
-    document.body.style.overflow = '';
-    body.innerHTML = '';
-  }}
-  document.querySelectorAll('[data-ig-permalink]').forEach(function(el){{
-    el.addEventListener('click', function(){{ openModal(el.getAttribute('data-ig-permalink')); }});
-  }});
-  modal.querySelectorAll('[data-ig-close]').forEach(function(el){{
-    el.addEventListener('click', closeModal);
-  }});
-  document.addEventListener('keydown', function(e){{ if(e.key === 'Escape' && modal.classList.contains('open')) closeModal(); }});
-}})();
-</script>
-<script async src="https://www.instagram.com/embed.js"></script>
 """
 
 
