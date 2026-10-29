@@ -21,6 +21,18 @@ MARKETING_AI_BODY = """
 
 <section class="pad rule">
   <div class="wrap">
+    <div class="sec-head rv"><span class="eyebrow">KINEK AJÁNLJUK</span></div>
+    <ul class="who-for rv-stagger">
+      <li><b style="color:var(--ivory);">Cégeknek, amelyek több ajánlatkérést szeretnének,</b> nem csak több lájkot.</li>
+      <li><b style="color:var(--ivory);">Webshopoknak,</b> amelyek nyereségesen szeretnék növelni az eladásaikat.</li>
+      <li><b style="color:var(--ivory);">Vállalkozásoknak,</b> amelyeknek a hirdetései futnak, de nem hoznak eredményt.</li>
+      <li><b style="color:var(--ivory);">Csapatoknak,</b> amelyek AI-jal szeretnének gyorsabban dolgozni.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="pad rule">
+  <div class="wrap">
     <div class="feature-list">
       <div class="feature">
         <div class="num">1</div>
@@ -55,11 +67,11 @@ MARKETING_AI_BODY = """
         <div><h3>Google Ads</h3>
           <ul class="bullet-list">
             <li>Fiókstruktúra felépítése</li>
-            <li>Keresési, Performance Max, Shopping és YouTube-kampányok</li>
+            <li>Hirdetések a Google-keresésben, a Google Shoppingban, a YouTube-on és a Google teljes hirdetési hálózatán (Performance Max)</li>
             <li>Remarketing: újra elérjük azokat, akik már jártak nálad</li>
             <li>Kizáró kulcsszavak, hogy ne fizess érdektelen keresésekért</li>
-            <li>Hirdetésszövegek, bővítmények, licitstratégia</li>
-            <li>Folyamatos A/B tesztelés</li>
+            <li>Hirdetésszövegek, kiegészítő elemek (linkek, telefonszám, kiemelések) és a költés okos beállítása</li>
+            <li>Folyamatos tesztelés: két változatból mindig a jobbat tartjuk meg (A/B teszt)</li>
           </ul>
         </div>
       </div>

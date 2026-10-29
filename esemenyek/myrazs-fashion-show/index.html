@@ -25,6 +25,7 @@
 <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800,900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/site.css">
 
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -73,8 +74,44 @@ gtag('config', 'G-EGGQF205M5', { 'anonymize_ip': true });
 </head>
 <body data-depth="2">
 
+<div class="motm-gate" id="motmGate">
+  <div class="motm-gate-box">
+    <img src="../../assets/motm_logo_dark.png" alt="Models on the Move" class="motm-gate-logo">
+    <h1>Fejlesztés alatt áll.</h1>
+    <p>Ez a weboldal jelenleg fejlesztés alatt áll. A megtekintéshez add meg a hozzáférési kódot.</p>
+    <form id="motmGateForm" autocomplete="off">
+      <input type="password" id="motmGateInput" placeholder="Hozzáférési kód" autocomplete="off">
+      <button type="submit" class="btn filled">Belépek</button>
+    </form>
+    <p class="motm-gate-error" id="motmGateError" hidden>Hibás kód. Próbáld újra.</p>
+  </div>
+</div>
+<script>
+(function(){
+  var KEY='motm_gate_ok';
+  var CODE='MOTM2026';
+  var gate=document.getElementById('motmGate');
+  if(!gate) return;
+  try{ if(localStorage.getItem(KEY)==='1'){ gate.classList.add('unlocked'); return; } }catch(e){}
+  var form=document.getElementById('motmGateForm');
+  var input=document.getElementById('motmGateInput');
+  var err=document.getElementById('motmGateError');
+  form.addEventListener('submit', function(ev){
+    ev.preventDefault();
+    if(input.value.trim().toUpperCase()===CODE){
+      try{ localStorage.setItem(KEY,'1'); }catch(e){}
+      gate.classList.add('unlocked');
+    } else {
+      err.hidden=false;
+      input.value='';
+      input.focus();
+    }
+  });
+})();
+</script>
+
 <div class="cookie-banner" id="cookieBanner" role="dialog" aria-live="polite" aria-label="Süti-tájékoztató">
-  <p>Az oldal látogatottsági statisztikákhoz sütiket használ (Google Analytics). Elfogadod?</p>
+  <p>Az oldal látogatottsági statisztikákhoz sütiket használ, és ez alapján személyre szabott ajánlatot jelenít meg. Elfogadod?</p>
   <div class="cookie-actions">
     <button type="button" class="btn" id="cookieDecline">Elutasítom</button>
     <button type="button" class="btn filled" id="cookieAccept">Elfogadom</button>
@@ -85,16 +122,22 @@ gtag('config', 'G-EGGQF205M5', { 'anonymize_ip': true });
 <nav id="nav">
   <a href="../../index.html" aria-label="Models on the Move — kezdőlap"><img class="wordmark-img" src="../../assets/motm_logo_dark.png" alt="Models on the Move"></a>
   <div class="nav-links">
-    <a href="../../esemenyek/" style="color:var(--bronze-bright);">ESEMÉNYEK</a>
-    <a href="../../arculat-es-webfejlesztes/">ARCULAT ÉS WEBFEJLESZTÉS</a>
+    <div class="has-sub" aria-expanded="true">
+      <button type="button" class="sub-toggle" style="color:var(--bronze-bright);">ESEMÉNYEK <svg viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.4"/></svg></button>
+      <div class="submenu">
+        <a href="../../esemenyek/">Következő esemény<small>A legközelebbi estünk</small></a>
+        <a href="../../korabbi-esemenyek/">Korábbi események<small>Galéria és eredmények</small></a>
+      </div>
+    </div>
+    <a href="../../arculat-es-webfejlesztes/">ARCULAT ÉS WEB</a>
     <a href="../../marketing-es-ai/">MARKETING ÉS AI</a>
-    <a href="../../influencer-egyuttmukodes/">INFLUENCER-EGYÜTTMŰKÖDÉS</a>
+    <a href="../../influencer-egyuttmukodes/">INFLUENCER</a>
     <a href="../../tartalomgyartas/">TARTALOMGYÁRTÁS</a>
     <a href="../../rolunk/">RÓLUNK</a>
     <a href="../../kapcsolat/">KAPCSOLAT</a>
   </div>
   <div class="nav-right">
-    <a href="../../projekt-inditasa/" class="btn filled">PROJEKT INDÍTÁSA</a>
+    <a href="../../projekt-inditasa/" class="btn filled">Elindítom a projektem</a>
   </div>
   <button class="burger" id="burgerBtn" aria-label="Menü" aria-expanded="false" aria-controls="mobileMenu"><span></span><span></span><span></span></button>
 </nav>
@@ -102,14 +145,19 @@ gtag('config', 'G-EGGQF205M5', { 'anonymize_ip': true });
 <div class="mobile-menu" id="mobileMenu">
   <button class="mobile-close" id="mobileClose">BEZÁR ✕</button>
   <div class="mmenu-body">
-    <a href="../../esemenyek/" class="mlink">Események</a>
-    <a href="../../arculat-es-webfejlesztes/" class="mlink">Arculat és webfejlesztés</a>
+    <button type="button" class="msub-toggle" aria-expanded="false">Események <svg viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.4"/></svg></button>
+    <div class="msub-panel">
+      <a href="../../esemenyek/" class="mlink">Következő esemény</a>
+      <a href="../../korabbi-esemenyek/" class="mlink">Korábbi események</a>
+    </div>
+    <div class="mmenu-rule"></div>
+    <a href="../../arculat-es-webfejlesztes/" class="mlink">Arculat és web</a>
     <a href="../../marketing-es-ai/" class="mlink">Marketing és AI</a>
-    <a href="../../influencer-egyuttmukodes/" class="mlink">Influencer-együttműködés</a>
+    <a href="../../influencer-egyuttmukodes/" class="mlink">Influencer</a>
     <a href="../../tartalomgyartas/" class="mlink">Tartalomgyártás</a>
     <a href="../../rolunk/" class="mlink">Rólunk</a>
     <a href="../../kapcsolat/" class="mlink">Kapcsolat</a>
-    <a href="../../projekt-inditasa/" class="btn filled mlink" style="margin-top:8px;">PROJEKT INDÍTÁSA</a>
+    <a href="../../projekt-inditasa/" class="btn filled mlink" style="margin-top:8px;">Elindítom a projektem</a>
   </div>
 </div>
 
@@ -174,38 +222,36 @@ gtag('config', 'G-EGGQF205M5', { 'anonymize_ip': true });
     <div class="foot-grid">
       <div>
         <img class="wordmark-img lg" src="../../assets/motm_logo_dark.png" alt="Models on the Move">
-        <p style="margin-top:10px;font-size:13px;color:var(--ivory-dim);font-weight:600;">Események. Arculat és weboldal. Marketing. Influencerek.</p>
-        <p style="margin-top:12px;font-size:12.5px;color:var(--ivory-dimmer);max-width:260px;line-height:1.7;">Élményt és láthatóságot teremtünk. Budapest.</p>
+        <p style="margin-top:10px;font-size:13px;color:var(--ivory-dim);font-weight:600;">Élményt és láthatóságot teremtünk.</p>
       </div>
       <div>
         <h5>OLDALAK</h5>
         <a href="../../esemenyek/">Események</a>
+        <a href="../../korabbi-esemenyek/">Korábbi események</a>
         <a href="../../arculat-es-webfejlesztes/">Arculat és webfejlesztés</a>
         <a href="../../marketing-es-ai/">Marketing és AI</a>
         <a href="../../influencer-egyuttmukodes/">Influencer-együttműködés</a>
         <a href="../../tartalomgyartas/">Tartalomgyártás</a>
         <a href="../../rolunk/">Rólunk</a>
         <a href="../../kapcsolat/">Kapcsolat</a>
-      </div>
-      <div>
-        <h5>MODELS ON THE MOVE</h5>
         <a href="../../projekt-inditasa/">Projekt indítása</a>
-        <a href="../../rolunk/">Rólunk</a>
-        <a href="../../kapcsolat/">Kapcsolat</a>
       </div>
       <div>
         <h5>KÖVESS</h5>
         <a href="https://www.instagram.com/models_on_the_move/" target="_blank" rel="noopener">Instagram</a>
         <a href="https://www.facebook.com/profile.php?id=61586682312593" target="_blank" rel="noopener">Facebook</a>
         <a href="https://www.tiktok.com/@models.on.the.move" target="_blank" rel="noopener">TikTok</a>
+        <p style="margin-top:16px;font-size:12.5px;color:var(--ivory-dimmer);">Egy munkanapon belül válaszolunk.</p>
       </div>
     </div>
     <div class="foot-bottom">
-      <div>© 2026 MODELS ON THE MOVE</div>
+      <div>© 2026 Models on the Move</div>
       <div class="foot-legal">
-        <button type="button" class="legal-link" data-open="modal-impressum">IMPRESSZUM</button>
-        <button type="button" class="legal-link" data-open="modal-privacy">ADATKEZELÉS</button>
         <button type="button" class="legal-link" data-open="modal-terms">ÁSZF</button>
+        <button type="button" class="legal-link" data-open="modal-privacy">Adatkezelési tájékoztató</button>
+        <button type="button" class="legal-link" data-open="modal-cookies">Sütitájékoztató</button>
+        <button type="button" class="legal-link" id="cookieSettingsBtn">Sütibeállítások</button>
+        <button type="button" class="legal-link" data-open="modal-impressum">Impresszum</button>
       </div>
     </div>
   </div>
@@ -359,6 +405,50 @@ gtag('config', 'G-EGGQF205M5', { 'anonymize_ip': true });
 
     <h3>9. Changes to this policy</h3>
     <p>The Data Controller reserves the right to amend this policy unilaterally. Any changes will be communicated via the website.</p>
+    </div>
+  </div>
+</div>
+
+<div class="legal-overlay" id="modal-cookies">
+  <div class="legal-box">
+    <button type="button" class="close" data-close>✕</button>
+
+    <div class="lang-hu">
+    <h2>Sütitájékoztató</h2>
+    <div class="updated">Utolsó frissítés: 2026. október</div>
+
+    <h3>1. Mi a süti (cookie)?</h3>
+    <p>A süti egy kis szöveges fájl, amelyet a böngésződ tárol, amikor meglátogatod a weboldalunkat. A sütik segítségével a weboldal megjegyez bizonyos információkat a látogatásodról.</p>
+
+    <h3>2. Milyen sütiket használunk</h3>
+    <p><b>Alapvető, működéshez szükséges sütik</b> — ezek nélkül a weboldal egyes funkciói (pl. a sütibeállítások megjegyzése) nem működnének. Ezekhez nem kérünk hozzájárulást, mert a szolgáltatás működéséhez elengedhetetlenek.</p>
+    <p><b>Statisztikai sütik (Google Analytics)</b> — ezek segítenek megérteni, hányan és hogyan használják a weboldalt. Ezekhez hozzájárulásodat kérjük a sütisávon; elfogadásig nem aktívak (Consent Mode v2).</p>
+    <p><b>Látogatás alapján személyre szabott megjelenés</b> — a weboldal a munkameneted és a sütihozzájárulásod alapján (pl. mennyi oldalt néztél meg, visszatérő látogató vagy-e) személyre szabottan jelenít meg bizonyos gombokat és ajánlatokat (pl. ingyenes konzultáció vagy projektindítás felajánlása). Ehhez a munkameneten belüli méréshez böngésződ tárolóját (session storage, local storage) használjuk; a 7 napon túli visszatérés-felismerés csak a sütihozzájárulásod megadása után aktív.</p>
+
+    <h3>3. Hozzájárulás és visszavonás</h3>
+    <p>A statisztikai sütikhez a hozzájárulásodat a sütisávon kérjük. A hozzájárulás bármikor visszavonható vagy módosítható a lábléc „Sütibeállítások” gombjával, amely újra megjeleníti a sütisávot.</p>
+
+    <h3>4. További információ</h3>
+    <p>A sütikkel kezelt adatokról részletesen az Adatkezelési tájékoztató nyújt tájékoztatást.</p>
+    </div>
+
+    <div class="lang-en">
+    <h2>Cookie Policy</h2>
+    <div class="updated">Last updated: October 2026</div>
+
+    <h3>1. What is a cookie?</h3>
+    <p>A cookie is a small text file stored by your browser when you visit our website. Cookies let the website remember certain information about your visit.</p>
+
+    <h3>2. What cookies we use</h3>
+    <p><b>Essential, functionality cookies</b> — without these, certain features (e.g. remembering your cookie settings) would not work. We do not ask for consent for these, as they are required for the service to function.</p>
+    <p><b>Statistical cookies (Google Analytics)</b> — these help us understand how many people use the website and how. We ask for your consent via the cookie banner; they remain inactive until accepted (Consent Mode v2).</p>
+    <p><b>Visit-based personalisation</b> — based on your session and your cookie consent (e.g. how many pages you viewed, whether you are a returning visitor), the website personalises certain buttons and offers (e.g. offering a free consultation or starting a project). This uses your browser's session storage and local storage; recognising a return within 7 days is only active after you give cookie consent.</p>
+
+    <h3>3. Consent and withdrawal</h3>
+    <p>We ask for your consent to statistical cookies via the cookie banner. Consent can be withdrawn or changed at any time using the "Cookie settings" button in the footer, which reopens the cookie banner.</p>
+
+    <h3>4. More information</h3>
+    <p>For details on data processed via cookies, see our Privacy Policy.</p>
     </div>
   </div>
 </div>

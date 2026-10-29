@@ -25,6 +25,26 @@ if(burgerBtn){
   document.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && burgerBtn.classList.contains('open')) closeMenu(); });
 }
 
+/* ============ fejléc "Események" legördülő (desktop) + almenü (mobil) ============ */
+document.querySelectorAll('.has-sub').forEach(group=>{
+  const toggle = group.querySelector('.sub-toggle');
+  toggle.addEventListener('click', (e)=>{
+    e.stopPropagation();
+    const open = group.getAttribute('aria-expanded') === 'true';
+    document.querySelectorAll('.has-sub').forEach(g=>g.setAttribute('aria-expanded','false'));
+    group.setAttribute('aria-expanded', open ? 'false' : 'true');
+  });
+});
+document.addEventListener('click', ()=> document.querySelectorAll('.has-sub').forEach(g=>g.setAttribute('aria-expanded','false')));
+document.querySelectorAll('.msub-toggle').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const panel = btn.nextElementSibling;
+    const open = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', open ? 'false' : 'true');
+    if(panel) panel.classList.toggle('open', !open);
+  });
+});
+
 /* ============ legal modals ============ */
 function openLegal(id){
   const el = document.getElementById(id);
@@ -117,6 +137,11 @@ window.addEventListener('keydown', (e)=>{
     localStorage.setItem(KEY, 'declined');
     banner.classList.remove('show');
   });
+  const settingsBtn = document.getElementById('cookieSettingsBtn');
+  if(settingsBtn) settingsBtn.addEventListener('click', ()=>{
+    banner.classList.add('show');
+    banner.scrollIntoView({behavior:'smooth', block:'center'});
+  });
 })();
 
 /* ============ CTA-szint rendszer (1/2/3) — brief "2. A látogatói út és a
@@ -191,8 +216,8 @@ window.addEventListener('keydown', (e)=>{
     const bar = document.createElement('div');
     bar.id = 'tier3Bar';
     bar.className = 'tier3-bar';
-    bar.innerHTML = '<p>Látjuk, hogy komolyan gondolod. Három perc, és személyre szabott javaslatot kapsz.</p>'
-      + '<div class="tier3-bar-ctas"><a href="/projekt-inditasa/" class="btn filled magnetic">INDÍTSUK EL A PROJEKTED</a>'
+    bar.innerHTML = '<p>Készen állsz a következő lépésre? Három perc, és személyre szabott javaslatot kapsz.</p>'
+      + '<div class="tier3-bar-ctas"><a href="/projekt-inditasa/" class="btn filled magnetic">Elindítom a projektem</a>'
       + '<button type="button" class="tier3-bar-close" aria-label="Bezárás">&times;</button></div>';
     document.body.appendChild(bar);
     requestAnimationFrame(function(){ bar.classList.add('show'); });

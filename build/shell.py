@@ -11,6 +11,18 @@ BASE_URL = "https://modelsonthemove.hu"
 
 SITE_NAME = "Models on the Move"
 
+# Helyőrzők ("[szögletes zárójeles]" szövegek, .dev-note class) a fejlesztői
+# build-ben láthatók, élesben (alapértelmezett build) rejtve vannak — a
+# végleges brief 0. pontja szerint. Lokális előnézethez: MOTM_DEV=1 python3 build.py
+DEV_MODE = os.environ.get("MOTM_DEV") == "1"
+DEV_NOTE_STYLE = (
+    "<style>.dev-note{display:block !important;margin-top:14px;padding:10px 14px;"
+    "border:1px dashed var(--bronze-dim);background:rgba(201,160,84,.08);"
+    "font-family:var(--sans);font-size:11px;letter-spacing:.02em;color:var(--bronze-bright);"
+    "border-radius:var(--r-sm);text-align:left;}</style>"
+    if DEV_MODE else ""
+)
+
 GA4_MEASUREMENT_ID = "G-EGGQF205M5"
 
 # Consent Mode v2: alapból minden tárolás elutasítva, amíg a látogató el nem
@@ -47,18 +59,18 @@ with open(os.path.join(HERE, "legal_modals.html"), encoding="utf-8") as f:
 
 FULL_STYLE = SHARED_STYLE + "\n" + EXT_STYLE
 
-# Fő navigáció — a "Models on the Move – weboldal-brief és szövegek (1. változat)"
-# 10-oldalas sitemapja szerint (2026.10.29). A "Korábbi események" nem önálló
-# nav-elem, hanem az Események oldalról érhető el (hogy a fejléc ne legyen
-# túlzsúfolt) — lásd content_events.py.
+# Fő navigáció — a "Models on the Move – végleges weboldal-brief" (2026.10.29)
+# 2. pontja szerint. nav_label: rövidített fejléc-feliratok. footer_label:
+# teljes nevek a lábléchez. "esemenyek" a fejlécben legördülőt kap
+# (Következő esemény / Korábbi események) — lásd nav().
 MAIN_NAV = [
-    ("esemenyek", "events", "Események"),
-    ("arculat-es-webfejlesztes", "arculat", "Arculat és webfejlesztés"),
-    ("marketing-es-ai", "marketing", "Marketing és AI"),
-    ("influencer-egyuttmukodes", "influencer", "Influencer-együttműködés"),
-    ("tartalomgyartas", "tartalom", "Tartalomgyártás"),
-    ("rolunk", "about", "Rólunk"),
-    ("kapcsolat", "contact", "Kapcsolat"),
+    ("esemenyek", "events", "Események", "Események"),
+    ("arculat-es-webfejlesztes", "arculat", "Arculat és web", "Arculat és webfejlesztés"),
+    ("marketing-es-ai", "marketing", "Marketing és AI", "Marketing és AI"),
+    ("influencer-egyuttmukodes", "influencer", "Influencer", "Influencer-együttműködés"),
+    ("tartalomgyartas", "tartalom", "Tartalomgyártás", "Tartalomgyártás"),
+    ("rolunk", "about", "Rólunk", "Rólunk"),
+    ("kapcsolat", "contact", "Kapcsolat", "Kapcsolat"),
 ]
 
 
@@ -124,6 +136,7 @@ def head(title, description, canonical_path, depth=0, og_image="assets/hero-myra
 <link rel="preconnect" href="https://api.fontshare.com">
 <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800,900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{r}assets/site.css">
+{DEV_NOTE_STYLE}
 {org_jsonld}
 {extra_jsonld}
 {GA4_SNIPPET}
@@ -141,12 +154,29 @@ def nav(depth=0, active=""):
     r = _root(depth)
     def cls(key):
         return ' style="color:var(--bronze-bright);"' if active == key else ""
-    main_links = "\n    ".join(
-        f'<a href="{r}{slug}/"{cls(key)}>{label.upper()}</a>' for slug, key, label in MAIN_NAV
-    )
-    m_main_links = "\n    ".join(
-        f'<a href="{r}{slug}/" class="mlink">{label}</a>' for slug, key, label in MAIN_NAV
-    )
+    link_parts = []
+    mlink_parts = []
+    for slug, key, nav_label, _footer_label in MAIN_NAV:
+        if slug == "esemenyek":
+            expanded = "true" if active == "events" else "false"
+            link_parts.append(f"""<div class="has-sub" aria-expanded="{expanded}">
+      <button type="button" class="sub-toggle"{cls(key)}>{nav_label.upper()} <svg viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.4"/></svg></button>
+      <div class="submenu">
+        <a href="{r}esemenyek/">Következő esemény<small>A legközelebbi estünk</small></a>
+        <a href="{r}korabbi-esemenyek/">Korábbi események<small>Galéria és eredmények</small></a>
+      </div>
+    </div>""")
+            mlink_parts.append(f"""<button type="button" class="msub-toggle" aria-expanded="false">{nav_label} <svg viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.4"/></svg></button>
+    <div class="msub-panel">
+      <a href="{r}esemenyek/" class="mlink">Következő esemény</a>
+      <a href="{r}korabbi-esemenyek/" class="mlink">Korábbi események</a>
+    </div>
+    <div class="mmenu-rule"></div>""")
+        else:
+            link_parts.append(f'<a href="{r}{slug}/"{cls(key)}>{nav_label.upper()}</a>')
+            mlink_parts.append(f'<a href="{r}{slug}/" class="mlink">{nav_label}</a>')
+    main_links = "\n    ".join(link_parts)
+    m_main_links = "\n    ".join(mlink_parts)
     return f"""
 <a href="#main" class="skip-link">Ugrás a tartalomhoz</a>
 <nav id="nav">
@@ -155,7 +185,7 @@ def nav(depth=0, active=""):
     {main_links}
   </div>
   <div class="nav-right">
-    <a href="{r}projekt-inditasa/" class="btn filled">PROJEKT INDÍTÁSA</a>
+    <a href="{r}projekt-inditasa/" class="btn filled">Elindítom a projektem</a>
   </div>
   <button class="burger" id="burgerBtn" aria-label="Menü" aria-expanded="false" aria-controls="mobileMenu"><span></span><span></span><span></span></button>
 </nav>
@@ -164,7 +194,7 @@ def nav(depth=0, active=""):
   <button class="mobile-close" id="mobileClose">BEZÁR ✕</button>
   <div class="mmenu-body">
     {m_main_links}
-    <a href="{r}projekt-inditasa/" class="btn filled mlink" style="margin-top:8px;">PROJEKT INDÍTÁSA</a>
+    <a href="{r}projekt-inditasa/" class="btn filled mlink" style="margin-top:8px;">Elindítom a projektem</a>
   </div>
 </div>
 """
@@ -186,39 +216,41 @@ def breadcrumb(items, depth=1):
 
 def footer(depth=0):
     r = _root(depth)
-    nav_links = "\n        ".join(f'<a href="{r}{slug}/">{label}</a>' for slug, _key, label in MAIN_NAV)
+    footer_links = [f'<a href="{r}esemenyek/">Események</a>', f'<a href="{r}korabbi-esemenyek/">Korábbi események</a>']
+    for slug, _key, _nav_label, footer_label in MAIN_NAV:
+        if slug == "esemenyek":
+            continue
+        footer_links.append(f'<a href="{r}{slug}/">{footer_label}</a>')
+    footer_links.append(f'<a href="{r}projekt-inditasa/">Projekt indítása</a>')
+    nav_links = "\n        ".join(footer_links)
     return f"""
 <footer>
   <div class="wrap">
     <div class="foot-grid">
       <div>
         <img class="wordmark-img lg" src="{r}assets/motm_logo_dark.png" alt="Models on the Move">
-        <p style="margin-top:10px;font-size:13px;color:var(--ivory-dim);font-weight:600;">Események. Arculat és weboldal. Marketing. Influencerek.</p>
-        <p style="margin-top:12px;font-size:12.5px;color:var(--ivory-dimmer);max-width:260px;line-height:1.7;">Élményt és láthatóságot teremtünk. Budapest.</p>
+        <p style="margin-top:10px;font-size:13px;color:var(--ivory-dim);font-weight:600;">Élményt és láthatóságot teremtünk.</p>
       </div>
       <div>
         <h5>OLDALAK</h5>
         {nav_links}
       </div>
       <div>
-        <h5>MODELS ON THE MOVE</h5>
-        <a href="{r}projekt-inditasa/">Projekt indítása</a>
-        <a href="{r}rolunk/">Rólunk</a>
-        <a href="{r}kapcsolat/">Kapcsolat</a>
-      </div>
-      <div>
         <h5>KÖVESS</h5>
         <a href="https://www.instagram.com/models_on_the_move/" target="_blank" rel="noopener">Instagram</a>
         <a href="https://www.facebook.com/profile.php?id=61586682312593" target="_blank" rel="noopener">Facebook</a>
         <a href="https://www.tiktok.com/@models.on.the.move" target="_blank" rel="noopener">TikTok</a>
+        <p style="margin-top:16px;font-size:12.5px;color:var(--ivory-dimmer);">Egy munkanapon belül válaszolunk.</p>
       </div>
     </div>
     <div class="foot-bottom">
-      <div>© 2026 MODELS ON THE MOVE</div>
+      <div>© 2026 Models on the Move</div>
       <div class="foot-legal">
-        <button type="button" class="legal-link" data-open="modal-impressum">IMPRESSZUM</button>
-        <button type="button" class="legal-link" data-open="modal-privacy">ADATKEZELÉS</button>
         <button type="button" class="legal-link" data-open="modal-terms">ÁSZF</button>
+        <button type="button" class="legal-link" data-open="modal-privacy">Adatkezelési tájékoztató</button>
+        <button type="button" class="legal-link" data-open="modal-cookies">Sütitájékoztató</button>
+        <button type="button" class="legal-link" id="cookieSettingsBtn">Sütibeállítások</button>
+        <button type="button" class="legal-link" data-open="modal-impressum">Impresszum</button>
       </div>
     </div>
   </div>
@@ -256,6 +288,26 @@ if(burgerBtn){
   document.querySelectorAll('.mlink').forEach(a=>a.addEventListener('click', closeMenu));
   document.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && burgerBtn.classList.contains('open')) closeMenu(); });
 }
+
+/* ============ fejléc "Események" legördülő (desktop) + almenü (mobil) ============ */
+document.querySelectorAll('.has-sub').forEach(group=>{
+  const toggle = group.querySelector('.sub-toggle');
+  toggle.addEventListener('click', (e)=>{
+    e.stopPropagation();
+    const open = group.getAttribute('aria-expanded') === 'true';
+    document.querySelectorAll('.has-sub').forEach(g=>g.setAttribute('aria-expanded','false'));
+    group.setAttribute('aria-expanded', open ? 'false' : 'true');
+  });
+});
+document.addEventListener('click', ()=> document.querySelectorAll('.has-sub').forEach(g=>g.setAttribute('aria-expanded','false')));
+document.querySelectorAll('.msub-toggle').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const panel = btn.nextElementSibling;
+    const open = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', open ? 'false' : 'true');
+    if(panel) panel.classList.toggle('open', !open);
+  });
+});
 
 /* ============ legal modals ============ */
 function openLegal(id){
@@ -349,6 +401,11 @@ window.addEventListener('keydown', (e)=>{
     localStorage.setItem(KEY, 'declined');
     banner.classList.remove('show');
   });
+  const settingsBtn = document.getElementById('cookieSettingsBtn');
+  if(settingsBtn) settingsBtn.addEventListener('click', ()=>{
+    banner.classList.add('show');
+    banner.scrollIntoView({behavior:'smooth', block:'center'});
+  });
 })();
 
 /* ============ CTA-szint rendszer (1/2/3) — brief "2. A látogatói út és a
@@ -423,8 +480,8 @@ window.addEventListener('keydown', (e)=>{
     const bar = document.createElement('div');
     bar.id = 'tier3Bar';
     bar.className = 'tier3-bar';
-    bar.innerHTML = '<p>Látjuk, hogy komolyan gondolod. Három perc, és személyre szabott javaslatot kapsz.</p>'
-      + '<div class="tier3-bar-ctas"><a href="/projekt-inditasa/" class="btn filled magnetic">INDÍTSUK EL A PROJEKTED</a>'
+    bar.innerHTML = '<p>Készen állsz a következő lépésre? Három perc, és személyre szabott javaslatot kapsz.</p>'
+      + '<div class="tier3-bar-ctas"><a href="/projekt-inditasa/" class="btn filled magnetic">Elindítom a projektem</a>'
       + '<button type="button" class="tier3-bar-close" aria-label="Bezárás">&times;</button></div>';
     document.body.appendChild(bar);
     requestAnimationFrame(function(){ bar.classList.add('show'); });
@@ -645,9 +702,55 @@ MODEL_APPLICATION_FORM = """
 """
 
 
+def gate_html(depth=0):
+    """Ideiglenes, kóddal nyitható "fejlesztés alatt áll" kapu — kliensoldali,
+    NEM valódi biztonság (a kód/tartalom megtekinthető forráskódból/hálózati
+    kérésből), csak addig tartja távol a véletlen látogatókat, amíg a brief
+    alapján zajló átépítés folyamatban van. A user explicit kérésére kerül be
+    minden oldalra; eltávolítandó, amint a fejlesztés befejeződött."""
+    r = _root(depth)
+    return f"""
+<div class="motm-gate" id="motmGate">
+  <div class="motm-gate-box">
+    <img src="{r}assets/motm_logo_dark.png" alt="Models on the Move" class="motm-gate-logo">
+    <h1>Fejlesztés alatt áll.</h1>
+    <p>Ez a weboldal jelenleg fejlesztés alatt áll. A megtekintéshez add meg a hozzáférési kódot.</p>
+    <form id="motmGateForm" autocomplete="off">
+      <input type="password" id="motmGateInput" placeholder="Hozzáférési kód" autocomplete="off">
+      <button type="submit" class="btn filled">Belépek</button>
+    </form>
+    <p class="motm-gate-error" id="motmGateError" hidden>Hibás kód. Próbáld újra.</p>
+  </div>
+</div>
+<script>
+(function(){{
+  var KEY='motm_gate_ok';
+  var CODE='MOTM2026';
+  var gate=document.getElementById('motmGate');
+  if(!gate) return;
+  try{{ if(localStorage.getItem(KEY)==='1'){{ gate.classList.add('unlocked'); return; }} }}catch(e){{}}
+  var form=document.getElementById('motmGateForm');
+  var input=document.getElementById('motmGateInput');
+  var err=document.getElementById('motmGateError');
+  form.addEventListener('submit', function(ev){{
+    ev.preventDefault();
+    if(input.value.trim().toUpperCase()===CODE){{
+      try{{ localStorage.setItem(KEY,'1'); }}catch(e){{}}
+      gate.classList.add('unlocked');
+    }} else {{
+      err.hidden=false;
+      input.value='';
+      input.focus();
+    }}
+  }});
+}})();
+</script>
+"""
+
+
 COOKIE_BANNER = """
 <div class="cookie-banner" id="cookieBanner" role="dialog" aria-live="polite" aria-label="Süti-tájékoztató">
-  <p>Az oldal látogatottsági statisztikákhoz sütiket használ (Google Analytics). Elfogadod?</p>
+  <p>Az oldal látogatottsági statisztikákhoz sütiket használ, és ez alapján személyre szabott ajánlatot jelenít meg. Elfogadod?</p>
   <div class="cookie-actions">
     <button type="button" class="btn" id="cookieDecline">Elutasítom</button>
     <button type="button" class="btn filled" id="cookieAccept">Elfogadom</button>
@@ -667,6 +770,7 @@ def page(title, description, canonical_path, body, depth=None, active="", og_ima
     return (
         head(title, description, canonical_path, depth=depth, og_image=og_image, robots=robots, extra_jsonld=extra_jsonld)
         + f"<body{body_attrs}>\n"
+        + gate_html(depth=depth)
         + COOKIE_BANNER
         + nav(depth=depth, active=active)
         + '\n<main id="main">\n'
