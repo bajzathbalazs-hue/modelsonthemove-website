@@ -168,29 +168,78 @@ gtag('config', 'G-EGGQF205M5', { 'anonymize_ip': true });
   <div class="wrap">
     <div class="rv">
       <span class="eyebrow">ESEMÉNYEK</span>
-      <h1>Esték, amelyekről még hetekig beszélnek.</h1>
-      <p>Válogatott közönség, prémium budapesti helyszín, VIP-asztalok — [a következő esemény hangulatának rövid leírása következik ide, helyszín- és névmegjelölés nélkül].</p>
+      <h1>Nem buli. Esemény.</h1>
+      <p>Válogatott közönség, prémium helyszín, gondosan felépített este. Azoknak, akik nemcsak ott akarnak lenni, hanem emlékezni is szeretnének rá.</p>
     </div>
   </div>
 </section>
 
+
 <section class="pad rule" id="kovetkezo" style="padding-top:60px;">
   <div class="wrap">
-    <div class="sec-head rv"><span class="eyebrow">KÖVETKEZŐ ESEMÉNYÜNK</span><h2>[Esemény jellege] · [ÉÉÉÉ. hónap NN.]</h2>
-      <p>[Rövid, hangulati leírás a következő estéről — helyszín típusa, de nem neve; dress code; mire számíthatsz.]</p>
+    <div class="sec-head rv"><span class="eyebrow">A KÖVETKEZŐ ESEMÉNY</span>
+      <h2>Hamarosan jelentkezünk a részletekkel.</h2>
+      <p>A következő esténk szervezés alatt áll. Iratkozz fel lent, és elsőként értesítünk, amint elérhető a jegyvásárlás.</p>
     </div>
-    <div class="ctas" style="margin-top:30px;justify-content:center;display:flex;gap:16px;flex-wrap:wrap;">
-      <a href="#" class="btn filled magnetic">JEGYVÁSÁRLÁS</a>
-      <a href="../projekt-inditasa/" class="btn magnetic">VIP-ASZTALFOGLALÁS</a>
-    </div>
-    <p style="margin-top:18px;text-align:center;font-size:12.5px;color:var(--ivory-dimmer);">A VIP-asztalfoglalás csak akkor jelenik meg, ha az adott estén elérhető.</p>
+    <p class="dev-note">[FEJLESZTŐI NÉZET — élesben rejtve. Ha lesz aktív esemény, töltsd ki az ACTIVE_EVENT szótárat content_events.py-ban, és ez a blokk a brief szerinti teljes sablonra vált: Esemény címe (belső, nem publikus) / Dátum · Kezdés · Budapest, a helyszín típusa / Két-három mondat a témáról és a hangulatról / Gomb: Jegyet veszek / "Jegy online és a helyszínen is vásárolható, amíg a készlet tart." / "VIP-asztal is foglalható." (csak ha elérhető) / Visszaszámláló az esemény kezdetéig.]</p>
   </div>
 </section>
 
 <section class="pad rule">
   <div class="wrap">
-    <div class="sec-head rv"><span class="eyebrow">GYAKORI KÉRDÉSEK</span><h2>Amit az esténkről érdemes tudni.</h2>
-      <p>[Helyőrző — a végleges kérdés-válasz lista a részletes szöveg megérkezésével kerül ide: dress code, korhatár, jegytípusok, VIP-asztal.]</p>
+    <div class="sec-head rv"><span class="eyebrow">MIRE SZÁMÍTHATSZ</span></div>
+    <ul class="who-for rv-stagger">
+      <li><b style="color:var(--ivory);">Válogatott vendégkör:</b> modellek, tartalomgyártók, vállalkozók és barátaik.</li>
+      <li><b style="color:var(--ivory);">Tematikus este:</b> minden eseménynek saját világa van, a dekorációtól a zenéig.</li>
+      <li><b style="color:var(--ivory);">Profi stáb:</b> fotósok és videósok rögzítik az estét, így a legjobb pillanataid megmaradnak.</li>
+      <li><b style="color:var(--ivory);">Prémium élmény:</b> a belépéstől az utolsó zenéig.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="pad rule">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="eyebrow">GYAKORI KÉRDÉSEK</span></div>
+    <div class="faq-list">
+      <div class="faq-item" aria-expanded="false">
+        <button type="button" class="faq-q">Hány éves kortól lehet belépni?<span class="plus"></span></button>
+        <div class="faq-a"><p>18 éves kortól, személyi igazolvánnyal.</p></div>
+      </div>
+      <div class="faq-item" aria-expanded="false">
+        <button type="button" class="faq-q">Van dress code?<span class="plus"></span></button>
+        <div class="faq-a"><p>Igen, az adott eseménynél mindig jelezzük.</p></div>
+      </div>
+      <div class="faq-item" aria-expanded="false">
+        <button type="button" class="faq-q">Visszaváltható a jegy?<span class="plus"></span></button>
+        <div class="faq-a"><p>A megvásárolt jegy nem váltható vissza, de más névre átíratható.</p></div>
+      </div>
+      <div class="faq-item" aria-expanded="false">
+        <button type="button" class="faq-q">Hogyan értesülök a következő eseményről?<span class="plus"></span></button>
+        <div class="faq-a"><p>Kövess minket Instagramon, vagy iratkozz fel a listánkra.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pad rule" id="feliratkozas">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="eyebrow">LEGYÉL AZ ELSŐK KÖZÖTT</span>
+      <p>Iratkozz fel, és még a nyilvános meghirdetés előtt értesítünk a következő eseményről.</p>
+    </div>
+    <div class="wrap rv" style="padding:0;max-width:480px;">
+      <form class="form-panel" name="esemeny-feliratkozas" data-netlify="true" data-netlify-honeypot="company_website" data-motm-form data-msg-id="subscribeMsg" data-event="event_subscribe_submit" novalidate>
+        <input type="hidden" name="form-name" value="esemeny-feliratkozas">
+        <input type="hidden" name="page_url" value="">
+        <input type="hidden" name="referrer_url" value="">
+        <div class="hp-field" aria-hidden="true"><label>Cégnév (ne töltsd ki)</label><input type="text" name="company_website" tabindex="-1" autocomplete="off"></div>
+        <div class="field"><label for="sub-name">NÉV</label><input id="sub-name" name="name" type="text" required></div>
+        <div class="field"><label for="sub-email">E-MAIL</label><input id="sub-email" name="email" type="email" required></div>
+        <label class="check"><input type="checkbox" name="consent" required> Elfogadom az Adatkezelési tájékoztatót.</label>
+        <div class="submit-row">
+          <button type="submit" class="btn filled magnetic">Feliratkozom</button>
+        </div>
+        <div class="form-msg" id="subscribeMsg"><h4>FELIRATKOZVA.</h4><p>Köszönjük. A következő eseményről elsőként értesítünk.</p></div>
+      </form>
     </div>
   </div>
 </section>
@@ -198,14 +247,14 @@ gtag('config', 'G-EGGQF205M5', { 'anonymize_ip': true });
 <section class="pad rule">
   <div class="wrap">
     <div class="sec-head rv"><span class="eyebrow">KORÁBBI ESTÉINK</span><h2>Nézd meg, mi történt eddig.</h2></div>
-    <div style="text-align:center;"><a href="../korabbi-esemenyek/" class="btn magnetic">KORÁBBI ESEMÉNYEK →</a></div>
+    <div style="text-align:center;"><a href="../korabbi-esemenyek/" class="btn magnetic">Megnézem a korábbi eseményeket →</a></div>
   </div>
 </section>
 
 <section class="cta-band rule">
   <div class="wrap rv">
-    <h2>Szerveznél hasonló estét a márkádnak?</h2>
-    <div class="ctas"><a href="../projekt-inditasa/" class="btn filled magnetic">INDÍTSUK EL A PROJEKTED</a></div>
+    <h2>Szeretnéd, hogy a márkád is megjelenjen az eseményeinken?</h2>
+    <div class="ctas"><a href="../projekt-inditasa/" class="btn filled magnetic">Együttműködést szeretnék</a></div>
   </div>
 </section>
 

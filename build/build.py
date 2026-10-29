@@ -10,7 +10,7 @@ import shell
 from shell import page, breadcrumb, BASE_URL
 from content_home import HOME_BODY
 from content_pages import ROLUNK_BODY, KAPCSOLAT_BODY, NOTFOUND_BODY
-from content_events import EVENTS_BODY, KORABBI_ESEMENYEK_BODY, PAST_EVENTS, past_event_detail_body
+from content_events import EVENTS_BODY, KORABBI_ESEMENYEK_BODY
 from content_arculat import ARCULAT_BODY
 from content_marketing_ai import MARKETING_AI_BODY
 from content_influencer import INFLUENCER_BODY
@@ -76,19 +76,12 @@ def main():
     write("korabbi-esemenyek/index.html", html)
     routes.append(("korabbi-esemenyek/", "0.7", "monthly"))
 
-    # ---- egy esemény részletező aloldalak (változatlan szerkezet) ----
-    for ev in PAST_EVENTS:
-        html = page(
-            title=f"{ev['title']} — Models on the Move",
-            description=f"{ev['venue']} · {ev['date_label']} — {ev['teaser']}",
-            canonical_path=f"esemenyek/{ev['slug']}/",
-            body=past_event_detail_body(ev),
-            depth=2,
-            active="events",
-            og_image=f"assets/{ev['cover']}",
-        )
-        write(f"esemenyek/{ev['slug']}/index.html", html)
-        routes.append((f"esemenyek/{ev['slug']}/", "0.5", "yearly"))
+    # NOTE: 2026.10.29 óta a korábbi, név/helyszín-szerinti esemény-aloldalak
+    # (pl. /esemenyek/dubai-style/) megszűntek — a végleges brief 10-oldalas
+    # oldaltérképében nincs helyük, és ügyfél-/helyszín-/eseménynevet nem
+    # tartalmazhatnak (0. pont). A korábbi tartalom anonimizált, összevont
+    # formában a /korabbi-esemenyek/ oldalon él tovább. A régi URL-ek a
+    # _redirects fájlban 301-gyel idekerülnek.
 
     # ---- ARCULAT ÉS WEBFEJLESZTÉS ----
     body = ARCULAT_BODY.replace("%%BREADCRUMB%%", breadcrumb([("Arculat és webfejlesztés", None)], depth=1))
@@ -146,7 +139,7 @@ def main():
     body = ROLUNK_BODY.replace("%%BREADCRUMB%%", breadcrumb([("Rólunk", None)], depth=1))
     html = page(
         title="Rólunk — Models on the Move csapata",
-        description="A Models on the Move Molnár Mira és Bajzáth Balázs közös projektje.",
+        description="Bajzáth Balázs és Molnár Míra, a Models on the Move alapítói — stratégia, weboldal, marketing, tartalom és influencerkapcsolatok egy kézben.",
         canonical_path="rolunk/",
         body=body,
         depth=1,
@@ -159,7 +152,7 @@ def main():
     body = KAPCSOLAT_BODY.replace("%%BREADCRUMB%%", breadcrumb([("Kapcsolat", None)], depth=1))
     html = page(
         title="Kapcsolat | Models on the Move",
-        description="Kérdésed van? Írj nyugodtan — egy munkanapon belül válaszolunk.",
+        description="Írj nekünk — egy munkanapon belül válaszolunk.",
         canonical_path="kapcsolat/",
         body=body,
         depth=1,
@@ -234,6 +227,10 @@ Sitemap: {BASE_URL}/sitemap.xml
 /weboldal-keszites/*  /arculat-es-webfejlesztes/  301
 /kozossegi-media-kezeles/*  /marketing-es-ai/  301
 /munkaink/*  /  301
+/esemenyek/dubai-style/*  /korabbi-esemenyek/  301
+/esemenyek/myrazs-fashion-show/*  /korabbi-esemenyek/  301
+/esemenyek/afro-house-night/*  /korabbi-esemenyek/  301
+/esemenyek/szezonnyito/*  /korabbi-esemenyek/  301
 """
     write("_redirects", redirects)
 

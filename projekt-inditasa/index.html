@@ -171,9 +171,21 @@ gtag('config', 'G-EGGQF205M5', { 'anonymize_ip': true });
     <p class="lead rv">Néhány egyszerű kérdés, nagyjából három perc. A válaszaid alapján személyre szabott javaslattal jelentkezünk.</p>
     <div class="audience-row rv" style="justify-content:center;margin-top:26px;">
       <span class="tag">Egy kapcsolattartó, aki végigviszi a projektedet</span>
-      <span class="tag">Saját csapat minden területre</span>
+      <span class="tag">Bevált csapat minden területre</span>
       <span class="tag">Átlátható lépések, mérhető eredmények</span>
     </div>
+  </div>
+</section>
+
+<section class="pad rule">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="eyebrow">MI TÖRTÉNIK A KÜLDÉS UTÁN</span></div>
+    <ol class="sidebar-steps rv-stagger">
+      <li>Egy munkanapon belül jelentkezünk.</li>
+      <li>Rövid konzultáción pontosítjuk az igényeidet.</li>
+      <li>Írásos javaslatot küldünk ütemezéssel.</li>
+      <li>A jóváhagyásod után indulunk.</li>
+    </ol>
   </div>
 </section>
 
@@ -204,18 +216,19 @@ gtag('config', 'G-EGGQF205M5', { 'anonymize_ip': true });
         </div>
         <input type="hidden" name="kategoria" value="">
       </div>
-        <div class="submit-row"><button type="button" class="btn filled magnetic pi-next">TOVÁBB</button></div>
+        <div class="submit-row"><button type="button" class="btn filled magnetic pi-next">Tovább lépek</button></div>
       </div>
 
       <!-- ÁG: ARCULAT, WEBOLDAL VAGY WEBSHOP -->
       <div class="pi-step" data-step="arculat" hidden>
         <div class="sec-head" style="text-align:left;margin:0 0 26px;"><span class="eyebrow">ARCULAT, WEBOLDAL VAGY WEBSHOP</span></div>
       <div class="field">
-        <label>Milyen oldalt szeretnél?</label>
-        <div class="chips chips-single" data-field-name="oldal_tipus">
+        <label>Mire van szükséged? (több is választható)</label>
+        <div class="chips" data-field-name="oldal_tipus">
+          <span class="chip-opt" data-value="Arculat (logó, színek, nyomdai anyagok)">Arculat (logó, színek, nyomdai anyagok)</span>
           <span class="chip-opt" data-value="Bemutatkozó oldal">Bemutatkozó oldal</span>
           <span class="chip-opt" data-value="Webshop">Webshop</span>
-          <span class="chip-opt" data-value="Landing oldal egy termékhez vagy kampányhoz">Landing oldal egy termékhez vagy kampányhoz</span>
+          <span class="chip-opt" data-value="Landing oldal">Landing oldal</span>
           <span class="chip-opt" data-value="Meglévő oldal megújítása">Meglévő oldal megújítása</span>
         </div>
         <input type="hidden" name="oldal_tipus" value="">
@@ -255,7 +268,7 @@ gtag('config', 'G-EGGQF205M5', { 'anonymize_ip': true });
         <label class="check" style="margin-top:14px;"><input type="checkbox" name="webshop_fizetes" value="Igen"> Kérem a fizetés, a szállítás és a számlázás bekötését is.</label>
       </div>
       <div class="field"><label for="referencia_link">VAN OLYAN OLDAL, AMELY TETSZIK, ÉS MEGMUTATNÁD NEKÜNK? (NEM KÖTELEZŐ)</label><input id="referencia_link" name="referencia_link" type="text" placeholder="https://..."></div>
-        <div class="submit-row"><button type="button" class="btn magnetic pi-back">VISSZA</button><button type="button" class="btn filled magnetic pi-next">TOVÁBB</button></div>
+        <div class="submit-row"><button type="button" class="btn magnetic pi-back">Visszalépek</button><button type="button" class="btn filled magnetic pi-next">Tovább lépek</button></div>
       </div>
 
       <!-- ÁG: MARKETING, HIRDETÉSKEZELÉS VAGY AI -->
@@ -313,7 +326,7 @@ gtag('config', 'G-EGGQF205M5', { 'anonymize_ip': true });
         <input type="hidden" name="ai_erdeklodes" value="">
       </div>
       </div>
-        <div class="submit-row"><button type="button" class="btn magnetic pi-back">VISSZA</button><button type="button" class="btn filled magnetic pi-next">TOVÁBB</button></div>
+        <div class="submit-row"><button type="button" class="btn magnetic pi-back">Visszalépek</button><button type="button" class="btn filled magnetic pi-next">Tovább lépek</button></div>
       </div>
 
       <!-- ÁG: KAMPÁNY VAGY TARTALOMGYÁRTÁS -->
@@ -324,6 +337,7 @@ gtag('config', 'G-EGGQF205M5', { 'anonymize_ip': true });
         <div class="chips" data-field-name="mit_keszitunk">
           <span class="chip-opt" data-value="Reklámfilm">Reklámfilm</span>
           <span class="chip-opt" data-value="Közösségi videók (Reels, TikTok)">Közösségi videók (Reels, TikTok)</span>
+          <span class="chip-opt" data-value="Hirdetési kreatívok">Hirdetési kreatívok</span>
           <span class="chip-opt" data-value="Fotózás">Fotózás</span>
           <span class="chip-opt" data-value="Eseményfilm">Eseményfilm</span>
         </div>
@@ -353,7 +367,7 @@ gtag('config', 'G-EGGQF205M5', { 'anonymize_ip': true });
         </div>
         <input type="hidden" name="hirdetesben_hasznalna" value="">
       </div>
-        <div class="submit-row"><button type="button" class="btn magnetic pi-back">VISSZA</button><button type="button" class="btn filled magnetic pi-next">TOVÁBB</button></div>
+        <div class="submit-row"><button type="button" class="btn magnetic pi-back">Visszalépek</button><button type="button" class="btn filled magnetic pi-next">Tovább lépek</button></div>
       </div>
 
       <!-- ÁG: INFLUENCER-EGYÜTTMŰKÖDÉS -->
@@ -389,7 +403,7 @@ gtag('config', 'G-EGGQF205M5', { 'anonymize_ip': true });
         </div>
         <input type="hidden" name="siker_meres" value="">
       </div>
-        <div class="submit-row"><button type="button" class="btn magnetic pi-back">VISSZA</button><button type="button" class="btn filled magnetic pi-next">TOVÁBB</button></div>
+        <div class="submit-row"><button type="button" class="btn magnetic pi-back">Visszalépek</button><button type="button" class="btn filled magnetic pi-next">Tovább lépek</button></div>
       </div>
 
       <!-- KÖZÖS ZÁRÓ LÉPÉS -->
@@ -493,7 +507,7 @@ gtag('config', 'G-EGGQF205M5', { 'anonymize_ip': true });
 
       <label class="check" style="margin-top:20px;"><input type="checkbox" name="consent" required> Elfogadom az Adatkezelési tájékoztatót.</label>
 
-        <div class="submit-row"><button type="button" class="btn magnetic pi-back">VISSZA</button><button type="submit" class="btn filled magnetic">MEGKERESÉS ELKÜLDÉSE</button></div>
+        <div class="submit-row"><button type="button" class="btn magnetic pi-back">Visszalépek</button><button type="submit" class="btn filled magnetic">Elküldöm a megkeresésem</button></div>
       </div>
 
       <div class="form-msg" id="piMsg"><h4>MEGKAPTUK. HAMAROSAN JELENTKEZÜNK.</h4><p>Egy munkanapon belül személyesen keresünk egy rövid konzultációval és az első javaslatunkkal.</p></div>
@@ -630,8 +644,12 @@ gtag('config', 'G-EGGQF205M5', { 'anonymize_ip': true });
     if(webKoltseg.indexOf('Még nem tudom') !== -1 || haviDij.indexOf('Még nem tudom') !== -1){
       tag = '[JAVASLATOT KÉR]';
     }
-    if(webKoltseg.indexOf('600') !== -1 || webKoltseg.indexOf('800') !== -1 || webKoltseg.indexOf('1,2') !== -1 ||
-       haviDij.indexOf('400') !== -1 || haviDij.indexOf('700') !== -1 || haviDij.indexOf('1 millió') !== -1){
+    // Pontos egyezés a [KIEMELT] sávokra — indexOf-alapú részszöveg-keresés
+    // hamis pozitívot adott (pl. "400–600 ezer Ft" tartalmazza a "600"
+    // részsztringet, holott az nem a kiemelt sáv).
+    var webKiemelt = ['600–800 ezer Ft', '800 ezer – 1,2 millió Ft', '1,2 millió Ft felett'];
+    var haviKiemelt = ['400–700 ezer Ft / hó', '700 ezer – 1 millió Ft / hó', '1 millió Ft / hó felett'];
+    if(webKiemelt.indexOf(webKoltseg) !== -1 || haviKiemelt.indexOf(haviDij) !== -1){
       tag = '[KIEMELT]';
     }
     subjectField.value = tag + ' Új projektindítás';

@@ -178,7 +178,7 @@ section{position:relative;}
 
 /* mobile full-screen menu */
 .mobile-menu{
-  position:fixed;inset:0;z-index:300;background:rgba(10,10,9,.98);backdrop-filter:blur(10px);
+  position:fixed;inset:0;z-index:9999;background:rgba(10,10,9,.98);backdrop-filter:blur(10px);
   display:none;flex-direction:column;align-items:center;justify-content:center;gap:30px;
 }
 .mobile-menu a{font-family:var(--serif);font-size:28px;}

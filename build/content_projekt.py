@@ -28,9 +28,21 @@ PROJEKT_BODY = """
     <p class="lead rv">Néhány egyszerű kérdés, nagyjából három perc. A válaszaid alapján személyre szabott javaslattal jelentkezünk.</p>
     <div class="audience-row rv" style="justify-content:center;margin-top:26px;">
       <span class="tag">Egy kapcsolattartó, aki végigviszi a projektedet</span>
-      <span class="tag">Saját csapat minden területre</span>
+      <span class="tag">Bevált csapat minden területre</span>
       <span class="tag">Átlátható lépések, mérhető eredmények</span>
     </div>
+  </div>
+</section>
+
+<section class="pad rule">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="eyebrow">MI TÖRTÉNIK A KÜLDÉS UTÁN</span></div>
+    <ol class="sidebar-steps rv-stagger">
+      <li>Egy munkanapon belül jelentkezünk.</li>
+      <li>Rövid konzultáción pontosítjuk az igényeidet.</li>
+      <li>Írásos javaslatot küldünk ütemezéssel.</li>
+      <li>A jóváhagyásod után indulunk.</li>
+    </ol>
   </div>
 </section>
 
@@ -57,13 +69,13 @@ PROJEKT_BODY = """
     "Kampány és tartalomgyártás (fotó, videó)",
     "Influencer-együttműködés",
 ], multi=True) + """
-        <div class="submit-row"><button type="button" class="btn filled magnetic pi-next">TOVÁBB</button></div>
+        <div class="submit-row"><button type="button" class="btn filled magnetic pi-next">Tovább lépek</button></div>
       </div>
 
       <!-- ÁG: ARCULAT, WEBOLDAL VAGY WEBSHOP -->
       <div class="pi-step" data-step="arculat" hidden>
         <div class="sec-head" style="text-align:left;margin:0 0 26px;"><span class="eyebrow">ARCULAT, WEBOLDAL VAGY WEBSHOP</span></div>
-""" + _chip_group("Milyen oldalt szeretnél?", "oldal_tipus", ["Bemutatkozó oldal", "Webshop", "Landing oldal egy termékhez vagy kampányhoz", "Meglévő oldal megújítása"], multi=False) + """
+""" + _chip_group("Mire van szükséged? (több is választható)", "oldal_tipus", ["Arculat (logó, színek, nyomdai anyagok)", "Bemutatkozó oldal", "Webshop", "Landing oldal", "Meglévő oldal megújítása"], multi=True) + """
 """ + _chip_group("Van már arculatod (logó, színek, betűtípus)?", "arculat_keszenlet", ["Igen, kész", "Részben", "Nincs, ezt is kérném"], multi=False) + """
 """ + _chip_group("Ki írja a szövegeket, és honnan lesznek a fotók?", "tartalom_igeny", ["Megvannak", "Kérem a szövegírást", "Kérem a fotózást is"], multi=True) + """
 """ + _chip_group("Mire van szükséged az indításhoz?", "extra_igeny", ["Mérés és analitika", "Keresőoptimalizálás", "Jogi szövegek", "Domain és tárhely", "Folyamatos karbantartás"], multi=True) + """
@@ -73,7 +85,7 @@ PROJEKT_BODY = """
         <label class="check" style="margin-top:14px;"><input type="checkbox" name="webshop_fizetes" value="Igen"> Kérem a fizetés, a szállítás és a számlázás bekötését is.</label>
       </div>
       <div class="field"><label for="referencia_link">VAN OLYAN OLDAL, AMELY TETSZIK, ÉS MEGMUTATNÁD NEKÜNK? (NEM KÖTELEZŐ)</label><input id="referencia_link" name="referencia_link" type="text" placeholder="https://..."></div>
-        <div class="submit-row"><button type="button" class="btn magnetic pi-back">VISSZA</button><button type="button" class="btn filled magnetic pi-next">TOVÁBB</button></div>
+        <div class="submit-row"><button type="button" class="btn magnetic pi-back">Visszalépek</button><button type="button" class="btn filled magnetic pi-next">Tovább lépek</button></div>
       </div>
 
       <!-- ÁG: MARKETING, HIRDETÉSKEZELÉS VAGY AI -->
@@ -86,17 +98,17 @@ PROJEKT_BODY = """
       <div class="field" id="aiExtra" hidden>
 """ + _chip_group("Mi érdekel?", "ai_erdeklodes", ["AI-oktatás a csapatnak", "Személyre szabott AI-asszisztens", "Automatizációk"], multi=False) + """
       </div>
-        <div class="submit-row"><button type="button" class="btn magnetic pi-back">VISSZA</button><button type="button" class="btn filled magnetic pi-next">TOVÁBB</button></div>
+        <div class="submit-row"><button type="button" class="btn magnetic pi-back">Visszalépek</button><button type="button" class="btn filled magnetic pi-next">Tovább lépek</button></div>
       </div>
 
       <!-- ÁG: KAMPÁNY VAGY TARTALOMGYÁRTÁS -->
       <div class="pi-step" data-step="kampany" hidden>
         <div class="sec-head" style="text-align:left;margin:0 0 26px;"><span class="eyebrow">KAMPÁNY VAGY TARTALOMGYÁRTÁS</span></div>
-""" + _chip_group("Mit készítünk?", "mit_keszitunk", ["Reklámfilm", "Közösségi videók (Reels, TikTok)", "Fotózás", "Eseményfilm"], multi=True) + """
+""" + _chip_group("Mit készítünk?", "mit_keszitunk", ["Reklámfilm", "Közösségi videók (Reels, TikTok)", "Hirdetési kreatívok", "Fotózás", "Eseményfilm"], multi=True) + """
 """ + _chip_group("Mit intézzünk?", "mit_intezzunk", ["Koncepció és forgatókönyv", "Szereplők és modellek", "Helyszín", "Kellékek", "Luxusautó", "Operatőr és fotós", "Smink és stylist", "Vágás és utómunka"], multi=True) + """
       <div class="field"><label for="mennyiseg_platform">HÁNY DARAB ANYAG KELL, ÉS MELYIK PLATFORMRA?</label><input id="mennyiseg_platform" name="mennyiseg_platform" type="text"></div>
 """ + _chip_group("Felhasználnád az anyagokat fizetett hirdetésben is?", "hirdetesben_hasznalna", ["Igen", "Nem", "Még nem tudom"], multi=False) + """
-        <div class="submit-row"><button type="button" class="btn magnetic pi-back">VISSZA</button><button type="button" class="btn filled magnetic pi-next">TOVÁBB</button></div>
+        <div class="submit-row"><button type="button" class="btn magnetic pi-back">Visszalépek</button><button type="button" class="btn filled magnetic pi-next">Tovább lépek</button></div>
       </div>
 
       <!-- ÁG: INFLUENCER-EGYÜTTMŰKÖDÉS -->
@@ -105,7 +117,7 @@ PROJEKT_BODY = """
 """ + _chip_group("Milyen influencerprofil illik a márkádhoz?", "influencer_profil", ["Lifestyle", "Divat és szépség", "Sport és fitnesz", "Ismert arcok (tévé, szépségversenyek)"], multi=True) + """
 """ + _chip_group("Milyen formában?", "egyuttmukodes_forma", ["Egyszeri megjelenés", "Havi, rendszeres együttműködés", "Eseményes megjelenés", "Termékcsere (barter)"], multi=False) + """
 """ + _chip_group("Hogyan mérjük a sikert?", "siker_meres", ["Elérés", "Követőszám", "Weboldal-forgalom", "Eladás egyedi kóddal"], multi=True) + """
-        <div class="submit-row"><button type="button" class="btn magnetic pi-back">VISSZA</button><button type="button" class="btn filled magnetic pi-next">TOVÁBB</button></div>
+        <div class="submit-row"><button type="button" class="btn magnetic pi-back">Visszalépek</button><button type="button" class="btn filled magnetic pi-next">Tovább lépek</button></div>
       </div>
 
       <!-- KÖZÖS ZÁRÓ LÉPÉS -->
@@ -143,7 +155,7 @@ PROJEKT_BODY = """
 
       <label class="check" style="margin-top:20px;"><input type="checkbox" name="consent" required> Elfogadom az Adatkezelési tájékoztatót.</label>
 
-        <div class="submit-row"><button type="button" class="btn magnetic pi-back">VISSZA</button><button type="submit" class="btn filled magnetic">MEGKERESÉS ELKÜLDÉSE</button></div>
+        <div class="submit-row"><button type="button" class="btn magnetic pi-back">Visszalépek</button><button type="submit" class="btn filled magnetic">Elküldöm a megkeresésem</button></div>
       </div>
 
       <div class="form-msg" id="piMsg"><h4>MEGKAPTUK. HAMAROSAN JELENTKEZÜNK.</h4><p>Egy munkanapon belül személyesen keresünk egy rövid konzultációval és az első javaslatunkkal.</p></div>
@@ -280,8 +292,12 @@ PROJEKT_BODY = """
     if(webKoltseg.indexOf('Még nem tudom') !== -1 || haviDij.indexOf('Még nem tudom') !== -1){
       tag = '[JAVASLATOT KÉR]';
     }
-    if(webKoltseg.indexOf('600') !== -1 || webKoltseg.indexOf('800') !== -1 || webKoltseg.indexOf('1,2') !== -1 ||
-       haviDij.indexOf('400') !== -1 || haviDij.indexOf('700') !== -1 || haviDij.indexOf('1 millió') !== -1){
+    // Pontos egyezés a [KIEMELT] sávokra — indexOf-alapú részszöveg-keresés
+    // hamis pozitívot adott (pl. "400–600 ezer Ft" tartalmazza a "600"
+    // részsztringet, holott az nem a kiemelt sáv).
+    var webKiemelt = ['600–800 ezer Ft', '800 ezer – 1,2 millió Ft', '1,2 millió Ft felett'];
+    var haviKiemelt = ['400–700 ezer Ft / hó', '700 ezer – 1 millió Ft / hó', '1 millió Ft / hó felett'];
+    if(webKiemelt.indexOf(webKoltseg) !== -1 || haviKiemelt.indexOf(haviDij) !== -1){
       tag = '[KIEMELT]';
     }
     subjectField.value = tag + ' Új projektindítás';

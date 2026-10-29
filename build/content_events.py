@@ -1,287 +1,172 @@
 # -*- coding: utf-8 -*-
 from shell import COOLTIX_EVENT_PRODUCT_ID, COOLTIX_WIDGET_URL
 
-# Jegyértékesítés 2026.10.02-től Cooltix-on fut (korábban SevenRooms) — a
-# gombok a Cooltix widget.js-t hívják (lásd shell.py COOLTIX_WIDGET_SCRIPT),
-# nem közvetlen linkek. EVENT_TICKET_URL csak a JSON-LD structured datának kell.
+# Jegyértékesítés: Cooltix widget (ld. shell.py COOLTIX_WIDGET_SCRIPT). A gomb
+# a data-cooltix-event-products attribútumot hívja, nem közvetlen link.
 EVENT_TICKET_URL = COOLTIX_WIDGET_URL
-EVENT_SLUG = "dubai-style"
 
-COOLTIX_TICKET_BTN = f'<button type="button" class="btn filled magnetic" data-cooltix-event-products=\'{COOLTIX_EVENT_PRODUCT_ID}\'>JEGYVÁSÁRLÁS</button>'
-COOLTIX_TABLE_BTN = f'<button type="button" class="btn magnetic" data-cooltix-event-products=\'{COOLTIX_EVENT_PRODUCT_ID}\'>ASZTALFOGLALÁS</button>'
+COOLTIX_TICKET_BTN = f'<button type="button" class="btn filled magnetic" data-cooltix-event-products=\'{COOLTIX_EVENT_PRODUCT_ID}\'>Jegyet veszek</button>'
+COOLTIX_TABLE_BTN = f'<button type="button" class="btn magnetic" data-cooltix-event-products=\'{COOLTIX_EVENT_PRODUCT_ID}\'>VIP-asztalfoglalás</button>'
 
-# ---- Instagram poszt-linkek a galéria csempékhez (kattintásra a valódi posztra/reelre visz) ----
-IG_FEATURED = "https://www.instagram.com/p/DYm2IkFilaO/"
-IG_FASHIONSHOW_REPORT = "https://www.instagram.com/p/DV13-0SCPjM/"
-IG_POPOUT = "https://www.instagram.com/p/DVopDD_DTAr/"
-IG_AFROHOUSE_ANNOUNCE = "https://www.instagram.com/p/DUgQUjGgjmC/"
-IG_MOMLEROY_TEASER = "https://www.instagram.com/p/DUThgzQEhK4/"
-IG_MYRAZS_RECAP = "https://www.instagram.com/p/DT8UZeBAgkQ/"
-IG_AFTERPARTY_TICKETS = "https://www.instagram.com/p/DU8rIVhgjz3/"
-IG_MYRAZS_TICKET_PROMO = "https://www.instagram.com/p/DXuTi24DD-C/"
-IG_MYRAZS_FEATHER_MIRAGE = "https://www.instagram.com/p/DaNzhxwCTw9/"
+# ---- Főoldali/Események "következő esemény" kártya — csak akkor jelenik meg
+# élesben teljes részletességgel, ha van ténylegesen meghirdetett esemény.
+# Formátum: {"name": "...", "date_label": "2026. november 14., szombat",
+#            "time_label": "23:00-tól", "venue_type": "prémium klub a belvárosban",
+#            "mood": "Két-három mondat a témáról és a hangulatról.",
+#            "dress_code": "Elegáns, all black.", "vip_table": True/False,
+#            "countdown_iso": "2026-11-14T23:00:00+01:00"}
+# A név/helyszín itt BELSŐ admin-célra van (pl. Cooltix-szinkron), a nyilvános
+# oldal NEM jeleníti meg az esemény/helyszín NEVÉT — csak típus/hangulat szerint,
+# anonimizáltan (brief 0. és 6.2 pont).
+ACTIVE_EVENT = None
 
-# ---- korábbi események: egy kártya = egy esemény, kattintásra saját aloldal ----
-PAST_EVENTS = [
+# ---- Korábbi események — anonimizált, név/helyszín nélküli leírások (brief
+# 6.3). A képek megmaradnak (saját fotók, nem azonosítanak ügyfelet/helyszínt
+# névvel), de a cím/helyszín/fellépő-nevek nem jelenhetnek meg. A pontos
+# dátumok a brief 8. pontja szerint egyelőre nyitott kérdés — addig a
+# "[ÉÉÉÉ. hónap NN.]" helyőrző marad, élesben rejtve (ld. shell.DEV_NOTE_STYLE),
+# így a nyilvános oldalon egyelőre nincs dátum kiírva a kártyákon.
+LATEST_EVENT = {
+    "cover": "dubai-style-flyer.jpg",
+    "teaser": "Egy este, amely a távoli éjszakák energiáját hozta Budapestre: élő DJ-szettek, különleges fények és hangulat, amely hajnalig tartó partyvá alakult.",
+    "gallery": ["vibe-jungle-lounge.jpg", "vibe-bartrio-final.jpg", "vibe-redroom-group.jpg", "vibe-table-group.jpg", "vibe-cellar-table.jpg"],
+    "video": None,
+}
+
+EARLIER_EVENTS = [
     {
-        "slug": "dubai-style",
-        "title": "Models on the Move × VIBE — Dubai Style",
-        "venue": "VIBE Budapest",
-        "date_label": "2026.10.16.",
-        "date_full": "2026. október 16., péntek",
-        "time_label": None,
-        "cover": "dubai-style-flyer.jpg",
-        "teaser": "A divat világa találkozott a VIBE karakteres hangulatával — Fabios és Mandmil Afro House szettjei egy felejthetetlen estén.",
-        "intro": [
-            "2026. október 16-án a Models on the Move × VIBE Budapest — Dubai Style elhozta a dubai éjszakák stílusát és energiáját Budapestre.",
-            "A divat világa találkozott a VIBE karakteres hangulatával: Fabios és Mandmil Afro House szettjei, táncosok és élő előadók emelték új szintre az éjszakát.",
-            "Exkluzív italok, bottle service és snackek egész este — az Early Bird jegyek egy nap alatt elfogytak, a terem hajnalig tartó Afro House partyvá változott.",
-        ],
-        "facts": [
-            ("DÁTUM", "2026. október 16., péntek"),
-            ("IDŐPONT", "23:00–03:00"),
-            ("HELYSZÍN", "VIBE Budapest"),
-            ("DRESS CODE", "Elegáns party stílus"),
-            ("KORHATÁR", "18+"),
-        ],
-        "lineup": [
-            ("Fabios", "Afro House"),
-            ("Mandmil", "Afro House"),
-        ],
-        "extras": ["Exkluzív italok", "Bottle service", "Early Bird jegyek 1 nap alatt elfogytak"],
-        "gallery": ["vibe-jungle-lounge.jpg", "vibe-bartrio-final.jpg", "vibe-redroom-group.jpg", "vibe-table-group.jpg", "vibe-cellar-table.jpg"],
-        "video": None,
-    },
-    {
-        "slug": "myrazs-fashion-show",
-        "title": "Myrázs Szülinapi Divatbemutató & After Party",
-        "venue": "MOM Leroy Bistro",
-        "date_label": "2026.01.09.",
-        "date_full": "2026. január 9., péntek",
-        "time_label": "18:00-tól",
         "cover": "ig-myrazs-recap.jpg",
-        "teaser": "A Myrázs első kollekciójának bemutatója, majd After Party — ez indította el a rendszeres estéinket.",
-        "intro": [
-            "A Myrázs szülinapi divatbemutatója volt az első nagy MODELS ON THE MOVE party — a hatalmas érdeklődésre való tekintettel ez indította el a rendszeres estéink sorát.",
-            "18:00–20:00 érkezés és vacsora, majd 20:00-tól a Myrázs bemutatta első kollekcióját, extra produkciókkal, tombolával és utána Myrázs After Partyval zárva az estét.",
-        ],
-        "facts": [
-            ("DÁTUM", "2026. január 9., péntek"),
-            ("IDŐPONT", "18:00-tól"),
-            ("HELYSZÍN", "MOM Leroy Bistro"),
-            ("LÉTSZÁM", "kb. 400 fő"),
-        ],
-        "lineup": [
-            ("Myrázs", "Divatbemutató — első kollekció"),
-            ("Nagy Nikol", "Extra produkció"),
-            ("Gyulai Viktória", "Extra produkció"),
-            ("Moani (Zsombor Dudás-Kass)", "DJ"),
-        ],
-        "extras": ["Tombola értékes nyereményekkel", "Myrázs After Party"],
-        "gallery": ["ig-myrazs-recap.jpg"],
-        "video": None,
+        "teaser": "Divatbemutató és utána party — ez indította el a rendszeres estéink sorát.",
     },
     {
-        "slug": "afro-house-night",
-        "title": "Afro House Night",
-        "venue": "MOM Leroy Bistro",
-        "date_label": "2026.02.27.",
-        "date_full": "2026. február 27., péntek",
-        "time_label": "19:00–03:00",
         "cover": "ig-afrohouse-announce.jpg",
-        "teaser": "Vacsora, fashion show, majd hajnalig tartó Afro House party a MOM Leroy Bistróban.",
-        "intro": [
-            "Exkluzív vacsora, látványos fashion show, majd 22:30-tól hajnalig tartó Afro House party a MOM Leroy Bistróban.",
-            "19:00 kapunyitás, 21:30 fashion show, 22:00 tombolahúzás, 22:30-tól Afro House party a POP OUT csapatával.",
-        ],
-        "facts": [
-            ("DÁTUM", "2026. február 27., péntek"),
-            ("IDŐPONT", "19:00–03:00"),
-            ("HELYSZÍN", "MOM Leroy Bistro"),
-            ("LÉTSZÁM", "forgóban nagyjából 500 fő"),
-        ],
-        "lineup": [
-            ("Myrázs", "Fashion show"),
-            ("Individual", "Fashion show"),
-            ("POP OUT", "Afro House DJ-k"),
-            ("Molnár Fábi", "DJ"),
-            ("Moani", "DJ"),
-        ],
-        "extras": ["Welcome drink early bird jeggyel", "Tombola értékes nyereményekkel", "Dress code: Cool – Elegant"],
-        "gallery": [],
-        "video": None,
+        "teaser": "Exkluzív vacsora, fashion show, majd hajnalig tartó party.",
     },
     {
-        "slug": "szezonnyito",
-        "title": "Szezonnyitó — Day Time Party & Fashion Show",
-        "venue": "MOM Leroy Bistro",
-        "date_label": "2026.05.29.",
-        "date_full": "2026. május 29., péntek",
-        "time_label": "16:00–00:00",
         "cover": "leroy-szezonnyito.jpg",
-        "teaser": "Két fashion show, élő DJ-k és napközbeni luxury hangulat a MOM Leroy teraszán.",
-        "intro": [
-            "A szezonnyitó estén a divat, a zene és a közösség találkozott a MOM Leroy Bistróban — napközbeni luxury experience-ként indult, és éjszakába nyúló partyvá alakult.",
-            "Két fashion show, élő DJ-szettek, pop-up store és tombola tette emlékezetessé az estét, a teljesen megnyitott teraszon.",
-        ],
-        "facts": [
-            ("DÁTUM", "2026. május 29., péntek"),
-            ("IDŐPONT", "16:00–00:00"),
-            ("HELYSZÍN", "MOM Leroy Bistro"),
-            ("LÉTSZÁM", "kb. 300 fő"),
-        ],
-        "lineup": [
-            ("Myrázs", "Fashion show"),
-            ("In My Style", "Fashion show"),
-            ("Szőke Rebeka (Sz_Becca)", "DJ"),
-            ("Fabiosz x Soma", "DJ"),
-        ],
-        "extras": ["Pop-up store", "Tombola és meglepetések", "Teljes terasz élmény", "Food & drink experience"],
-        "gallery": [],
-        "video": {"src": "hero-myrazs.mp4", "poster": "hero-myrazs-poster.jpg"},
+        "teaser": "Napközbeni luxusélmény a teraszon, két fashion show-val és élő DJ-szettekkel, amely éjszakába nyúló partyvá alakult.",
     },
 ]
 
 
-def _event_card(ev, depth_prefix="../assets/", link_prefix="../esemenyek/"):
-    return f"""      <a class="event-card glow-card" href="{link_prefix}{ev['slug']}/">
+def _event_card_anon(ev, depth_prefix="../assets/"):
+    return f"""      <div class="event-card glow-card">
         <div class="plate photo grain" style="background-image:url('{depth_prefix}{ev['cover']}')"></div>
         <div class="event-card-body">
-          <h3>{ev['title']}</h3>
-          <div class="meta-line">{ev['venue']} · {ev['date_label']}</div>
+          <p class="dev-note">[ÉÉÉÉ. hónap NN.]</p>
           <p>{ev['teaser']}</p>
         </div>
-      </a>"""
+      </div>"""
 
 
-def _fact_rows(facts):
-    return "\n".join(f'          <div><span>{k}</span><span>{v}</span></div>' for k, v in facts)
-
-
-def _lineup_rows(lineup):
-    if not lineup:
-        return ""
-    rows = "\n".join(
-        f'          <div class="dj"><span class="name">{name}</span><span class="meta"><span class="genre">{role}</span></span></div>'
-        for name, role in lineup
-    )
-    return f"""
-        <div class="lineup" style="margin-top:40px;">
-          <h4>KÖZREMŰKÖDŐK</h4>
-{rows}
-        </div>"""
-
-
-def _extras_html(extras):
-    if not extras:
-        return ""
-    tags = "".join(f'<span class="tag">{e}</span>' for e in extras)
-    return f'\n        <div class="audience-row" style="margin-top:28px;">{tags}</div>'
-
-
-def _gallery_html(ev):
-    tiles = []
-    if ev.get("video"):
-        tiles.append(f"""      <div class="gtile wide glow-card">
-        <video class="gtile-video" autoplay muted loop playsinline controls poster="../../assets/{ev['video']['poster']}">
-          <source src="../../assets/{ev['video']['src']}" type="video/mp4">
-        </video>
-        <span class="gtile-badge">▶ VIDEÓ</span>
-      </div>""")
-    for i, img in enumerate(ev["gallery"]):
-        wide = " wide" if i == 0 and not ev.get("video") else ""
-        tiles.append(f"""      <div class="gtile{wide} glow-card"><div class="plate photo grain" style="background-image:url('../../assets/{img}')"></div></div>""")
-    return "\n\n".join(tiles)
-
-
-def past_event_detail_body(ev):
-    intro_html = "\n        ".join(f"<p>{p}</p>" for p in ev["intro"])
-    time_row = f'\n          <div><span>IDŐPONT</span><span>{ev["time_label"]}</span></div>' if ev.get("time_label") else ""
-    gallery_section = ""
-    if ev.get("video") or ev.get("gallery"):
-        gallery_section = f"""
+def _next_event_section():
+    if ACTIVE_EVENT:
+        ev = ACTIVE_EVENT
+        vip_row = f'<p style="margin-top:14px;text-align:center;font-size:13px;color:var(--ivory-dim);">VIP-asztal is foglalható.</p>' if ev.get("vip_table") else ""
+        dress_row = f"""
 <section class="pad rule">
   <div class="wrap">
-    <div class="sec-head rv"><span class="eyebrow">GALÉRIA</span><h2>Ízelítő az estéből.</h2></div>
-    <div class="gallery-grid rv-stagger">
-{_gallery_html(ev)}
+    <div class="sec-head rv"><span class="eyebrow">DRESS CODE</span></div>
+    <div class="dresscode-box rv">{ev.get('dress_code', '')}</div>
+  </div>
+</section>""" if ev.get("dress_code") else ""
+        return f"""
+<section class="pad rule" id="kovetkezo" style="padding-top:60px;">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="eyebrow">A KÖVETKEZŐ ESEMÉNY</span>
+      <h2>{ev['date_label']} · {ev.get('time_label','')} · Budapest, {ev['venue_type']}</h2>
+      <p>{ev['mood']}</p>
     </div>
+    <div class="ctas" style="margin-top:30px;justify-content:center;display:flex;gap:16px;flex-wrap:wrap;">
+      {COOLTIX_TICKET_BTN}
+      {COOLTIX_TABLE_BTN if ev.get('vip_table') else ''}
+    </div>
+    <p style="margin-top:18px;text-align:center;font-size:12.5px;color:var(--ivory-dimmer);">Jegy online és a helyszínen is vásárolható, amíg a készlet tart.</p>
+    {vip_row}
+  </div>
+</section>
+{dress_row}"""
+    return """
+<section class="pad rule" id="kovetkezo" style="padding-top:60px;">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="eyebrow">A KÖVETKEZŐ ESEMÉNY</span>
+      <h2>Hamarosan jelentkezünk a részletekkel.</h2>
+      <p>A következő esténk szervezés alatt áll. Iratkozz fel lent, és elsőként értesítünk, amint elérhető a jegyvásárlás.</p>
+    </div>
+    <p class="dev-note">[FEJLESZTŐI NÉZET — élesben rejtve. Ha lesz aktív esemény, töltsd ki az ACTIVE_EVENT szótárat content_events.py-ban, és ez a blokk a brief szerinti teljes sablonra vált: Esemény címe (belső, nem publikus) / Dátum · Kezdés · Budapest, a helyszín típusa / Két-három mondat a témáról és a hangulatról / Gomb: Jegyet veszek / "Jegy online és a helyszínen is vásárolható, amíg a készlet tart." / "VIP-asztal is foglalható." (csak ha elérhető) / Visszaszámláló az esemény kezdetéig.]</p>
   </div>
 </section>"""
-    return f"""
-<section class="hero" style="min-height:56vh;">
-  <div class="plate photo grain" style="background-image:url('../../assets/{ev['cover']}');background-position:center 28%;"></div>
-  <a href="../" class="event-hero-back rv" style="position:absolute;top:110px;left:48px;z-index:3;">← ÖSSZES ESEMÉNY</a>
-</section>
-
-<section class="pad rule" style="padding-top:60px;padding-bottom:60px;">
-  <div class="wrap">
-    <div class="hero-kicker rv"><span class="dot"></span><span class="eyebrow">KORÁBBI ESTÉNK</span></div>
-    <h1 class="rv" style="font-family:var(--sans);font-weight:800;text-transform:uppercase;font-size:clamp(30px,5.6vw,64px);line-height:1.02;letter-spacing:-.01em;margin-top:18px;max-width:900px;">{ev['title']}</h1>
-    <div class="event-two-col rv" style="margin-top:44px;">
-      <div>
-        {intro_html}{_lineup_rows(ev['lineup'])}{_extras_html(ev['extras'])}
-      </div>
-      <div>
-        <div class="event-facts">
-{_fact_rows(ev['facts'])}{time_row}
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-{gallery_section}
-
-<section class="cta-band rule">
-  <div class="wrap rv">
-    <h2>Szerveznél hasonló estét a márkádnak?</h2>
-    <div class="ctas"><a href="../../projekt-inditasa/" class="btn filled magnetic">INDÍTSUK EL A PROJEKTED</a></div>
-  </div>
-</section>
-"""
 
 
-# ---- főoldali hero "felúszó eseménykártya" — csak akkor jelenik meg, ha van
-# ténylegesen aktív/meghirdetett következő esemény. Ha van, töltsd ki:
-# ACTIVE_EVENT = {"name": "Esemény neve", "date_label": "2026. november 14., szombat", "venue": "Helyszín"}
-ACTIVE_EVENT = None
-
-# ---- /esemenyek/ — a brief 4.2 szerint: szöveg még nem végleges ("később
-# érkezik"), ezért itt csak a tervezett szerkezet épül fel helyőrző szöveggel.
-# Tervezett elemek: következő esemény (dátum, helyszín típusa anonim módon,
-# hangulat), jegyvásárlás gomb, VIP-asztalfoglalás (csak ha az adott bulin
-# elérhető), dress code, GYIK. Helyszín/influencer NEVE nem jelenhet meg —
-# csak típus/hangulat szerinti, anonimizált leírás.
 EVENTS_BODY = f"""
 %%BREADCRUMB%%
 <section class="gal-hero">
   <div class="wrap">
     <div class="rv">
       <span class="eyebrow">ESEMÉNYEK</span>
-      <h1>Esték, amelyekről még hetekig beszélnek.</h1>
-      <p>Válogatott közönség, prémium budapesti helyszín, VIP-asztalok — [a következő esemény hangulatának rövid leírása következik ide, helyszín- és névmegjelölés nélkül].</p>
+      <h1>Nem buli. Esemény.</h1>
+      <p>Válogatott közönség, prémium helyszín, gondosan felépített este. Azoknak, akik nemcsak ott akarnak lenni, hanem emlékezni is szeretnének rá.</p>
     </div>
   </div>
 </section>
 
-<section class="pad rule" id="kovetkezo" style="padding-top:60px;">
+{_next_event_section()}
+
+<section class="pad rule">
   <div class="wrap">
-    <div class="sec-head rv"><span class="eyebrow">KÖVETKEZŐ ESEMÉNYÜNK</span><h2>[Esemény jellege] · [ÉÉÉÉ. hónap NN.]</h2>
-      <p>[Rövid, hangulati leírás a következő estéről — helyszín típusa, de nem neve; dress code; mire számíthatsz.]</p>
-    </div>
-    <div class="ctas" style="margin-top:30px;justify-content:center;display:flex;gap:16px;flex-wrap:wrap;">
-      <a href="#" class="btn filled magnetic">JEGYVÁSÁRLÁS</a>
-      <a href="../projekt-inditasa/" class="btn magnetic">VIP-ASZTALFOGLALÁS</a>
-    </div>
-    <p style="margin-top:18px;text-align:center;font-size:12.5px;color:var(--ivory-dimmer);">A VIP-asztalfoglalás csak akkor jelenik meg, ha az adott estén elérhető.</p>
+    <div class="sec-head rv"><span class="eyebrow">MIRE SZÁMÍTHATSZ</span></div>
+    <ul class="who-for rv-stagger">
+      <li><b style="color:var(--ivory);">Válogatott vendégkör:</b> modellek, tartalomgyártók, vállalkozók és barátaik.</li>
+      <li><b style="color:var(--ivory);">Tematikus este:</b> minden eseménynek saját világa van, a dekorációtól a zenéig.</li>
+      <li><b style="color:var(--ivory);">Profi stáb:</b> fotósok és videósok rögzítik az estét, így a legjobb pillanataid megmaradnak.</li>
+      <li><b style="color:var(--ivory);">Prémium élmény:</b> a belépéstől az utolsó zenéig.</li>
+    </ul>
   </div>
 </section>
 
 <section class="pad rule">
   <div class="wrap">
-    <div class="sec-head rv"><span class="eyebrow">GYAKORI KÉRDÉSEK</span><h2>Amit az esténkről érdemes tudni.</h2>
-      <p>[Helyőrző — a végleges kérdés-válasz lista a részletes szöveg megérkezésével kerül ide: dress code, korhatár, jegytípusok, VIP-asztal.]</p>
+    <div class="sec-head rv"><span class="eyebrow">GYAKORI KÉRDÉSEK</span></div>
+    <div class="faq-list">
+      <div class="faq-item" aria-expanded="false">
+        <button type="button" class="faq-q">Hány éves kortól lehet belépni?<span class="plus"></span></button>
+        <div class="faq-a"><p>18 éves kortól, személyi igazolvánnyal.</p></div>
+      </div>
+      <div class="faq-item" aria-expanded="false">
+        <button type="button" class="faq-q">Van dress code?<span class="plus"></span></button>
+        <div class="faq-a"><p>Igen, az adott eseménynél mindig jelezzük.</p></div>
+      </div>
+      <div class="faq-item" aria-expanded="false">
+        <button type="button" class="faq-q">Visszaváltható a jegy?<span class="plus"></span></button>
+        <div class="faq-a"><p>A megvásárolt jegy nem váltható vissza, de más névre átíratható.</p></div>
+      </div>
+      <div class="faq-item" aria-expanded="false">
+        <button type="button" class="faq-q">Hogyan értesülök a következő eseményről?<span class="plus"></span></button>
+        <div class="faq-a"><p>Kövess minket Instagramon, vagy iratkozz fel a listánkra.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pad rule" id="feliratkozas">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="eyebrow">LEGYÉL AZ ELSŐK KÖZÖTT</span>
+      <p>Iratkozz fel, és még a nyilvános meghirdetés előtt értesítünk a következő eseményről.</p>
+    </div>
+    <div class="wrap rv" style="padding:0;max-width:480px;">
+      <form class="form-panel" name="esemeny-feliratkozas" data-netlify="true" data-netlify-honeypot="company_website" data-motm-form data-msg-id="subscribeMsg" data-event="event_subscribe_submit" novalidate>
+        <input type="hidden" name="form-name" value="esemeny-feliratkozas">
+        <input type="hidden" name="page_url" value="">
+        <input type="hidden" name="referrer_url" value="">
+        <div class="hp-field" aria-hidden="true"><label>Cégnév (ne töltsd ki)</label><input type="text" name="company_website" tabindex="-1" autocomplete="off"></div>
+        <div class="field"><label for="sub-name">NÉV</label><input id="sub-name" name="name" type="text" required></div>
+        <div class="field"><label for="sub-email">E-MAIL</label><input id="sub-email" name="email" type="email" required></div>
+        <label class="check"><input type="checkbox" name="consent" required> Elfogadom az Adatkezelési tájékoztatót.</label>
+        <div class="submit-row">
+          <button type="submit" class="btn filled magnetic">Feliratkozom</button>
+        </div>
+        <div class="form-msg" id="subscribeMsg"><h4>FELIRATKOZVA.</h4><p>Köszönjük. A következő eseményről elsőként értesítünk.</p></div>
+      </form>
     </div>
   </div>
 </section>
@@ -289,49 +174,82 @@ EVENTS_BODY = f"""
 <section class="pad rule">
   <div class="wrap">
     <div class="sec-head rv"><span class="eyebrow">KORÁBBI ESTÉINK</span><h2>Nézd meg, mi történt eddig.</h2></div>
-    <div style="text-align:center;"><a href="../korabbi-esemenyek/" class="btn magnetic">KORÁBBI ESEMÉNYEK →</a></div>
+    <div style="text-align:center;"><a href="../korabbi-esemenyek/" class="btn magnetic">Megnézem a korábbi eseményeket →</a></div>
   </div>
 </section>
 
 <section class="cta-band rule">
   <div class="wrap rv">
-    <h2>Szerveznél hasonló estét a márkádnak?</h2>
-    <div class="ctas"><a href="../projekt-inditasa/" class="btn filled magnetic">INDÍTSUK EL A PROJEKTED</a></div>
+    <h2>Szeretnéd, hogy a márkád is megjelenjen az eseményeinken?</h2>
+    <div class="ctas"><a href="../projekt-inditasa/" class="btn filled magnetic">Együttműködést szeretnék</a></div>
   </div>
 </section>
 """
 
-# ---- /korabbi-esemenyek/ — a brief 4.3 szerint: szöveg később érkezik,
-# tervezett szerkezet: galéria, eseményfilm, eredmények. Az eseményekre név
-# nélkül hivatkozunk ("legutóbbi eseményünk"), helyszínnév nélkül.
-# A kártyák egyelőre a meglévő esemény-aloldalakra mutatnak (ott még a régi,
-# nem anonimizált részletek — ez külön átnézendő, lásd a végső összefoglalót).
 KORABBI_ESEMENYEK_BODY = f"""
 %%BREADCRUMB%%
 <section class="gal-hero">
   <div class="wrap">
     <div class="rv">
       <span class="eyebrow">KORÁBBI ESEMÉNYEK</span>
-      <h1>Egy pillantás arra, ami már megtörtént.</h1>
-      <p>Galéria és eredmények a korábbi estjeinkről — [a végleges bevezető szöveg később érkezik].</p>
+      <h1>Esték, amelyekről még mindig beszélnek.</h1>
+      <p>Négy esemény, eseményenként 200–300 vendég, és egy közösség, amely minden alkalommal tovább nő.</p>
     </div>
   </div>
 </section>
 
 <section class="pad rule">
   <div class="wrap">
+    <div class="stat-row rv-stagger" style="margin-top:0;">
+      <div><b>4</b><span>ESEMÉNY</span></div>
+      <div><b>200–300</b><span>VENDÉG ESEMÉNYENKÉNT</span></div>
+      <div><b>332 ezer</b><span>MEGTEKINTÉS EGYETLEN KAMPÁNYBAN</span></div>
+      <div><b>87,6%</b><span>ÚJ KÖZÖNSÉG</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="pad rule">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="eyebrow">LEGUTÓBBI ESEMÉNYÜNK</span>
+      <p class="dev-note">[ÉÉÉÉ. hónap NN.]</p>
+      <p>{LATEST_EVENT['teaser']}</p>
+      <p style="margin-top:14px;"><b style="color:var(--bronze-bright);">Eredmények a kampányidőszakban:</b> 332 ezer megtekintés · 81 ezer egyedi néző · 135 ezer sztori-, 107 ezer poszt- és 87 ezer Reels-megtekintés</p>
+    </div>
+    <div class="gallery-grid rv-stagger" style="margin-top:40px;">
+{chr(10).join(f'''      <div class="gtile glow-card"><div class="plate photo grain" style="background-image:url('../assets/{img}')"></div></div>''' for img in LATEST_EVENT['gallery'])}
+    </div>
+  </div>
+</section>
+
+<section class="pad rule">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="eyebrow">KORÁBBI ESEMÉNYEINK</span></div>
     <div class="event-cards-row rv-stagger">
-{chr(10).join(_event_card(ev) for ev in PAST_EVENTS)}
+{chr(10).join(_event_card_anon(ev) for ev in EARLIER_EVENTS)}
+    </div>
+  </div>
+</section>
+
+<section class="pad rule">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="eyebrow">KEZDETEK</span>
+      <p>Divatbemutatókkal indultunk, ma már saját eseménysorozatunk van, és egy közösség, amely minden alkalommal visszatér.</p>
     </div>
   </div>
 </section>
 
 <section class="cta-band rule">
   <div class="wrap rv">
-    <h2>Szerveznél hasonló estét a márkádnak?</h2>
-    <div class="ctas"><a href="../projekt-inditasa/" class="btn filled magnetic">INDÍTSUK EL A PROJEKTED</a></div>
+    <h2>Eseményeinken a márkád valós, prémium közönség előtt jelenhet meg, a karszalagtól a fotófalig.</h2>
+    <div class="ctas"><a href="../influencer-egyuttmukodes/" class="btn filled magnetic">Együttműködést szeretnék</a></div>
+  </div>
+</section>
+
+<section class="pad rule" style="padding-top:60px;">
+  <div class="wrap rv" style="text-align:center;">
+    <h2 style="font-family:var(--serif);font-size:clamp(26px,4vw,40px);margin-bottom:28px;">Ott leszel a következőn?</h2>
+    <a href="../esemenyek/" class="btn filled magnetic">Megnézem a következő eseményt</a>
   </div>
 </section>
 """
-
-
