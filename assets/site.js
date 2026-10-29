@@ -166,6 +166,27 @@ document.querySelectorAll('.chips .chip-opt').forEach(c=>{
   c.addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); toggle(); } });
 });
 
+/* ============ kapcsolat-űrlap: a hivatkozó oldal (document.referrer) alapján
+   automatikusan bejelöli a megfelelő "miben segíthetünk" chipet, ha a
+   látogató egy konkrét szolgáltatás-oldalról érkezett ============ */
+(function(){
+  const bizChips = document.getElementById('bizChips');
+  if(!bizChips || !document.referrer) return;
+  const slugToChip = {
+    'modellugynokseg': 'modell',
+    'influencer-marketing': 'influencer',
+    'marketing-ugynokseg': 'teljes-marketing',
+    'rendezvenyszervezes': 'rendezveny',
+    'reklamfilm-keszites': 'foto-video',
+    'weboldal-keszites': 'weboldal',
+    'kozossegi-media-kezeles': 'social'
+  };
+  const match = Object.keys(slugToChip).find(slug => document.referrer.indexOf('/'+slug+'/') !== -1);
+  if(!match) return;
+  const chip = bizChips.querySelector('.chip-opt[data-value="'+slugToChip[match]+'"]');
+  if(chip && !chip.classList.contains('on')){ chip.click(); }
+})();
+
 /* ============ FAQ accordion ============ */
 document.querySelectorAll('.faq-item').forEach(item=>{
   const q = item.querySelector('.faq-q');
@@ -214,6 +235,10 @@ function motmHandleForm(form, opts){
       const chips = form.querySelectorAll('.chips .chip-opt.on');
       servicesField.value = Array.from(chips).map(c=>c.textContent.trim()).join(', ');
     }
+    const pageUrlField = form.querySelector('[name="page_url"]');
+    if(pageUrlField) pageUrlField.value = location.href;
+    const referrerField = form.querySelector('[name="referrer_url"]');
+    if(referrerField) referrerField.value = document.referrer || 'Közvetlen látogatás / nincs hivatkozó oldal';
     const data = Object.fromEntries(new FormData(form).entries());
 
     if(btn){ btn.disabled = true; btn.textContent = 'KÜLDÉS...'; }

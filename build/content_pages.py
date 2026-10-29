@@ -125,6 +125,8 @@ KAPCSOLAT_BODY = """
       <form class="form-panel" id="bizForm" name="kapcsolat" data-netlify="true" data-netlify-honeypot="website" data-motm-form data-msg-id="bizMsg" data-event="contact_form_submit" novalidate>
         <input type="hidden" name="form-name" value="kapcsolat">
         <input type="hidden" name="services" value="">
+        <input type="hidden" name="page_url" value="">
+        <input type="hidden" name="referrer_url" value="">
         <div class="hp-field" aria-hidden="true"><label>Weboldal (ne töltsd ki)</label><input type="text" name="website" tabindex="-1" autocomplete="off"></div>
 
         <div class="field">
