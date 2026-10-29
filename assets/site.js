@@ -12,18 +12,6 @@ window.MOTM_CONFIG = {
 const nav = document.getElementById('nav');
 if(nav){ window.addEventListener('scroll', ()=> nav.classList.toggle('scrolled', window.scrollY > 40)); }
 
-/* ============ desktop services dropdown (click + keyboard, not hover-only) ============ */
-(function(){
-  const wrap = document.getElementById('navSubWrap');
-  const btn = document.getElementById('navSubBtn');
-  if(!wrap || !btn) return;
-  function close(){ wrap.setAttribute('aria-expanded','false'); btn.setAttribute('aria-expanded','false'); }
-  function open(){ wrap.setAttribute('aria-expanded','true'); btn.setAttribute('aria-expanded','true'); }
-  btn.addEventListener('click', (e)=>{ e.stopPropagation(); btn.getAttribute('aria-expanded')==='true' ? close() : open(); });
-  document.addEventListener('click', (e)=>{ if(!wrap.contains(e.target)) close(); });
-  document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
-})();
-
 /* ============ mobile menu ============ */
 const burgerBtn = document.getElementById('burgerBtn');
 const mobileMenu = document.getElementById('mobileMenu');
@@ -33,16 +21,8 @@ function closeMenu(){ mobileMenu.style.display='none'; document.body.style.overf
 if(burgerBtn){
   burgerBtn.addEventListener('click', ()=> burgerBtn.classList.contains('open') ? closeMenu() : openMenu());
   mobileClose.addEventListener('click', closeMenu);
-  document.querySelectorAll('.mlink').forEach(a=>a.addEventListener('click', (e)=>{ if(!a.classList.contains('msub-toggle')) closeMenu(); }));
+  document.querySelectorAll('.mlink').forEach(a=>a.addEventListener('click', closeMenu));
   document.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && burgerBtn.classList.contains('open')) closeMenu(); });
-}
-const mSubBtn = document.getElementById('mSubBtn');
-const mSubPanel = document.getElementById('mSubPanel');
-if(mSubBtn){
-  mSubBtn.addEventListener('click', ()=>{
-    const open = mSubPanel.classList.toggle('open');
-    mSubBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
-  });
 }
 
 /* ============ legal modals ============ */

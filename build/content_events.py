@@ -242,26 +242,10 @@ def past_event_detail_body(ev):
 """
 
 
-# ---- homepage teaser (placed directly under the hero) ----
-EVENT_HOME_TEASER = f"""
-<!-- 02 KÖVETKEZŐ ESEMÉNY -->
-<section class="pad rule" style="padding-top:100px;">
-  <div class="wrap">
-    <div class="event-head rv">
-      <div>
-        <span class="eyebrow">02 — KÖVETKEZŐ ESEMÉNYÜNK</span>
-        <h2 style="margin-top:14px;">HAMAROSAN<br><em>ÉRKEZÜNK</em> A RÉSZLETEKKEL.</h2>
-      </div>
-      <div class="event-side">
-        <p>A következő Models on the Move estét hamarosan jelentjük be — addig is nézd meg a korábbi estéinket.</p>
-      </div>
-    </div>
-    <div class="event-cta" style="margin-top:10px;">
-      <a href="esemenyek/" class="btn filled magnetic">KORÁBBI ESTÉINK →</a>
-    </div>
-  </div>
-</section>
-"""
+# ---- főoldali hero "felúszó eseménykártya" — csak akkor jelenik meg, ha van
+# ténylegesen aktív/meghirdetett következő esemény. Ha van, töltsd ki:
+# ACTIVE_EVENT = {"name": "Esemény neve", "date_label": "2026. november 14., szombat", "venue": "Helyszín"}
+ACTIVE_EVENT = None
 
 # ---- /esemenyek/ index page (overview + gallery) ----
 EVENTS_BODY = f"""

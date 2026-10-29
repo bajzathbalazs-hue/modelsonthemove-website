@@ -8,7 +8,7 @@ sys.path.insert(0, HERE)
 
 import shell
 from shell import page, breadcrumb, service_page, BASE_URL
-from content_home import HOME_BODY, HOME_FAQ_JSONLD
+from content_home import HOME_BODY
 from content_services import SERVICES
 from content_pages import MUNKAINK_BODY, ROLUNK_BODY, KAPCSOLAT_BODY, NOTFOUND_BODY
 from content_events import EVENTS_BODY, PAST_EVENTS, past_event_detail_body
@@ -42,7 +42,6 @@ def main():
         body=HOME_BODY,
         depth=0,
         active="home",
-        extra_jsonld=HOME_FAQ_JSONLD,
     )
     write("index.html", home_html)
     routes.append(("", "1.0", "weekly"))

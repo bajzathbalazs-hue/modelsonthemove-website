@@ -57,6 +57,16 @@ SERVICES_NAV = [
     ("kozossegi-media-kezeles", "Közösségi média"),
 ]
 
+# 3-pilléres fő navigáció (a "MOTM weboldal – építési terv" PDF Alapok szakasza).
+# A "web-marketing" és "influencer" slugok TEMP-ek: amíg a valódi /web-marketing
+# és /influencer pillér-oldalak el nem készülnek (3. szakasz), a legközelebbi
+# meglévő oldalra mutatnak. Cseréld le, amint a pillér-oldalak élesednek.
+PILLARS_NAV = [
+    ("esemenyek", "esemenyek", "Események"),
+    ("marketing-ugynokseg", "web-marketing", "Web és marketing"),  # TEMP cél
+    ("modellugynokseg", "influencer", "Influencer és tartalom"),  # TEMP cél
+]
+
 
 def head(title, description, canonical_path, depth=0, og_image="assets/hero-myrazs-poster.jpg", robots="index,follow", extra_jsonld=""):
     """canonical_path: '' for home, or 'modellugynokseg/' etc (trailing slash, no leading slash)."""
@@ -135,24 +145,20 @@ def _root(depth):
 
 def nav(depth=0, active=""):
     r = _root(depth)
-    subitems = "\n".join(
-        f'      <a href="{r}{slug}/"><small>Szolgáltatás</small>{label}</a>'
-        for slug, label in SERVICES_NAV
-    )
     def cls(key):
         return ' style="color:var(--bronze-bright);"' if active == key else ""
+    pillar_links = "\n    ".join(
+        f'<a href="{r}{slug}/"{cls(key)}>{label.upper()}</a>' for slug, key, label in PILLARS_NAV
+    )
+    m_pillar_links = "\n    ".join(
+        f'<a href="{r}{slug}/" class="mlink">{label}</a>' for slug, key, label in PILLARS_NAV
+    )
     return f"""
 <a href="#main" class="skip-link">Ugrás a tartalomhoz</a>
 <nav id="nav">
   <a href="{r}index.html" aria-label="Models on the Move — kezdőlap"><img class="wordmark-img" src="{r}assets/motm_logo_dark.png" alt="Models on the Move"></a>
   <div class="nav-links">
-    <div class="has-sub" id="navSubWrap">
-      <button class="sub-toggle" id="navSubBtn" aria-expanded="false" aria-controls="navSubmenu">SZOLGÁLTATÁSOK<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
-      <div class="submenu" id="navSubmenu" role="menu">
-{subitems}
-      </div>
-    </div>
-    <a href="{r}esemenyek/"{cls('events')}>ESEMÉNYEK</a>
+    {pillar_links}
     <a href="{r}munkaink/"{cls('works')}>MUNKÁINK</a>
     <a href="{r}rolunk/"{cls('about')}>RÓLUNK</a>
     <a href="{r}kapcsolat/"{cls('contact')}>KAPCSOLAT</a>
@@ -166,12 +172,7 @@ def nav(depth=0, active=""):
 <div class="mobile-menu" id="mobileMenu">
   <button class="mobile-close" id="mobileClose">BEZÁR ✕</button>
   <div class="mmenu-body">
-    <button class="msub-toggle mlink" id="mSubBtn" aria-expanded="false" aria-controls="mSubPanel">SZOLGÁLTATÁSOK <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
-    <div class="msub-panel" id="mSubPanel">
-{chr(10).join(f'      <a href="{r}{slug}/" class="mlink">{label}</a>' for slug, label in SERVICES_NAV)}
-    </div>
-    <div class="mmenu-rule" aria-hidden="true"></div>
-    <a href="{r}esemenyek/" class="mlink">ESEMÉNYEK</a>
+    {m_pillar_links}
     <a href="{r}munkaink/" class="mlink">MUNKÁINK</a>
     <a href="{r}rolunk/" class="mlink">RÓLUNK</a>
     <a href="{r}kapcsolat/" class="mlink">KAPCSOLAT</a>
@@ -197,7 +198,7 @@ def breadcrumb(items, depth=1):
 
 def footer(depth=0):
     r = _root(depth)
-    svc_links = "\n        ".join(f'<a href="{r}{slug}/">{label}</a>' for slug, label in SERVICES_NAV)
+    svc_links = "\n        ".join(f'<a href="{r}{slug}/">{label}</a>' for slug, _key, label in PILLARS_NAV)
     return f"""
 <footer>
   <div class="wrap">
@@ -213,7 +214,6 @@ def footer(depth=0):
       </div>
       <div>
         <h5>MODELS ON THE MOVE</h5>
-        <a href="{r}esemenyek/">Események</a>
         <a href="{r}munkaink/">Munkáink</a>
         <a href="{r}rolunk/">Rólunk</a>
         <a href="{r}kapcsolat/">Kapcsolat</a>
@@ -256,18 +256,6 @@ window.MOTM_CONFIG = {
 const nav = document.getElementById('nav');
 if(nav){ window.addEventListener('scroll', ()=> nav.classList.toggle('scrolled', window.scrollY > 40)); }
 
-/* ============ desktop services dropdown (click + keyboard, not hover-only) ============ */
-(function(){
-  const wrap = document.getElementById('navSubWrap');
-  const btn = document.getElementById('navSubBtn');
-  if(!wrap || !btn) return;
-  function close(){ wrap.setAttribute('aria-expanded','false'); btn.setAttribute('aria-expanded','false'); }
-  function open(){ wrap.setAttribute('aria-expanded','true'); btn.setAttribute('aria-expanded','true'); }
-  btn.addEventListener('click', (e)=>{ e.stopPropagation(); btn.getAttribute('aria-expanded')==='true' ? close() : open(); });
-  document.addEventListener('click', (e)=>{ if(!wrap.contains(e.target)) close(); });
-  document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
-})();
-
 /* ============ mobile menu ============ */
 const burgerBtn = document.getElementById('burgerBtn');
 const mobileMenu = document.getElementById('mobileMenu');
@@ -277,16 +265,8 @@ function closeMenu(){ mobileMenu.style.display='none'; document.body.style.overf
 if(burgerBtn){
   burgerBtn.addEventListener('click', ()=> burgerBtn.classList.contains('open') ? closeMenu() : openMenu());
   mobileClose.addEventListener('click', closeMenu);
-  document.querySelectorAll('.mlink').forEach(a=>a.addEventListener('click', (e)=>{ if(!a.classList.contains('msub-toggle')) closeMenu(); }));
+  document.querySelectorAll('.mlink').forEach(a=>a.addEventListener('click', closeMenu));
   document.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && burgerBtn.classList.contains('open')) closeMenu(); });
-}
-const mSubBtn = document.getElementById('mSubBtn');
-const mSubPanel = document.getElementById('mSubPanel');
-if(mSubBtn){
-  mSubBtn.addEventListener('click', ()=>{
-    const open = mSubPanel.classList.toggle('open');
-    mSubBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
-  });
 }
 
 /* ============ legal modals ============ */
@@ -643,13 +623,17 @@ def service_page(d):
 {{"@type":"ListItem","position":2,"name":{_jsonstr(d['nav_label'])},"item":"{BASE_URL}/{d['slug']}/"}}
 ]}}
 </script>"""
+    # A navigáció pillér-linkjei közül kettő (lásd PILLARS_NAV) átmenetileg erre
+    # a két szolgáltatás-oldalra mutat — ezeken ezért a megfelelő pillér aktívnak
+    # jelölendő a fejlécben, amíg a valódi pillér-oldalak el nem készülnek.
+    _temp_active = {"marketing-ugynokseg": "web-marketing", "modellugynokseg": "influencer"}
     return page(
         title=d["seo_title"],
         description=d["meta_desc"],
         canonical_path=d["slug"] + "/",
         body=body,
         depth=1,
-        active="services",
+        active=_temp_active.get(d["slug"], ""),
         extra_jsonld=extra_jsonld,
     )
 
