@@ -40,8 +40,8 @@ def main():
 
     # ---- HOME ----
     home_html = page(
-        title="Models on the Move — Élményt és láthatóságot teremtünk | Budapest",
-        description="Prémium eseményeket szervezünk, és segítünk, hogy a vállalkozásod az online térben is ugyanilyen erős benyomást keltsen. Arculat, weboldal, marketing, influencer-együttműködés.",
+        title="Models on the Move — Prémium események, arculat és marketing | Budapest",
+        description="Prémium eseményeket szervezünk, és ugyanezzel az igényességgel építjük fel a vállalkozásod arculatát, weboldalát és online jelenlétét. Marketing és influencer-együttműködés.",
         canonical_path="",
         body=HOME_BODY,
         depth=0,

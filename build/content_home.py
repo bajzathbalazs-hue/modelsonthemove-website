@@ -14,8 +14,8 @@ HOME_BODY = """
     <div class="collab">
       <span class="m1">MODELS ON THE MOVE</span>
     </div>
-    <h1 class="hero-tag" style="font-family:var(--serif);font-size:clamp(22px,2.8vw,32px);max-width:640px;color:var(--ivory);line-height:1.35;margin-top:22px;">Élményt és láthatóságot teremtünk.</h1>
-    <p class="hero-tag">Prémium eseményeket szervezünk, és abban is segítünk, hogy a vállalkozásod az online térben is ugyanilyen erős benyomást keltsen.</p>
+    <h1 class="hero-tag" style="font-family:var(--serif);font-size:clamp(22px,2.8vw,32px);max-width:640px;color:var(--ivory);line-height:1.35;margin-top:22px;">Esték, amelyekre emlékeznek. Márkák, amelyeket észrevesznek.</h1>
+    <p class="hero-tag">Prémium eseményeket szervezünk, és ugyanezzel az igényességgel építjük fel a vállalkozásod arculatát, weboldalát és online jelenlétét.</p>
     <div class="hero-ctas">
       <a href="esemenyek/" class="btn filled magnetic">Megnézem a következő eseményt</a>
       <a href="kapcsolat/" class="btn magnetic">Ingyenes konzultációt kérek</a>

@@ -229,7 +229,7 @@ def footer(depth=0):
     <div class="foot-grid">
       <div>
         <img class="wordmark-img lg" src="{r}assets/motm_logo_dark.png" alt="Models on the Move">
-        <p style="margin-top:10px;font-size:13px;color:var(--ivory-dim);font-weight:600;">Élményt és láthatóságot teremtünk.</p>
+        <p style="margin-top:10px;font-size:13px;color:var(--ivory-dim);font-weight:600;">Esték, amelyekre emlékeznek. Márkák, amelyeket észrevesznek.</p>
       </div>
       <div>
         <h5>OLDALAK</h5>
