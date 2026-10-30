@@ -64,7 +64,7 @@ ROLUNK_BODY = """
     <div class="stat-row rv-stagger" style="margin-top:0;">
       <div><b>4</b><span>ESEMÉNY</span></div>
       <div><b>10+</b><span>CÉGES PROJEKT</span></div>
-      <div><b>16</b><span>INFLUENCERPARTNER</span></div>
+      <div><b>32+</b><span>MODELL- ÉS INFLUENCERPARTNER</span></div>
       <div><b>≈790 ezer</b><span>ELÉRHETŐ KÖVETŐ</span></div>
     </div>
   </div>

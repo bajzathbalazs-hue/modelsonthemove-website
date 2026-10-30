@@ -193,7 +193,7 @@ KORABBI_ESEMENYEK_BODY = f"""
     <div class="rv">
       <span class="eyebrow">KORÁBBI ESEMÉNYEK</span>
       <h1>Esték, amelyekről még mindig beszélnek.</h1>
-      <p>Négy esemény, eseményenként 200–300 vendég, és egy közösség, amely minden alkalommal tovább nő.</p>
+      <p>Négy esemény, eseményenként 300–500 vendég, és egy közösség, amely minden alkalommal tovább nő.</p>
     </div>
   </div>
 </section>
@@ -202,8 +202,8 @@ KORABBI_ESEMENYEK_BODY = f"""
   <div class="wrap">
     <div class="stat-row rv-stagger" style="margin-top:0;">
       <div><b>4</b><span>ESEMÉNY</span></div>
-      <div><b>200–300</b><span>VENDÉG ESEMÉNYENKÉNT</span></div>
-      <div><b>332 ezer</b><span>MEGTEKINTÉS EGYETLEN KAMPÁNYBAN</span></div>
+      <div><b>300–500</b><span>VENDÉG ESEMÉNYENKÉNT</span></div>
+      <div><b>368 ezer</b><span>MEGTEKINTÉS EGYETLEN KAMPÁNYBAN</span></div>
       <div><b>87,6%</b><span>ÚJ KÖZÖNSÉG</span></div>
     </div>
   </div>
@@ -214,7 +214,7 @@ KORABBI_ESEMENYEK_BODY = f"""
     <div class="sec-head rv"><span class="eyebrow">LEGUTÓBBI ESEMÉNYÜNK</span>
       <p class="dev-note">[ÉÉÉÉ. hónap NN.]</p>
       <p>{LATEST_EVENT['teaser']}</p>
-      <p style="margin-top:14px;"><b style="color:var(--bronze-bright);">Eredmények a kampányidőszakban:</b> 332 ezer megtekintés · 81 ezer egyedi néző · 135 ezer sztori-, 107 ezer poszt- és 87 ezer Reels-megtekintés</p>
+      <p style="margin-top:14px;"><b style="color:var(--bronze-bright);">Eredmények a kampányidőszakban:</b> 368 ezer megtekintés, a nézők 87,6%-a új közönség</p>
     </div>
     <div class="gallery-grid rv-stagger" style="margin-top:40px;">
 {chr(10).join(f'''      <div class="gtile glow-card"><div class="plate photo grain" style="background-image:url('../assets/{img}')"></div></div>''' for img in LATEST_EVENT['gallery'])}

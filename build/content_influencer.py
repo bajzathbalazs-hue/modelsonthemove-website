@@ -23,9 +23,9 @@ INFLUENCER_BODY = """
 <section class="pad rule">
   <div class="wrap">
     <div class="stat-row rv-stagger" style="margin-top:0;">
-      <div><b>16</b><span>ÁLLANDÓ INFLUENCERPARTNER</span></div>
+      <div><b>32+</b><span>AKTÍV MODELL- ÉS INFLUENCERPARTNER</span></div>
       <div><b>≈790 000</b><span>INSTAGRAM-KÖVETŐ</span></div>
-      <div><b>332 000</b><span>MEGTEKINTÉS EGYETLEN KAMPÁNYBAN</span></div>
+      <div><b>368 ezer</b><span>MEGTEKINTÉS EGYETLEN KAMPÁNYBAN</span></div>
       <div><b>87,6%</b><span>ÚJ KÖZÖNSÉG</span></div>
     </div>
     <p style="margin-top:22px;text-align:center;font-size:11.5px;color:var(--ivory-dimmer);">Partnereink Instagram-követőinek összesített száma, 2026. október. Az összeg átfedéseket tartalmazhat.</p>
@@ -127,7 +127,7 @@ INFLUENCER_BODY = """
 <section class="pad rule">
   <div class="wrap">
     <div class="sec-head rv"><span class="eyebrow">EREDMÉNYEK</span>
-      <p>Legutóbbi eseményünk kampányidőszakában 332 ezer megtekintést értünk el, 81 ezer egyedi nézővel, és a nézők 87,6%-a új közönség volt.</p>
+      <p>Legutóbbi eseményünk kampányidőszakában 368 ezer megtekintést értünk el, és a nézők 87,6%-a új közönség volt.</p>
     </div>
   </div>
 </section>
